@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { OwnProp } from "../pages/register/step1";
+import { OwnProp } from "../pages/auth/register";
 
 export const config = {
   apiUrl: "http://localhost:7000",
@@ -20,4 +20,27 @@ export const Login = (email: string, password: string) => {
     return;
   }
   return axios.post(`${config.apiUrl}/api/admin/login`, { email, password });
+};
+
+export const GetAllUsers = ({ token }: { token: any }) => {
+  return axios.post(
+    `${config.apiUrl}/api/admin/getAllusers`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+};
+
+export const Deleteuser = (id: any, token: string) => {
+  if (!id || !token) {
+    return;
+  }
+  return axios.delete(`${config.apiUrl}/api/data/admin/deleteUser/${id}`, id, {
+    headers: {
+      authorization: token,
+    },
+  });
 };
