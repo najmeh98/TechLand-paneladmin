@@ -38,9 +38,14 @@ export const Deleteuser = (id: any, token: string) => {
   if (!id || !token) {
     return;
   }
-  return axios.delete(`${config.apiUrl}/api/data/admin/deleteUser/${id}`, id, {
-    headers: {
-      authorization: token,
-    },
-  });
+  return axios.post(
+    `${config.apiUrl}/api/data/admin/deleteUser/${id}`,
+    {},
+    // {id},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
 };
