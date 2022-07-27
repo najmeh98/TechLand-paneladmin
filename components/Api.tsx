@@ -49,3 +49,14 @@ export const Deleteuser = (id: any, token: string) => {
     }
   );
 };
+
+export const EdituserInfo = (adminInfo: object, id: any, token: string) => {
+  if (!adminInfo) {
+    return;
+  }
+  return axios.post(`${config.apiUrl}/api/data/admin/editUserInfo/${id}`, {
+    headers: {
+      authorization: token,
+    },
+  });
+};
