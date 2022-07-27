@@ -68,11 +68,8 @@ export const CustomInput: React.FC<Props> = ({
 
   return (
     <FormItem
-      // method="posts"
-      // enctype={enctype}
       style={{
-        marginTop: t.margin.medium,
-        marginBottom: t.margin.medium,
+        margin: t.margin.medium,
         width: width,
         height: height,
         direction: "ltr",
@@ -84,7 +81,7 @@ export const CustomInput: React.FC<Props> = ({
           <label
             style={{
               color: t.color.labelColor,
-              paddingTop: t.padding.normal,
+              // paddingTop: t.padding.normal,
               paddingBottom: t.padding.normal,
             }}
           >
@@ -141,12 +138,15 @@ export const Input = styled.input`
   border: 1px solid rgb(204, 204, 204);
   direction: ltr !important;
   display: flex;
-  /* text-align: left; */
+  /* box-shadow: rgb(16 30 115 / 6%) 0px 6px 26px 0px;
+   */
+  /* background: "#a3a1a0"; */
+  box-shadow: rgb(51 59 75 / 5%) 0px 16px 40px 0px;
   border-radius: 7px;
   width: 100%;
   margin-bottom: 5px;
-  /* margin-top: 5px; */
   resize: none;
+  font-size: medium;
   &::placeholder {
     font-size: 13px;
   }
