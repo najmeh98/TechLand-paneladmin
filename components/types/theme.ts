@@ -40,6 +40,7 @@ export interface Theme {
     buttonBg: string;
     textColor: string;
     errortext: string;
+    grayColor: string;
   };
   borderRadius: {
     small: number;

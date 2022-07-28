@@ -43,9 +43,10 @@ export const lightTheme: Theme = {
     borderColor: "rgb(204, 204, 204)",
     titleColor: "#7a7a7a",
     labelColor: "#000",
-    buttonBg: "#CE9461",
+    buttonBg: "#2e82aa",
     textColor: "#fff",
     errortext: "#dd2020",
+    grayColor: "#CBD7DC",
   },
   borderRadius: {
     small: 5,
