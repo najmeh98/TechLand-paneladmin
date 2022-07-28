@@ -11,16 +11,30 @@ export const FormItem = styled.div`
   /* align-items: flex-start; */
   justify-content: flex-start;
 
-  direction: rtl;
+  /* direction: rtl; */
 `;
 
 export const FlexRow = styled.div`
   display: flex;
   /* align-items: center; */
   justify-content: space-between;
+  width: 100%;
 `;
 export const Flex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* text-align: left; */
+`;
+
+export const Column = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const MainWrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  /* margin: auto; */
 `;
