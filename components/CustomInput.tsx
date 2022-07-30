@@ -4,7 +4,7 @@ import React, {
   TextareaHTMLAttributes,
   useState,
 } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, CSSProperties } from "styled-components";
 import { useTheme } from "./Context/ThemeContext";
 import { FormItem } from "./share/Container";
 import { Space } from "./share/Space";
@@ -29,13 +29,13 @@ interface TextPassword {
 
 export type InputCommonProps = {
   label?: string;
-  placeholder?: string;
-  value?: string;
-  width?: string;
-  height?: string;
+  placeholder?: string | undefined;
+  value?: string | number;
+  width?: string | undefined;
+  height?: string | undefined;
   enctype?: string | undefined;
   name?: string;
-  style?: any;
+  style?: CSSProperties;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (() => void) | undefined;
   type?: string;
@@ -118,6 +118,7 @@ export const CustomInput: React.FC<Props> = ({
             borderColor: t.color.borderColor,
             resize: "none",
             padding: t.padding.normal,
+            borderRadius: t.borderRadius.normal,
           }}
         ></textarea>
       )}
