@@ -61,7 +61,7 @@ export default function Profileadmin(): JSX.Element {
 
           <Column style={{ height: "150px" }}>
             <ThemedText>Bio :</ThemedText>
-            <CustomInput type="textarea" width="100%" />
+            <CustomInput type="textarea" width="100%" column={10} />
           </Column>
         </Container>
       </MainWrapper>
