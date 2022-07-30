@@ -39,6 +39,7 @@ export type InputCommonProps = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (() => void) | undefined;
   type?: string;
+  column?: number;
 };
 
 type Props = (TextInput | TextArea | FileInput | TextPassword) &
@@ -61,6 +62,7 @@ export const CustomInput: React.FC<Props> = ({
   style,
   onSubmit,
   type,
+  column,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -114,6 +116,7 @@ export const CustomInput: React.FC<Props> = ({
           value={value}
           onChange={onChange}
           rows={6}
+          cols={column}
           style={{
             borderColor: t.color.borderColor,
             resize: "none",
