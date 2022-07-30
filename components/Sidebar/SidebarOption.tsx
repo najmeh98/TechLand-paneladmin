@@ -50,7 +50,17 @@ const Items: itemProp[] = [
   {
     title: "Setting",
     icon: <IoSettingsOutline />,
-    path: "/admin/profileadmin",
+    // path: "/admin/profileadmin",
+    subRoutes: [
+      {
+        title: "Profile",
+        path: "/admin/profileadmin",
+      },
+      {
+        title: "Password",
+        path: "/admin/password",
+      },
+    ],
   },
 
   {
@@ -91,9 +101,9 @@ export const SidebarOption = (): JSX.Element => {
       onMouseEnter={() => {
         setisOpen(true);
       }}
-      onMouseLeave={() => {
-        setisOpen(false);
-      }}
+      // onMouseLeave={() => {
+      //   setisOpen(false);
+      // }}
     >
       <Navbar
         style={{
