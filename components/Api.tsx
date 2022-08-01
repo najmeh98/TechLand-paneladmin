@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { OwnProp } from "../pages/auth/register";
 
 export const config = {
-  apiUrl: "http://localhost:7000",
+  apiUrl: "http://localhost:3001",
 };
 
 export const Verification = ({
