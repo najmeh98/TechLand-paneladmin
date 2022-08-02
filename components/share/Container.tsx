@@ -35,6 +35,6 @@ export const Column = styled.div`
 
 export const MainWrapper = styled.div`
   width: 100%;
-  max-width: 1200px;
-  /* margin: auto; */
+  max-width: 900px;
+  margin: 20px auto;
 `;

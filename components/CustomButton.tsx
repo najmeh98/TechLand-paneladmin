@@ -14,6 +14,7 @@ type OwnProps = {
   maxWidth?: string;
   padding?: string;
   color?: keyof Theme["color"];
+  bgcolor?: keyof Theme["color"];
 };
 
 export const CustomButton = ({
@@ -26,6 +27,7 @@ export const CustomButton = ({
   padding,
   maxWidth,
   color,
+  bgcolor,
 }: OwnProps) => {
   let t = useTheme();
   return (
@@ -43,8 +45,8 @@ export const CustomButton = ({
           style={{
             width: "100%",
             height: "40px",
-            backgroundColor: t.color[color || "buttonBg"],
-            color: t.color.textColor,
+            backgroundColor: t.color[bgcolor || "buttonBg"],
+            color: t.color[color || "textColor"],
             borderRadius: t.borderRadius.small,
             fontSize: t.fontSize.medium,
             padding: padding,
@@ -61,7 +63,7 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   /* width: 100%; */
-  height: 65px;
+  /* height: 65px; */
 `;
 const Button = styled.button`
   border: none;
