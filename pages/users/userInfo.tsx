@@ -43,7 +43,7 @@ export default function UserInfo(): JSX.Element {
   };
 
   return (
-    <UserLayout title="Personal Info" width="70%">
+    <UserLayout title="Personal Info" width="100%">
       <FormItem style={{ padding: "45px" }}>
         <Wrapper>
           <Img src="/flower1.jpg" width="70px" height="70px" alt="profile" />
