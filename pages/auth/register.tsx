@@ -12,17 +12,7 @@ import { FlexRow } from "../../components/share/Container";
 import { Space } from "../../components/share/Space";
 import { ThemedText } from "../../components/ThemedText";
 import { ToasterRef, ToasterProps } from "../../components/types/toastr";
-
-export interface OwnProp {
-  name: string | undefined;
-  family: string | undefined;
-  password: string | undefined;
-  repassword: string | undefined;
-  username: string | undefined;
-  email: string | undefined;
-  address: string | undefined;
-  phone: string | undefined;
-}
+import { OwnProp } from "./authType";
 
 export default function Register(): JSX.Element {
   let [admin, setadmin] = useState<OwnProp>({
@@ -74,6 +64,8 @@ export default function Register(): JSX.Element {
 
         if ((result?.status as number) == 200) {
           CheckLoggedIn({ ...result?.data });
+
+          //update the auth context
           dispatch({ type: "LOGGED IN", payload: { ...result?.data.admin } });
 
           router.push("/");
