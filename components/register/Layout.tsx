@@ -30,9 +30,11 @@ export const Layout = ({ children }: OwnProp): JSX.Element => {
 };
 
 const Wrapper = styled.div`
-  margin: 20px auto 10px;
+  margin: 7% auto;
   width: 100%;
   max-width: 1200px;
+  display: block;
+  align-items: center;
 `;
 
 const Container = styled.div`

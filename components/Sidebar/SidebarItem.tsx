@@ -8,6 +8,7 @@ import { useHover } from "../utils/use-hover";
 import { IoIosArrowUp } from "react-icons/io";
 import { Router, useRouter } from "next/router";
 import { itemProp } from "./SidebarOption";
+
 type Props = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   title: string;
@@ -37,7 +38,7 @@ export const SidebarItem = ({
       <MainWrapper
         onClick={onClick}
         style={{
-          padding: "10px 20px 10px 10px",
+          padding: "10px",
           cursor: "pointer",
           width: "100%",
         }}
@@ -59,7 +60,7 @@ export const SidebarItem = ({
         </span>
       </MainWrapper>
 
-      <Column>
+      <Column style={{ width: "100%" }}>
         {showSubRoute &&
           subRoutes?.map((SubRoute: any, index: any) => (
             <Wrapper
@@ -73,12 +74,18 @@ export const SidebarItem = ({
                 justifyContent: "flex-start",
                 paddingLeft: "10px",
                 color: t.color.bgColor,
+                cursor: "pointer",
               }}
             >
               <Span>{SubRoute.icon}</Span>
-              <ThemedText style={{ color: t.color.bgColor }}>
+              <Title
+                style={{
+                  color: t.color.bgColor,
+                  paddingLeft: t.padding.medium,
+                }}
+              >
                 {SubRoute.title}
-              </ThemedText>
+              </Title>
             </Wrapper>
           ))}
       </Column>
@@ -106,4 +113,17 @@ const Span = styled.span`
   justify-content: center;
   width: 35px;
   height: 35px;
+`;
+
+const Title = styled.p`
+  position: relative;
+  margin: 0px;
+  &::before {
+    content: "";
+    border-left: 1px dashed #fff;
+    padding-right: 10px;
+    position: absolute;
+    left: 8px;
+    height: 100%;
+  }
 `;
