@@ -16,13 +16,20 @@ const Home: NextPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("admintoken");
     const email = localStorage.getItem("adminemail");
+    console.log("token", token);
 
-    if (!token && !email) {
-      router.push("/auth/register");
+    if (!token || token == undefined) {
+      console.log("token is undefind");
+      router.push("/auth/loginByEmail");
       return;
     }
-  }, [logout, router]);
 
+    if (!email || email == undefined) {
+      router.push("/auth/loginByEmail");
+      return;
+    }
+    console.log("done");
+  }, [router]);
   return (
     <>
       <SidebarOption />
