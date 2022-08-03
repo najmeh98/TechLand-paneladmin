@@ -39,8 +39,7 @@ export const Deleteuser = (id: any, token: string) => {
   }
   return axios.post(
     `${config.apiUrl}/api/data/admin/deleteUser/${id}`,
-    {},
-    // {id},
+    { id },
     {
       headers: {
         authorization: token,
@@ -49,13 +48,35 @@ export const Deleteuser = (id: any, token: string) => {
   );
 };
 
-export const EdituserInfo = (userInfo: object, id: any, token: string) => {
+export const EdituserInfo = (
+  userInfo: object,
+  id: any,
+  token: string
+): Promise<AxiosResponse<any, any>> | undefined => {
   if (!userInfo) {
     return;
   }
   return axios.post(
     `${config.apiUrl}/api/data/admin/editUserInfo/${id}`,
     { userInfo },
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+};
+
+export const Createadmin = (
+  adminInfo: object,
+  id: any,
+  token: string
+): Promise<AxiosResponse<any, any>> | undefined => {
+  if (!id) return;
+
+  return axios.post(
+    `${config.apiUrl}/api/data/admin/createadmin/${id}`,
+    { adminInfo },
     {
       headers: {
         authorization: token,
