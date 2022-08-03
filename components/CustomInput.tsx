@@ -40,6 +40,7 @@ export type InputCommonProps = {
   onSubmit?: (() => void) | undefined;
   type?: string;
   column?: number;
+  row?: number;
 };
 
 type Props = (TextInput | TextArea | FileInput | TextPassword) &
@@ -63,6 +64,7 @@ export const CustomInput: React.FC<Props> = ({
   onSubmit,
   type,
   column,
+  row,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -115,7 +117,7 @@ export const CustomInput: React.FC<Props> = ({
         <textarea
           value={value}
           onChange={onChange}
-          rows={6}
+          rows={row ? row : 6}
           cols={column}
           style={{
             borderColor: t.color.borderColor,
