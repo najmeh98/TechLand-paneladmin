@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-import { OwnProp } from "../pages/auth/register";
 
 export const config = {
   apiUrl: "http://localhost:3001",
@@ -50,13 +49,17 @@ export const Deleteuser = (id: any, token: string) => {
   );
 };
 
-export const EdituserInfo = (adminInfo: object, id: any, token: string) => {
-  if (!adminInfo) {
+export const EdituserInfo = (userInfo: object, id: any, token: string) => {
+  if (!userInfo) {
     return;
   }
-  return axios.post(`${config.apiUrl}/api/data/admin/editUserInfo/${id}`, {
-    headers: {
-      authorization: token,
-    },
-  });
+  return axios.post(
+    `${config.apiUrl}/api/data/admin/editUserInfo/${id}`,
+    { userInfo },
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
 };
