@@ -1,5 +1,6 @@
+import { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { EdituserInfo } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
@@ -17,6 +18,8 @@ export default function UserInfo(): JSX.Element {
   const router = useRouter();
   const { dispatch, allUsers, adminInfo } = useAppContext();
 
+  console.log("users", allUsers);
+
   const id: any = router.query?.id;
   const filteruser: any = allUsers.filter((user) => user.id == id);
   const index: any = allUsers.findIndex((user) => user.id == id);
@@ -31,19 +34,44 @@ export default function UserInfo(): JSX.Element {
     phoneNumber: profile?.phoneNumber || "",
     address: profile?.address || "",
     username: profile?.username || "",
+    skill: profile?.skill || "",
+    bio: profile?.bio || "",
   });
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   console.log(filteruser);
 
   const token: string = adminInfo?.token;
 
-  const editInfohandler = async (): Promise<void> => {
-    const res: any = await EdituserInfo(adminInfo, token, id);
-    console.log(res);
-  };
+  const editInfohandler = useCallback(async (): Promise<void> => {
+    try {
+      setLoading(true);
+      const result: any = await EdituserInfo(userInfo, id, token);
+      console.log(result);
+
+      if ((result?.status as number) == 200) {
+        //user info
+        dispatch({ type: "LIST OF USERS", payload: result?.data });
+        router.push("/");
+      }
+    } catch (error) {
+      setLoading(false);
+      const err = error as AxiosError;
+      if (err.response?.status == 400) {
+        //edit problem
+      } else if (err.response?.status == 401) {
+        // data problem
+      } else {
+        // 500 error
+      }
+    }
+  }, [dispatch, id, router, token, userInfo]);
+
+  const fullname: string = `${userInfo.name} ${userInfo.family}`;
 
   return (
-    <UserLayout title="Personal Info" width="100%">
+    <UserLayout title="Personal Info" width="85%">
       <FormItem style={{ padding: "45px" }}>
         <Wrapper>
           <Img src="/flower1.jpg" width="70px" height="70px" alt="profile" />
@@ -55,7 +83,7 @@ export default function UserInfo(): JSX.Element {
                 paddingBottom: t.padding.small,
               }}
             >
-              Sara Tancredi
+              {fullname}
             </ThemedText>
             <ThemedText
               style={{ fontSize: t.fontSize.smaller, color: "#a3a1a0" }}
@@ -75,7 +103,7 @@ export default function UserInfo(): JSX.Element {
           />
           <CustomInput
             type="text"
-            label="Full Name"
+            label="Last name"
             width="45%"
             value={userInfo.family}
             onChange={() =>
@@ -106,7 +134,7 @@ export default function UserInfo(): JSX.Element {
         <FlexRow style={{ paddingTop: "30px" }}>
           <CustomInput
             type="text"
-            label="address"
+            label="Address"
             width="45%"
             value={userInfo.address}
             onChange={() =>
@@ -115,12 +143,33 @@ export default function UserInfo(): JSX.Element {
           />
           <CustomInput
             type="text"
-            label="username"
+            label="Username"
             width="45%"
             value={userInfo.username}
             onChange={() =>
               setuserInfo({ ...userInfo, username: userInfo.username })
             }
+          />
+        </FlexRow>
+
+        <FlexRow style={{ paddingTop: "30px" }}>
+          <CustomInput
+            type="textarea"
+            column={10}
+            row={4}
+            label="Skill"
+            width="45%"
+            value={userInfo.skill}
+            onChange={() => setuserInfo({ ...userInfo, skill: userInfo.skill })}
+          />
+          <CustomInput
+            type="textarea"
+            label="Bio"
+            row={4}
+            column={10}
+            width="45%"
+            value={userInfo.bio}
+            onChange={() => setuserInfo({ ...userInfo, bio: userInfo.bio })}
           />
         </FlexRow>
         <Space vertical="20px" />
@@ -157,7 +206,7 @@ const InfoStyle = styled.div`
   padding-left: 30px;
 `;
 
-const ButtonRow = styled.div`
+export const ButtonRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
