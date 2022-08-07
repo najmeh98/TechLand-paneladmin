@@ -12,13 +12,9 @@ import { Flex, Wrapper } from "../../components/share/Container";
 import { AxiosError } from "axios";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { Theme } from "../../components/types/theme";
+import { loginProp } from "./authType";
 
-interface loginProp {
-  email: string;
-  password: string;
-}
-
-export default function LoginByEmail() {
+export default function LoginByEmail(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
   const [loginInfo, setLoginInfo] = useState<loginProp>({
     email: "",
@@ -75,7 +71,7 @@ export default function LoginByEmail() {
       <div
         style={{
           width: "100%",
-          maxWidth: "70%",
+          // maxWidth: "70%",
           // padding: "40px",
           direction: "ltr",
         }}
@@ -117,7 +113,7 @@ export default function LoginByEmail() {
           }
         />
 
-        <Flex>
+        <Flex style={{ paddingTop: "10px" }}>
           <div>
             <input type={"checkbox"} />
             <span>Remember me</span>
@@ -135,7 +131,7 @@ export default function LoginByEmail() {
           Sign in
         </CustomButton>
 
-        <ThemedText>
+        <ThemedText style={{ padding: "10px 0px" }}>
           Don&apos;t have account yet?{" "}
           <Span onClick={() => router.push("/auth/register")}>Join Us</Span>
         </ThemedText>

@@ -6,7 +6,7 @@ export interface OwnProp {
   username: string | undefined;
   email: string | undefined;
   address: string | undefined;
-  phone: string | undefined;
+  phone: number | string;
 }
 
 export interface loginProp {
