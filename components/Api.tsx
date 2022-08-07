@@ -67,15 +67,14 @@ export const EdituserInfo = (
   );
 };
 
-export const Createadmin = (
+export const adminCreate = (
   adminInfo: object,
-  id: any,
   token: string
 ): Promise<AxiosResponse<any, any>> | undefined => {
-  if (!id) return;
+  // if (!id) return;
 
   return axios.post(
-    `${config.apiUrl}/api/data/admin/createadmin/${id}`,
+    `${config.apiUrl}/api/data/admin/adminCreate`,
     { adminInfo },
     {
       headers: {
