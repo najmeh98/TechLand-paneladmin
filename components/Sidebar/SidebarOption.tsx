@@ -27,8 +27,9 @@ const Items: itemProp[] = [
   {
     title: "Dashboard",
     icon: <GoHome />,
-    path: "/dashboard",
+    path: "/",
   },
+
   {
     title: "Users",
     icon: <FiUsers />,
@@ -36,13 +37,13 @@ const Items: itemProp[] = [
     subRoutes: [
       {
         title: "User manage",
-        icon: <FaRegUser />,
+        // icon: <FaRegUser />,
         path: "/users/userManage",
       },
+
       {
-        title: "User Info",
-        icon: <FiPaperclip />,
-        path: "/users/userInfo",
+        title: "Admin Create ",
+        path: "/admin/adminCreate",
       },
     ],
   },
@@ -76,6 +77,8 @@ export const SidebarOption = (): JSX.Element => {
 
   const [hovered, hoverListener] = useHover();
 
+  const [showSubRoute, setshowSubRoute] = useState<boolean>(false);
+
   let router = useRouter();
   let t = useTheme();
 
@@ -96,24 +99,18 @@ export const SidebarOption = (): JSX.Element => {
         fontWeight: t.fontWeight.bold,
         backgroundImage:
           "linear-gradient(to bottom, #06162d, #163655, #235b7f, #2e82aa, #39acd4)",
-        width: isOpen ? "250px" : "60px",
+        width: isOpen ? "250px" : "70px",
       }}
       onMouseEnter={() => {
         setisOpen(true);
       }}
-      // onMouseLeave={() => {
-      //   setisOpen(false);
-      // }}
+      onMouseLeave={() => {
+        setisOpen(false);
+      }}
     >
       <Navbar
         style={{
-          height: "50px",
-          display: " flex",
-          padding: "13px",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottom: "1px solid #7a7a7a30",
-          cursor: "pointer",
+          padding: "16px",
           color: t.color.titleColor,
         }}
       >
@@ -124,6 +121,7 @@ export const SidebarOption = (): JSX.Element => {
         return (
           <SidebarItem
             key={index}
+            isActive={router.pathname === item.path}
             style={{
               display: isOpen ? "flex" : "none",
             }}
@@ -147,7 +145,7 @@ export const SidebarOption = (): JSX.Element => {
   );
 };
 
-const Wrapper = styled.ul`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,10 +160,16 @@ const Wrapper = styled.ul`
   right: 0;
   z-index: 1;
   margin: 0;
-  padding: 0;
+  /* padding: 10px; */
   position: sticky;
 `;
 
 const Navbar = styled.div`
-  width: 93%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #7a7a7a30;
+  cursor: pointer;
+  height: 50px;
 `;

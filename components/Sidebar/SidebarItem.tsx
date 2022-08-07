@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useTheme } from "../Context/ThemeContext";
 import { ArrowDown } from "../icons/Icon";
 import { Column, Flex, FormItem, Wrapper } from "../share/Container";
@@ -11,11 +11,16 @@ import { itemProp } from "./SidebarOption";
 
 type Props = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  title: string;
-  icon: JSX.Element;
+  title?: string;
+  icon?: JSX.Element;
   style: any;
   isOpen: boolean;
   subRoutes?: itemProp[];
+  isActive: boolean;
+};
+
+type Styleprop = {
+  isActive: boolean;
 };
 
 export const SidebarItem = ({
@@ -25,6 +30,7 @@ export const SidebarItem = ({
   style,
   isOpen,
   subRoutes,
+  isActive,
 }: Props): JSX.Element => {
   let t = useTheme();
   const router = useRouter();
@@ -42,6 +48,7 @@ export const SidebarItem = ({
           cursor: "pointer",
           width: "100%",
         }}
+        isActive={isActive}
       >
         <Wrapper>
           <Span
@@ -93,7 +100,7 @@ export const SidebarItem = ({
   );
 };
 
-const MainWrapper = styled.div`
+const MainWrapper = styled.div<Styleprop>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -105,6 +112,13 @@ const MainWrapper = styled.div`
     white-space: nowrap;
     padding-left: 10px;
   }
+  ${(p) =>
+    p.isActive &&
+    css`
+      border-left: 3px solid #abcde3;
+      /* border-top-right-radius: 50px; */
+      /* border-bottom-right-radius: 30px; */
+    `}
 `;
 const Span = styled.span`
   vertical-align: middle;
