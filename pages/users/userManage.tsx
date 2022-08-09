@@ -40,37 +40,37 @@ export default function UserManage(): JSX.Element {
   }, [dispatch]);
 
   return (
-    <FlexRow>
-      <UserLayout title="Users">
-        <Container>
-          {/* title */}
-          <RowTitle />
+    // <FlexRow>
+    <UserLayout title="Users">
+      <Container>
+        {/* title */}
+        <RowTitle />
 
-          {/* Info row */}
-          {allUsers &&
-            allUsers?.map((userInfo: any, index: any) => {
-              // const date: string = userInfo?.createdAt;
-              const newdate: string = userInfo?.createdAt
-                .slice(0, 10)
-                .replace(/-/g, "/");
-              return (
-                <UserComponent
-                  name={userInfo?.name}
-                  family={userInfo?.family}
-                  key={userInfo?.id}
-                  email={userInfo?.email}
-                  address={userInfo?.address}
-                  number={userInfo?.phoneNumber}
-                  createdAt={newdate}
-                  userId={userInfo.id}
-                />
-              );
-            })}
+        {/* Info row */}
+        {allUsers &&
+          allUsers?.map((userInfo: any, index: any) => {
+            // const date: string = userInfo?.createdAt;
+            const newdate: string = userInfo?.createdAt
+              .slice(0, 10)
+              .replace(/-/g, "/");
+            return (
+              <UserComponent
+                name={userInfo?.name}
+                family={userInfo?.family}
+                key={userInfo?.id}
+                email={userInfo?.email}
+                address={userInfo?.address}
+                number={userInfo?.phoneNumber}
+                createdAt={newdate}
+                userId={userInfo.id}
+              />
+            );
+          })}
 
-          {/* <FiMoreVertical /> */}
-        </Container>
-      </UserLayout>
-    </FlexRow>
+        {/* <FiMoreVertical /> */}
+      </Container>
+    </UserLayout>
+    // </FlexRow>
   );
 }
 
