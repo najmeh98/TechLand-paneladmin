@@ -83,3 +83,24 @@ export const adminCreate = (
     }
   );
 };
+
+export const changePassword = (
+  newPassword: object,
+  token: string,
+  id: number
+) => {
+  if (!newPassword) {
+    return;
+  }
+  return axios.post(
+    `${config.apiUrl}/api/admin/changePassword?query=${id}`,
+    {
+      newPassword,
+    },
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+};
