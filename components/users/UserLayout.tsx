@@ -24,13 +24,20 @@ export const UserLayout: React.FC<UserProp> = ({
     <LayoutStyle>
       <SidebarOption />
       <MainWrapper>
-        <Conianer>
-          <HeaderText
-            style={{ display: "flex", alignItems: "flex-start", width: "100%" }}
+        <Conianer
+          style={{
+            maxWidth: width,
+            width: "100%",
+          }}
+        >
+          <HeaderText>{title}</HeaderText>
+          <Wrapper
+            style={{
+              // maxWidth: width ? `${width}` : "100%",
+              // width: "100%",
+              ...style,
+            }}
           >
-            {title}
-          </HeaderText>
-          <Wrapper style={{ width: width ? `${width}` : "100%", ...style }}>
             {children}
           </Wrapper>
         </Conianer>
@@ -46,22 +53,21 @@ const Wrapper = styled.div`
   border: 1px solid rgb(230, 235, 235);
   border-radius: 16px;
   box-shadow: rgb(16 30 115 / 6%) 0px 6px 26px 0px;
-  /* padding: 30px; */
-  /* height: 100vh; */
   margin: 20px 0px;
-  /* height: calc(100vh - 130px); */
 `;
 
 const Conianer = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start; */
+  height: 100%;
+  /* width: 100%; */
+
+  /* max-width: 700px; */
+  padding: 10px 30px;
 `;
 
 const LayoutStyle = styled.div`
   display: flex;
-  /* align-items: center; */
-  justify-content: space-around;
-  width: "100%";
 `;

@@ -35,26 +35,28 @@ export const CustomButton = ({
       style={{
         marginTop: t.margin.medium,
         marginBottom: t.margin.medium,
+        width: width,
+        maxWidth: maxWidth,
         ...style,
       }}
     >
-      <StyleButton style={{ width: width, maxWidth: maxWidth }}>
-        <Button
-          onClick={onClick}
-          disabled={disable}
-          style={{
-            width: "100%",
-            height: "40px",
-            backgroundColor: t.color[bgcolor || "buttonBg"],
-            color: t.color[color || "textColor"],
-            borderRadius: t.borderRadius.small,
-            fontSize: t.fontSize.medium,
-            padding: padding,
-          }}
-        >
-          {children}
-        </Button>
-      </StyleButton>
+      {/* <StyleButton style={{ width: width, maxWidth: maxWidth }}> */}
+      <Button
+        onClick={onClick}
+        disabled={disable}
+        style={{
+          width: "100%",
+          height: "40px",
+          backgroundColor: t.color[bgcolor || "buttonBg"],
+          color: t.color[color || "textColor"],
+          borderRadius: t.borderRadius.small,
+          fontSize: t.fontSize.medium,
+          padding: padding,
+        }}
+      >
+        {children}
+      </Button>
+      {/* </StyleButton> */}
     </Row>
   );
 };
@@ -62,8 +64,6 @@ export const CustomButton = ({
 const Row = styled.div`
   display: flex;
   align-items: center;
-  /* width: 100%; */
-  /* height: 65px; */
 `;
 const Button = styled.button`
   border: none;
@@ -73,8 +73,5 @@ const Button = styled.button`
 export const StyleButton = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
   justify-content: flex-start;
-
-  direction: rtl;
 `;
