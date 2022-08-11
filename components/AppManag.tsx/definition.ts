@@ -8,6 +8,8 @@ export interface OwnadminProp {
   createdAt?: string;
   address: string;
   token: string;
+  bio?: string;
+  job?: string;
 }
 
 export interface allUsers {
@@ -18,4 +20,6 @@ export interface allUsers {
   username: string;
   email: string;
   address: string;
+  skill?: string;
+  bio?: string;
 }
