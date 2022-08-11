@@ -116,8 +116,6 @@ const MainWrapper = styled.div<Styleprop>`
     p.isActive &&
     css`
       border-left: 3px solid #abcde3;
-      /* border-top-right-radius: 50px; */
-      /* border-bottom-right-radius: 30px; */
     `}
 `;
 const Span = styled.span`

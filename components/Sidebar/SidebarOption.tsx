@@ -51,15 +51,14 @@ const Items: itemProp[] = [
   {
     title: "Setting",
     icon: <IoSettingsOutline />,
-    // path: "/admin/profileadmin",
     subRoutes: [
       {
         title: "Profile",
-        path: "/admin/profileadmin",
+        path: "/admin/adminProfile",
       },
       {
         title: "Password",
-        path: "/admin/password",
+        path: "/admin/changePassword",
       },
     ],
   },
@@ -67,7 +66,6 @@ const Items: itemProp[] = [
   {
     title: "Exit",
     icon: <MdExitToApp />,
-    // path: "/exit",
   },
 ];
 
@@ -160,7 +158,6 @@ const Wrapper = styled.div`
   right: 0;
   z-index: 1;
   margin: 0;
-  /* padding: 10px; */
   position: sticky;
 `;
 
