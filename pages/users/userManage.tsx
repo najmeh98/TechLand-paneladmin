@@ -41,7 +41,7 @@ export default function UserManage(): JSX.Element {
 
   return (
     // <FlexRow>
-    <UserLayout title="Users">
+    <UserLayout title="Users" style={{ height: "100vh" }}>
       <Container>
         {/* title */}
         <RowTitle />
