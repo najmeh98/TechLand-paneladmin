@@ -1,9 +1,10 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import router from "next/router";
 import { useEffect, useState } from "react";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import styled from "styled-components";
 import { config, Deleteuser } from "../Api";
+import { useAppContext } from "../AppManag.tsx/AppContext";
 import { Flex, FlexRow } from "../share/Container";
 import { Space } from "../share/Space";
 import { ThemedText } from "../ThemedText";
@@ -20,6 +21,8 @@ export const UserComponent = ({
 }: USerInfo): JSX.Element => {
   const [token, settoken] = useState<string | undefined>(undefined);
 
+  const { dispatch } = useAppContext();
+
   useEffect(() => {
     const admintoken: any = localStorage.getItem("token");
     settoken(admintoken);
@@ -31,7 +34,7 @@ export const UserComponent = ({
       axios
         .delete(
           `${config.apiUrl}/api/data/admin/deleteUser/${id}`,
-          // {},
+          // { id },
           {
             headers: {
               authorization: token as string,
@@ -42,11 +45,19 @@ export const UserComponent = ({
           console.log(result);
           if ((result?.status as number) == 200) {
             console.log(result?.data);
+            dispatch({ type: "DELETE USER", payload: id });
           }
         })
         .catch((err) => console.log(err));
     } catch (error) {
       console.log(error);
+      const err = error as AxiosError;
+      const resError = err.response?.status;
+      if (resError == 400) {
+        // user does not delete
+      } else {
+        //server error
+      }
     }
   };
 
@@ -86,7 +97,7 @@ const Flexul = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 30px;
+  padding: 25px 30px;
 
   text-align: left;
   height: 60px;
