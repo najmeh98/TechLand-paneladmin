@@ -23,7 +23,7 @@ export default function Register(): JSX.Element {
     username: "",
     email: "",
     address: "",
-    phone: "",
+    phoneNumber: "0",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -97,7 +97,7 @@ export default function Register(): JSX.Element {
           style={{
             width: "100%",
             direction: "ltr",
-            padding: "20px ",
+            // padding: "20px ",
           }}
         >
           <ThemedText
@@ -171,12 +171,12 @@ export default function Register(): JSX.Element {
             />
 
             <CustomInput
-              label="phone"
-              placeholder="phone"
+              label="phoneNumber"
+              placeholder="phoneNumber"
               type="text"
-              value={admin.phone}
+              value={admin.phoneNumber}
               onChange={(event) =>
-                setadmin({ ...admin, phone: event.currentTarget.value })
+                setadmin({ ...admin, phoneNumber: event.currentTarget.value })
               }
               width="100%"
             />
@@ -192,7 +192,7 @@ export default function Register(): JSX.Element {
             onChange={(event) =>
               setadmin({ ...admin, address: event.currentTarget.value })
             }
-            width="100%"
+            // width="100%"
           />
 
           <Space vertical={3} />
@@ -205,8 +205,10 @@ export default function Register(): JSX.Element {
             onChange={(event) => {
               setadmin({ ...admin, email: event.currentTarget.value });
             }}
-            width="100%"
+            // width="100%"
           />
+
+          <Space vertical={15} />
 
           <CustomButton width="100%" onClick={onSubmitVerification}>
             Create Account
@@ -217,6 +219,7 @@ export default function Register(): JSX.Element {
               alignItems: "center",
               textAlign: "center",
               justifyContent: "flex-start",
+              padding: "10px 0px",
             }}
           >
             Already have an account ?{" "}
