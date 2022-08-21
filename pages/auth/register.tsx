@@ -210,7 +210,7 @@ export default function Register(): JSX.Element {
 
           <Space vertical={15} />
 
-          <CustomButton width="100%" onClick={onSubmitVerification}>
+          <CustomButton onClick={onSubmitVerification}>
             Create Account
           </CustomButton>
           <ThemedText

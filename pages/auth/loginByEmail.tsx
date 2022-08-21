@@ -40,7 +40,6 @@ export default function LoginByEmail(): JSX.Element {
         console.log(result);
 
         CheckLoggedIn({ ...result?.data });
-        console.log("done");
         //set logg in dispatch
         dispatch({ type: "LOGGED IN", payload: { ...result?.data } });
 
@@ -73,6 +72,7 @@ export default function LoginByEmail(): JSX.Element {
           width: "100%",
           // maxWidth: "70%",
           // padding: "40px",
+          margin: "6px",
           direction: "ltr",
         }}
       >
@@ -90,7 +90,7 @@ export default function LoginByEmail(): JSX.Element {
 
         <ThemedText>Login to your account</ThemedText>
 
-        <Space vertical={10} />
+        <Space vertical={25} />
 
         <CustomInput
           label="Email :"
@@ -101,7 +101,7 @@ export default function LoginByEmail(): JSX.Element {
             setLoginInfo({ ...loginInfo, email: event.currentTarget.value })
           }
         />
-        <Space vertical={5} />
+        <Space vertical={15} />
 
         <CustomInput
           label="Password :"
@@ -131,7 +131,7 @@ export default function LoginByEmail(): JSX.Element {
           Sign in
         </CustomButton>
 
-        <ThemedText style={{ padding: "10px 0px" }}>
+        <ThemedText style={{ padding: "20px 0px" }}>
           Don&apos;t have account yet?{" "}
           <Span onClick={() => router.push("/auth/register")}>Join Us</Span>
         </ThemedText>
