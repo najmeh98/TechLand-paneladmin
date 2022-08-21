@@ -25,17 +25,16 @@ export default function UserInfo(): JSX.Element {
   const index: any = allUsers.findIndex((user) => user.id == id);
   console.log(index);
   const profile = allUsers[index];
-  console.log("profile", profile);
 
   const [userInfo, setuserInfo] = useState<InfoProp>({
-    name: profile?.name || "",
-    family: profile?.family || "",
-    email: profile?.email || "",
-    phoneNumber: profile?.phoneNumber || "",
-    address: profile?.address || "",
-    username: profile?.username || "",
-    skill: profile?.skill || "",
-    bio: profile?.bio || "",
+    name: "",
+    family: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    username: "",
+    skill: "",
+    bio: "",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -98,16 +97,18 @@ export default function UserInfo(): JSX.Element {
             type="text"
             label="Name"
             width="45%"
-            value={userInfo.name}
-            onChange={() => setuserInfo({ ...userInfo, name: userInfo.name })}
+            value={profile.name}
+            onChange={(event) =>
+              setuserInfo({ ...userInfo, name: event.currentTarget.value })
+            }
           />
           <CustomInput
             type="text"
             label="Last name"
             width="45%"
-            value={userInfo.family}
-            onChange={() =>
-              setuserInfo({ ...userInfo, family: userInfo.family })
+            value={profile.family}
+            onChange={(event) =>
+              setuserInfo({ ...userInfo, family: event?.currentTarget.value })
             }
           />
         </FlexRow>
@@ -117,16 +118,21 @@ export default function UserInfo(): JSX.Element {
             type="text"
             label="Email Address"
             width="45%"
-            value={userInfo.email}
-            onChange={() => setuserInfo({ ...userInfo, email: userInfo.email })}
+            value={profile.email}
+            onChange={(event) =>
+              setuserInfo({ ...userInfo, email: event?.currentTarget.value })
+            }
           />
           <CustomInput
             type="text"
             label="Phone Number"
             width="45%"
-            value={userInfo.phoneNumber}
-            onChange={() =>
-              setuserInfo({ ...userInfo, phoneNumber: userInfo.phoneNumber })
+            value={profile.phoneNumber}
+            onChange={(event) =>
+              setuserInfo({
+                ...userInfo,
+                phoneNumber: event.currentTarget.value,
+              })
             }
           />
         </FlexRow>
@@ -136,18 +142,18 @@ export default function UserInfo(): JSX.Element {
             type="text"
             label="Address"
             width="45%"
-            value={userInfo.address}
-            onChange={() =>
-              setuserInfo({ ...userInfo, address: userInfo.address })
+            value={profile.address}
+            onChange={(event) =>
+              setuserInfo({ ...userInfo, address: event.currentTarget.value })
             }
           />
           <CustomInput
             type="text"
             label="Username"
             width="45%"
-            value={userInfo.username}
-            onChange={() =>
-              setuserInfo({ ...userInfo, username: userInfo.username })
+            value={profile.username}
+            onChange={(event) =>
+              setuserInfo({ ...userInfo, username: event?.currentTarget.value })
             }
           />
         </FlexRow>
@@ -159,8 +165,10 @@ export default function UserInfo(): JSX.Element {
             row={4}
             label="Skill"
             width="45%"
-            value={userInfo.skill}
-            onChange={() => setuserInfo({ ...userInfo, skill: userInfo.skill })}
+            value={profile.skill}
+            onChange={(event) =>
+              setuserInfo({ ...userInfo, skill: event.currentTarget.value })
+            }
           />
           <CustomInput
             type="textarea"
@@ -168,8 +176,10 @@ export default function UserInfo(): JSX.Element {
             row={4}
             column={10}
             width="45%"
-            value={userInfo.bio}
-            onChange={() => setuserInfo({ ...userInfo, bio: userInfo.bio })}
+            value={profile.bio}
+            onChange={(event) =>
+              setuserInfo({ ...userInfo, bio: event.currentTarget.value })
+            }
           />
         </FlexRow>
         <Space vertical="20px" />
