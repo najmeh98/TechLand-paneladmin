@@ -35,12 +35,12 @@ export const CustomButton = ({
       style={{
         marginTop: t.margin.medium,
         marginBottom: t.margin.medium,
+        // margin: t.margin.medium,
         width: width,
         maxWidth: maxWidth,
         ...style,
       }}
     >
-      {/* <StyleButton style={{ width: width, maxWidth: maxWidth }}> */}
       <Button
         onClick={onClick}
         disabled={disable}
@@ -56,7 +56,6 @@ export const CustomButton = ({
       >
         {children}
       </Button>
-      {/* </StyleButton> */}
     </Row>
   );
 };

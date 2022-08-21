@@ -33,8 +33,6 @@ export const UserLayout: React.FC<UserProp> = ({
           <HeaderText>{title}</HeaderText>
           <Wrapper
             style={{
-              // maxWidth: width ? `${width}` : "100%",
-              // width: "100%",
               ...style,
             }}
           >

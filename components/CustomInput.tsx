@@ -73,7 +73,7 @@ export const CustomInput: React.FC<Props> = ({
   return (
     <FormItem
       style={{
-        margin: t.margin.medium,
+        // margin: t.margin.medium,
         width: width,
         height: height,
         direction: "ltr",
