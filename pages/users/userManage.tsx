@@ -17,11 +17,24 @@ export default function UserManage(): JSX.Element {
   const t = useTheme();
   const router = useRouter();
 
-  const { dispatch, allUsers } = useAppContext();
+  const { dispatch, allUsers, adminInfo } = useAppContext();
+
+  const token: string = adminInfo.token;
+  console.log(token);
+
+  const email: string = adminInfo.email;
 
   useEffect(() => {
     axios
-      .get(`${config.apiUrl}/api/data/admin/getAllusers`)
+      .post(
+        `${config.apiUrl}/api/data/admin/getAllusers`,
+        { email },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      )
       .then((result) => {
         console.log(result);
         if ((result.status as number) === 200) {
@@ -37,16 +50,13 @@ export default function UserManage(): JSX.Element {
           //return
         }
       });
-  }, [dispatch]);
+  }, [dispatch, email, token]);
 
   return (
-    // <FlexRow>
     <UserLayout title="Users" style={{ height: "100vh" }}>
       <Container>
-        {/* title */}
         <RowTitle />
 
-        {/* Info row */}
         {allUsers &&
           allUsers?.map((userInfo: any, index: any) => {
             // const date: string = userInfo?.createdAt;
@@ -66,11 +76,8 @@ export default function UserManage(): JSX.Element {
               />
             );
           })}
-
-        {/* <FiMoreVertical /> */}
       </Container>
     </UserLayout>
-    // </FlexRow>
   );
 }
 
