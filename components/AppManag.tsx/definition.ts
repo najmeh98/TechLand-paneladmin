@@ -13,7 +13,7 @@ export interface OwnadminProp {
 }
 
 export interface allUsers {
-  phoneNumber: string;
+  phoneNumber: number;
   id: any;
   name: string;
   family: string;
@@ -22,4 +22,12 @@ export interface allUsers {
   address: string;
   skill?: string;
   bio?: string;
+}
+
+export interface adminsPosts {
+  id?: string;
+  title: string;
+  content: string;
+  file: any;
+  published?: boolean;
 }
