@@ -51,18 +51,12 @@ const Wrapper = styled.div`
   border: 1px solid rgb(230, 235, 235);
   border-radius: 16px;
   box-shadow: rgb(16 30 115 / 6%) 0px 6px 26px 0px;
+  /* box-shadow: 0 0 40px 15px rgba(0, 0, 0, 0.2); */
+
   margin: 20px 0px;
 `;
 
 const Conianer = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; */
-  height: 100%;
-  /* width: 100%; */
-
-  /* max-width: 700px; */
   padding: 10px 30px;
 `;
 
