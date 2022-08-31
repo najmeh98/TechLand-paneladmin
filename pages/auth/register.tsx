@@ -23,7 +23,7 @@ export default function Register(): JSX.Element {
     username: "",
     email: "",
     address: "",
-    phoneNumber: "0",
+    phoneNumber: 0,
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -66,7 +66,7 @@ export default function Register(): JSX.Element {
           CheckLoggedIn({ ...result?.data });
 
           //update the auth context
-          dispatch({ type: "LOGGED IN", payload: { ...result?.data.admin } });
+          // dispatch({ type: "LOGGED IN", payload: { ...result?.data.admin } });
 
           router.push("/");
         }
@@ -85,10 +85,7 @@ export default function Register(): JSX.Element {
         }
       }
     }
-  }, [CheckLoggedIn, admin, dispatch, router]);
-  useEffect(() => {
-    console.log(toastrRef.current);
-  }, []);
+  }, [CheckLoggedIn, admin, router]);
 
   return (
     <>
@@ -97,7 +94,6 @@ export default function Register(): JSX.Element {
           style={{
             width: "100%",
             direction: "ltr",
-            // padding: "20px ",
           }}
         >
           <ThemedText
@@ -110,7 +106,7 @@ export default function Register(): JSX.Element {
             Register
           </ThemedText>
 
-          <FlexRow>
+          <FlexRow style={{ marginBottom: "10px" }}>
             <CustomInput
               label="name"
               placeholder="Name"
@@ -127,6 +123,7 @@ export default function Register(): JSX.Element {
               placeholder="Last name"
               type="text"
               value={admin.family}
+              style={{ paddingLeft: "10px" }}
               onChange={(event) =>
                 setadmin({ ...admin, family: event.currentTarget.value })
               }
@@ -134,7 +131,7 @@ export default function Register(): JSX.Element {
             />
           </FlexRow>
 
-          <FlexRow>
+          <FlexRow style={{ marginBottom: "10px" }}>
             <CustomInput
               label="password :"
               placeholder="password"
@@ -149,6 +146,7 @@ export default function Register(): JSX.Element {
             <CustomInput
               label="repassword :"
               placeholder="repassword"
+              style={{ paddingLeft: "10px" }}
               type="password"
               value={admin.repassword}
               onChange={(event) =>
@@ -158,7 +156,7 @@ export default function Register(): JSX.Element {
             />
           </FlexRow>
 
-          <FlexRow>
+          <FlexRow style={{ marginBottom: "10px" }}>
             <CustomInput
               label="username"
               placeholder="Username"
@@ -173,10 +171,14 @@ export default function Register(): JSX.Element {
             <CustomInput
               label="phoneNumber"
               placeholder="phoneNumber"
+              style={{ paddingLeft: "10px" }}
               type="text"
               value={admin.phoneNumber}
               onChange={(event) =>
-                setadmin({ ...admin, phoneNumber: event.currentTarget.value })
+                setadmin({
+                  ...admin,
+                  phoneNumber: parseInt(event.currentTarget.value),
+                })
               }
               width="100%"
             />
@@ -195,7 +197,7 @@ export default function Register(): JSX.Element {
             // width="100%"
           />
 
-          <Space vertical={3} />
+          <Space vertical={10} />
 
           <CustomInput
             label="email"

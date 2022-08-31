@@ -3,6 +3,8 @@ export interface InfoProp {
   family: string;
   email: string;
   username: string;
-  phoneNumber: any;
+  phoneNumber: number;
   address: string;
+  skill?: string;
+  bio?: string;
 }

@@ -30,7 +30,7 @@ export default function UserInfo(): JSX.Element {
     name: "",
     family: "",
     email: "",
-    phoneNumber: "",
+    phoneNumber: 0,
     address: "",
     username: "",
     skill: "",
@@ -131,7 +131,7 @@ export default function UserInfo(): JSX.Element {
             onChange={(event) =>
               setuserInfo({
                 ...userInfo,
-                phoneNumber: event.currentTarget.value,
+                phoneNumber: parseInt(event.currentTarget.value),
               })
             }
           />
