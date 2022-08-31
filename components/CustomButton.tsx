@@ -28,7 +28,7 @@ export const CustomButton = ({
   maxWidth,
   color,
   bgcolor,
-}: OwnProps) => {
+}: OwnProps): JSX.Element => {
   let t = useTheme();
   return (
     <Row
@@ -43,7 +43,7 @@ export const CustomButton = ({
     >
       <Button
         onClick={onClick}
-        disabled={disable}
+        // disabled={disable}
         style={{
           width: "100%",
           height: "40px",
