@@ -85,7 +85,6 @@ export const CustomInput: React.FC<Props> = ({
           <label
             style={{
               color: t.color.labelColor,
-              // paddingTop: t.padding.normal,
               paddingBottom: t.padding.normal,
             }}
           >
@@ -121,6 +120,7 @@ export const CustomInput: React.FC<Props> = ({
           cols={column}
           style={{
             borderColor: t.color.borderColor,
+            border: "1px solid rgb(204, 204, 204)",
             resize: "none",
             padding: t.padding.normal,
             borderRadius: t.borderRadius.normal,
@@ -144,15 +144,13 @@ export const Input = styled.input`
   border: 1px solid rgb(204, 204, 204);
   direction: ltr !important;
   display: flex;
-  /* box-shadow: rgb(16 30 115 / 6%) 0px 6px 26px 0px;
-   */
-  /* background: "#a3a1a0"; */
   box-shadow: rgb(51 59 75 / 5%) 0px 16px 40px 0px;
   border-radius: 7px;
   width: 100%;
   margin-bottom: 5px;
   resize: none;
   font-size: medium;
+  font-family: inherit;
   &::placeholder {
     font-size: 13px;
   }

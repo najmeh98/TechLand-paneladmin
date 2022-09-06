@@ -35,7 +35,7 @@ export const Column = styled.div`
 
 export const MainWrapper = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 20px auto;
   display: flex;
   align-items: center;

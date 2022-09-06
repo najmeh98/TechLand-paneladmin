@@ -21,8 +21,8 @@ export const Layout = ({ children }: OwnProp): JSX.Element => {
           <img
             src="/flower2.jpg"
             alt="rightSide"
-            width="530px"
-            height="600px"
+            width="500px"
+            height="570px"
           />
         </LeftSide>
       </Container>
@@ -94,7 +94,7 @@ const LeftSide = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 10px 20px;
+  padding: 10px 0px;
 
   ${tablet(css`
     img {
