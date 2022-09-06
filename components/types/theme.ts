@@ -6,6 +6,7 @@ export interface Theme {
     medium: number;
     semiLarge: number;
     large: number;
+    XLarge: number;
   };
   fontFamily: {
     MainFont: string;
@@ -41,6 +42,7 @@ export interface Theme {
     textColor: string;
     errortext: string;
     grayColor: string;
+    desColor: string;
   };
   borderRadius: {
     small: number;

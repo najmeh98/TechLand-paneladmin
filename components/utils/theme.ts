@@ -8,6 +8,7 @@ export const lightTheme: Theme = {
     medium: 18,
     semiLarge: 20,
     large: 28,
+    XLarge: 42,
   },
 
   fontFamily: {
@@ -47,6 +48,7 @@ export const lightTheme: Theme = {
     textColor: "#fff",
     errortext: "#dd2020",
     grayColor: "#CBD7DC",
+    desColor: "#757575",
   },
   borderRadius: {
     small: 5,
