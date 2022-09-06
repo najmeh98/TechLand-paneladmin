@@ -15,6 +15,7 @@ type OwnProps = {
   padding?: string;
   color?: keyof Theme["color"];
   bgcolor?: keyof Theme["color"];
+  className?: string;
 };
 
 export const CustomButton = ({
@@ -28,6 +29,7 @@ export const CustomButton = ({
   maxWidth,
   color,
   bgcolor,
+  className,
 }: OwnProps): JSX.Element => {
   let t = useTheme();
   return (
@@ -43,6 +45,7 @@ export const CustomButton = ({
     >
       <Button
         onClick={onClick}
+        className={className}
         // disabled={disable}
         style={{
           width: "100%",
