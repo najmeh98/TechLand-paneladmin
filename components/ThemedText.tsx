@@ -9,6 +9,7 @@ interface OwenProp {
   color?: keyof Theme["color"];
   style?: any;
   children: ReactNode;
+  className?: string;
 }
 
 export const ThemedText: React.FC<OwenProp> = ({
@@ -17,6 +18,7 @@ export const ThemedText: React.FC<OwenProp> = ({
   color,
   style,
   children,
+  className,
 }) => {
   const t = useTheme();
 
@@ -28,6 +30,7 @@ export const ThemedText: React.FC<OwenProp> = ({
         ...style,
       }}
       onClick={onClick}
+      className={className}
     >
       {children}
     </Text>
