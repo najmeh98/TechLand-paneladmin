@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { changePassword, config } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { useTheme } from "../../components/Context/ThemeContext";
@@ -36,18 +36,13 @@ export default function ChangePassword(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>("");
 
-  const updatePassword = async (): Promise<void> => {
+  const updatePassword = useCallback(async (): Promise<void> => {
     if (adminPassword.newpassword !== adminPassword.renewpassword) {
       setError("Confirm password is not matched");
     }
     try {
       setLoading(true);
-      //   const result = await changePassword(newPassword, token, id);
 
-      //   if ((result?.status as number) == 200) {
-      //     console.log(result);
-      //     setLoading(false);
-      //   }
       axios
         .post(
           `${config.apiUrl}/api/admin/changePassword?query=${id}`,
@@ -78,7 +73,7 @@ export default function ChangePassword(): JSX.Element {
       console.log(error);
       setLoading(false);
     }
-  };
+  }, [adminPassword, error, id, router, token]);
 
   return (
     <UserLayout title="Password" width="70%" style={{ padding: "20px 30px" }}>
@@ -132,10 +127,12 @@ export default function ChangePassword(): JSX.Element {
       <Space vertical={20} />
 
       <ButtonRow style={{ marginRight: "40px" }}>
-        <CustomButton onClick={() => router.push("/")}>Cancel</CustomButton>
+        <CustomButton onClick={() => router.push("/")} padding="0px 15px">
+          Cancel
+        </CustomButton>
         <CustomButton
           onClick={updatePassword}
-          padding="10px 20px"
+          padding="0px 15px"
           style={{ paddingLeft: "10px" }}
 
           //   disable={loading}
