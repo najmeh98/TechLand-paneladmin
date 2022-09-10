@@ -41,6 +41,7 @@ export type InputCommonProps = {
   type?: string;
   column?: number;
   row?: number;
+  className?: any;
 };
 
 type Props = (TextInput | TextArea | FileInput | TextPassword) &
@@ -65,6 +66,7 @@ export const CustomInput: React.FC<Props> = ({
   type,
   column,
   row,
+  className,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -94,19 +96,23 @@ export const CustomInput: React.FC<Props> = ({
       )}
       {type === "password" && (
         <Input
+          className={className}
           value={value}
           onChange={onChange}
           type={show ? "text" : "password"}
           placeholder={placeholder}
+          maxLength={255}
           style={{ padding: t.padding.normal, height: t.height.small }}
         />
       )}
       {!(type === "password" || type === "textarea") && (
         <Input
+          className={className}
           name={name}
           value={value}
           onChange={onChange}
           type={type}
+          maxLength={255}
           placeholder={placeholder}
           style={{ padding: t.padding.normal, height: t.height.small }}
         />
@@ -114,6 +120,8 @@ export const CustomInput: React.FC<Props> = ({
 
       {type === "textarea" && (
         <textarea
+          maxLength={255}
+          className={className}
           value={value}
           onChange={onChange}
           rows={row ? row : 6}
@@ -150,7 +158,7 @@ export const Input = styled.input`
   margin-bottom: 5px;
   resize: none;
   font-size: medium;
-  font-family: inherit;
+  /* font-family: inherit; */
   &::placeholder {
     font-size: 13px;
   }
