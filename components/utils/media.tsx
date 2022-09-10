@@ -1,6 +1,6 @@
-import { css } from "styled-components";
+import { css, FlattenSimpleInterpolation } from "styled-components";
 
-export const tablet = (body: any) => css`
+export const tablet = (body: any): FlattenSimpleInterpolation => css`
   @media (max-width: 950px) and (max-width: 1024px) {
     ${body};
   }

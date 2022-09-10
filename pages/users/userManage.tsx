@@ -6,11 +6,9 @@ import { useTheme } from "../../components/Context/ThemeContext";
 import { FlexRow } from "../../components/share/Container";
 import axios, { AxiosError } from "axios";
 import styled from "styled-components";
-import { FiMoreVertical } from "react-icons/fi";
 import { UserLayout } from "../../components/users/UserLayout";
 import { UserComponent } from "../../components/users/UserComponent";
 import { RowTitle } from "../../components/users/RowTitle";
-import { SidebarOption } from "../../components/Sidebar/SidebarOption";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 
 export default function UserManage(): JSX.Element {

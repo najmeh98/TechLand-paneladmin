@@ -1,8 +1,8 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
-import { config, Verification } from "../../components/Api";
+import { Verification } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { useTheme } from "../../components/Context/ThemeContext";
 import { CustomButton } from "../../components/CustomButton";

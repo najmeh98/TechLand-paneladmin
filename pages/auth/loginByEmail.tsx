@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTheme } from "../../components/Context/ThemeContext";
 import { useRouter } from "next/router";
 import { Login } from "../../components/Api";
@@ -8,7 +8,7 @@ import { Space } from "../../components/share/Space";
 import { CustomButton } from "../../components/CustomButton";
 import { ThemedText } from "../../components/ThemedText";
 import { Span } from "./register";
-import { Flex, Wrapper } from "../../components/share/Container";
+import { Flex } from "../../components/share/Container";
 import { AxiosError } from "axios";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { Theme } from "../../components/types/theme";

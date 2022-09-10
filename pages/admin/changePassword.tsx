@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
-import { changePassword, config } from "../../components/Api";
+import { config } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { useTheme } from "../../components/Context/ThemeContext";
 import { CustomButton } from "../../components/CustomButton";
@@ -34,7 +34,7 @@ export default function ChangePassword(): JSX.Element {
     renewpassword: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const updatePassword = useCallback(async (): Promise<void> => {
     if (adminPassword.newpassword !== adminPassword.renewpassword) {
