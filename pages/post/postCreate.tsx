@@ -27,7 +27,6 @@ export default function PostCreate(): JSX.Element {
   const [localToken, setLocalToken] = useState<string>("");
   const [categoryItem, setCategoryItem] = useState<CatItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<CatItem>();
-  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const { dispatch } = useAppContext();
 
@@ -129,7 +128,7 @@ export default function PostCreate(): JSX.Element {
       {/* upload Image */}
       <ComponentUploader setImage={setImage} image={image} />
 
-      <Space vertical={15} />
+      <Space vertical={30} />
 
       <CustomInput
         type="text"
@@ -140,7 +139,7 @@ export default function PostCreate(): JSX.Element {
         }
       />
 
-      <Space vertical={15} />
+      <Space vertical={25} />
 
       <CustomInput
         type="textarea"
@@ -151,7 +150,7 @@ export default function PostCreate(): JSX.Element {
         }
       />
 
-      <Space vertical={30} />
+      <Space vertical={25} />
 
       <CustomSelect
         categoryItem={categoryItem}
