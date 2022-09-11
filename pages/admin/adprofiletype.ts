@@ -1,4 +1,5 @@
 export interface ProfileProp {
+  id?: undefined;
   name: string;
   family: string;
   username: string;
