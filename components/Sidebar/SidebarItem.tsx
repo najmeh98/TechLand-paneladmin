@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useTheme } from "../Context/ThemeContext";
-import { ArrowDown } from "../icons/Icon";
-import { Column, Flex, FormItem, Wrapper } from "../share/Container";
-import { ThemedText } from "../ThemedText";
-import { useHover } from "../utils/use-hover";
-import { IoIosArrowUp } from "react-icons/io";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { itemProp } from "./SidebarOption";
 
 type Props = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   title?: string;
   icon?: JSX.Element;
-  style: any;
-  isOpen: boolean;
+  fullIcon?: JSX.Element;
   subRoutes?: itemProp[];
   isActive: boolean;
 };
@@ -27,47 +21,68 @@ export const SidebarItem = ({
   onClick,
   icon,
   title,
-  style,
-  isOpen,
-  subRoutes,
   isActive,
+  fullIcon,
 }: Props): JSX.Element => {
   let t = useTheme();
-  const router = useRouter();
-  const [showSubRoute, setshowSubRoute] = useState<boolean>(false);
-  const onmouseOut = (): void => {
-    setshowSubRoute(false);
-  };
+
+  const [isOpne, setIsOpne] = useState<boolean>(false);
 
   return (
-    <>
-      <MainWrapper
-        onClick={onClick}
-        style={{
-          padding: "10px",
-          cursor: "pointer",
-          width: "100%",
+    <div
+      className="flex items-start justify-center w-full cursor-pointer mb-10"
+      onClick={onClick}
+    >
+      {/* <Wrapper> */}
+
+      <div
+        className="flex justify-start"
+        onMouseEnter={() => {
+          setIsOpne(true);
         }}
-        isActive={isActive}
+        onMouseLeave={() => {
+          setIsOpne(false);
+        }}
       >
-        <Wrapper>
-          <Span
+        {isActive ? (
+          <span
+            className="text-2xl "
             style={{
               color: t.color.bgColor,
-              fontSize: t.fontSize.semiLarge,
+            }}
+          >
+            {fullIcon}
+          </span>
+        ) : (
+          <span
+            className="text-2xl "
+            style={{
+              color: t.color.bgColor,
             }}
           >
             {icon}
-          </Span>
-          <p style={{ color: t.color.bgColor, ...style }}>{title}</p>
-        </Wrapper>
+          </span>
+        )}
 
-        <span onClick={() => setshowSubRoute(!showSubRoute)} style={style}>
+        {isOpne && (
+          <div className="fixed flex items-start !z-50">
+            <div className="absolute top-2 left-8 rounded-sm !z-30 bg-white w-3 h-3 rotate-45  scale-x-100 scale-y-100 translate-x-1 translate-y-1 skew-x-1 skew-y-1" />
+            <div className="relative text-cyan-700 border border-solid border-cyan-700  flex items-start justify-start bg-white px-3 py-2 left-10 rounded ">
+              {title}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* <p style={{ color: t.color.bgColor, ...style }}>{title}</p> */}
+      {/* </Wrapper> */}
+
+      {/* <span onClick={() => setshowSubRoute(!showSubRoute)} style={style}>
           {subRoutes && <ArrowDown fill="#fff" />}
-        </span>
-      </MainWrapper>
+        </span> */}
+    </div>
 
-      <Column style={{ width: "100%" }}>
+    /* <Column style={{ width: "100%" }}>
         {showSubRoute &&
           subRoutes?.map((SubRoute: any, index: any) => (
             <Wrapper
@@ -95,8 +110,7 @@ export const SidebarItem = ({
               </Title>
             </Wrapper>
           ))}
-      </Column>
-    </>
+      </Column> */
   );
 };
 
@@ -115,7 +129,7 @@ const MainWrapper = styled.div<Styleprop>`
   ${(p) =>
     p.isActive &&
     css`
-      border-left: 3px solid #abcde3;
+      /* border-left: 3px solid #abcde3; */
     `}
 `;
 const Span = styled.span`

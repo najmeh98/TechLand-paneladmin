@@ -1,172 +1,211 @@
 import { useRouter } from "next/router";
-import { GoHome } from "react-icons/go";
-import { FaRegUser } from "react-icons/fa";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
-import { FiUsers } from "react-icons/fi";
 import { useTheme } from "../Context/ThemeContext";
-import { IoSettingsOutline } from "react-icons/io5";
-import { MdExitToApp } from "react-icons/md";
-import { useCallback, useEffect, useState } from "react";
-import axios from "axios";
-import { config } from "../Api";
-import { ThemedText } from "../ThemedText";
 import { SidebarItem } from "./SidebarItem";
 import { useHover } from "../utils/use-hover";
-import { SidebarMenu } from "./SidebarMenu";
-import { FiPaperclip } from "react-icons/fi";
 import { useAppContext } from "../AppManag.tsx/AppContext";
+import {
+  Account,
+  AdminIcon,
+  FullAdminIcon,
+  FullHome,
+  FullistofItem,
+  FullSaveList,
+  FullWritepost,
+  Home,
+  ListofItem,
+  SaveList,
+  Signout,
+  Writepost,
+} from "../icons/Icon";
+import { SidebarMenu } from "./SidebarMenu";
+import { Flex, FormItem } from "../share/Container";
+import { useState } from "react";
 export type itemProp = {
   title: string | undefined;
   icon?: JSX.Element;
+  fullIcon?: JSX.Element;
   path?: string;
   subRoutes?: itemProp[];
 };
 
 const Items: itemProp[] = [
   {
-    title: "Dashboard",
-    icon: <GoHome />,
+    title: "Home",
+    icon: <Home />,
+    fullIcon: <FullHome />,
     path: "/",
   },
-
   {
-    title: "Users",
-    icon: <FiUsers />,
-    // path: "/users",
-    subRoutes: [
-      {
-        title: "User manage",
-        // icon: <FaRegUser />,
-        path: "/users/userManage",
-      },
-
-      {
-        title: "Admin Create ",
-        path: "/admin/adminCreate",
-      },
-    ],
+    title: "List",
+    icon: <SaveList />,
+    fullIcon: <FullSaveList />,
+    path: "/category/listofCategory",
   },
-
   {
-    title: "Setting",
-    icon: <IoSettingsOutline />,
-    subRoutes: [
-      {
-        title: "Profile",
-        path: "/admin/adminProfile",
-      },
-      {
-        title: "Password",
-        path: "/admin/changePassword",
-      },
-    ],
+    title: "Stories",
+    icon: <ListofItem />,
+    fullIcon: <FullistofItem />,
+    path: "/post/listofPost",
   },
-
   {
-    title: "Exit",
-    icon: <MdExitToApp />,
+    title: "Admin",
+    path: "/admin/adminCreate",
+    icon: <AdminIcon />,
+    fullIcon: <FullAdminIcon />,
+  },
+  {
+    title: "Write",
+    icon: <Writepost />,
+    fullIcon: <FullWritepost />,
+    path: "/post/postCreate",
   },
 ];
 
 export const SidebarOption = (): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [isOpen, setisOpen] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
 
   const [hovered, hoverListener] = useHover();
-
-  const [showSubRoute, setshowSubRoute] = useState<boolean>(false);
 
   let router = useRouter();
   let t = useTheme();
 
   console.log(useAppContext());
 
-  const { logout } = useAppContext();
+  const { logout, adminInfo } = useAppContext();
 
   const toggle = (): void => {
-    setisOpen(!isOpen);
+    setShow(!show);
   };
+
+  console.log("info", adminInfo);
+  console.log("img", adminInfo?.image);
+
+  const fullName: string = `${adminInfo?.name} ${adminInfo?.family}`;
+
+  const profile: JSX.Element = (
+    <>
+      {adminInfo?.image ? (
+        <img
+          src={adminInfo?.image}
+          alt="profilImg"
+          className="w-14 h-14 rounded-full"
+        />
+      ) : (
+        <img src="/avator.png" alt="img" className="w-12 h-12 rounded-full" />
+      )}
+    </>
+  );
 
   return (
     <Wrapper
       style={{
-        borderLeft: "1px solid t.color.titleColor",
         boxShadow: t.boxShadowbox,
         fontSize: t.fontSize.normal,
         fontWeight: t.fontWeight.bold,
         backgroundImage:
           "linear-gradient(to bottom, #06162d, #163655, #235b7f, #2e82aa, #39acd4)",
-        width: isOpen ? "250px" : "70px",
+        width: "100px",
       }}
-      onMouseEnter={() => {
-        setisOpen(true);
-      }}
-      onMouseLeave={() => {
-        setisOpen(false);
-      }}
+      className="justify-between flex flex-col items-center left-0 gap-3  overflow-x-hidden overflow-y-scroll top-0 bottom-0 m-0 h-screen sticky"
+      // onMouseEnter={() => {
+      //   setisOpen(true);
+      // }}
+      // onMouseLeave={() => {
+      //   setisOpen(false);
+      // }}
     >
-      <Navbar
-        style={{
-          padding: "16px",
-          color: t.color.titleColor,
-        }}
-      >
-        <FaBars color="#fff" />
-      </Navbar>
+      <div className="flex  items-center justify-center py-10 w-full">
+        <FaBars color="#fff" fontSize={22} />
+      </div>
 
-      {Items?.map((item: itemProp, index: number) => {
-        return (
-          <SidebarItem
-            key={index}
-            isActive={router.pathname === item.path}
-            style={{
-              display: isOpen ? "flex" : "none",
-            }}
-            onClick={() => {
-              if (item.title === "Exit") {
-                logout();
-                router.push("/auth/loginByEmail");
-              }
-              if (item?.path == undefined) {
-                return;
-              } else {
-                router.push(item?.path as string);
-              }
-            }}
-            isOpen={isOpen}
-            {...item}
-          />
-        );
-      })}
+      <div className="w-full block flex-col items-center justify-center">
+        {Items?.map((item: itemProp, index: number) => {
+          return (
+            <SidebarItem
+              key={index}
+              isActive={router.pathname === item.path}
+              onClick={() => {
+                if (item?.path == undefined) {
+                  return;
+                } else {
+                  router.push(item?.path as string);
+                }
+              }}
+              {...item}
+            />
+          );
+        })}
+      </div>
+
+      <div
+        className="w-full  relative flex  flex-col items-center justify-center border border-black my-6 mx-2 cursor-pointer"
+        onClick={toggle}
+      >
+        {/*  show profile image */}
+        {profile}
+
+        {show && (
+          <div className="relative  !z-10  flex flex-col items-center  w-full justify-center shadow-2xl">
+            <div className="absolute -top-20 rounded-sm !z-30 bg-white w-7 h-7 rotate-45  scale-x-100 scale-y-100 translate-x-1 translate-y-1 skew-x-1 skew-y-1   left-7" />
+
+            <div
+              className="fixed py-4 px-4 bottom-20 left-2 w-full bg-white  rounded-lg border border-solid border-slate-200"
+              style={{ maxWidth: "300px" }}
+            >
+              <SidebarMenu
+                className="text-black p-4"
+                label={
+                  <FormItem>
+                    <h3 className="m-0 pb-2">{fullName}</h3>
+                    <p className="m-0 text-slate-400 font-light">{`@${adminInfo?.name}`}</p>
+                  </FormItem>
+                }
+                icon={
+                  <div className=" rounded-full block  mr-3">{profile}</div>
+                }
+                onClick={() => router.push("/admin/adminProfile")}
+              />
+
+              <hr className=" ml-0 mr-3  border-gray-300 border-t-0 border-solid" />
+
+              <SidebarMenu
+                className="text-black p-3"
+                label="Account Setting"
+                icon={<Account />}
+                onClick={() => router.push("/admin/adminProfile")}
+              />
+
+              <SidebarMenu
+                className="text-black p-3"
+                label="Password"
+                // icon={}
+                onClick={() => router.push("/admin/changePassword")}
+              />
+
+              <hr className=" ml-0 mr-3  border-gray-300 border-t-0 border-solid" />
+
+              <SidebarMenu
+                className="text-black p-3"
+                label="Log out"
+                onClick={() => {
+                  logout();
+                  router.push("/auth/loginByEmail");
+                }}
+                icon={<Signout />}
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   box-shadow: 0 1px 11px hsl(0deg 0% 66% / 27%);
   animation: 1s ease 0s 1 normal none running fadeIn;
   transition: all 0.5s;
-  height: 100vh;
-  overflow: hidden;
-  gap: 10px;
-  top: 0px;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-  margin: 0;
-  position: sticky;
-`;
-
-const Navbar = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #7a7a7a30;
-  cursor: pointer;
-  height: 50px;
 `;
