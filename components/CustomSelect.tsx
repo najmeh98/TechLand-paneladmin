@@ -1,13 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { IoIosArrowDown } from "react-icons/io";
 import { FiPlusCircle } from "react-icons/fi";
 import { CatItem } from "../pages/post/postCreate.interface";
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BsCheck2 } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { CreateList } from "./LayoutList.tsx/CreateList";
 import Createnewlist from "./LayoutList.tsx/Createnewlist";
 // import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 interface CustomProp {
@@ -44,8 +42,8 @@ export const CustomSelect = ({
       >
         {({ open }) => (
           <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
-              categrory
+            <Listbox.Label className="block text-base font-normal text-black">
+              Categrory
             </Listbox.Label>
             <Container className="relative mt-1 ">
               <Listbox.Button

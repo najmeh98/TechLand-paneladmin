@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Layout } from "../register/Layout";
-import { Flex, FlexRow, FormItem, Wrapper } from "../share/Container";
-// import { Wrapper } from "../share/Container";
 import { SidebarOption } from "../Sidebar/SidebarOption";
 import { FiUsers } from "react-icons/fi";
-import { ThemedText } from "../ThemedText";
 import { useTheme } from "../Context/ThemeContext";
 import { DashboardMain } from "./DashboardMain";
 import { useAppContext } from "../AppManag.tsx/AppContext";
@@ -66,7 +62,7 @@ export default function Dashboard(): JSX.Element {
             icon={<FiUsers fontSize={30} />}
             title="Total Users"
             count={count?.userCount}
-            text="Add new user"
+            text="Add new admin"
             onClick={() => router.push("admin/adminCreate")}
           />
           <DashboardMain
@@ -81,7 +77,7 @@ export default function Dashboard(): JSX.Element {
             title=" Post Create"
             count={count?.postCount}
             text="Add new post"
-            onClick={() => router.push("/admin/post/postCreate")}
+            onClick={() => router.push("/post/postCreate")}
           />
         </Container>
       </ContaineRow>

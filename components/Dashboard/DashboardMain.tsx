@@ -1,7 +1,6 @@
 import React from "react";
-import { FiUsers } from "react-icons/fi";
 import styled from "styled-components";
-import { Flex, FlexRow, FormItem } from "../share/Container";
+import { FlexRow, FormItem } from "../share/Container";
 import { ThemedText } from "../ThemedText";
 import { FiPlus } from "react-icons/fi";
 import { OwnProp } from "./dashType";

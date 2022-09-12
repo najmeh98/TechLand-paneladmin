@@ -6,13 +6,20 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import { config, GetAllUsers } from "../Api";
-import { allUsers, OwnadminProp } from "./definition";
+import { config } from "../Api";
+import {
+  adminsPosts,
+  allUsers,
+  listofCategories,
+  OwnadminProp,
+} from "./definition";
 
 interface State {
   isLoggedIn: boolean;
   adminInfo: OwnadminProp;
   allUsers: allUsers[];
+  adminsPost: adminsPosts[];
+  listofCate: listofCategories[];
 }
 
 const initialState: State = {
@@ -29,8 +36,11 @@ const initialState: State = {
     createdAt: "",
     bio: "",
     job: "",
+    image: "",
   },
   allUsers: [],
+  adminsPost: [],
+  listofCate: [],
 };
 
 type AppContextInterface = State & {
@@ -64,28 +74,39 @@ export const AppManagerContext = ({
 
   //login
   const login = useCallback((adminProp: OwnadminProp): void => {
-    console.log(adminProp);
-    const token: string = adminProp.token;
-    const email: string = adminProp.email;
-    localStorage.setItem("admintoken", token);
-    localStorage.setItem("adminemail", email);
-    console.log("email", email);
+    if (typeof window == "object") {
+      if (window.localStorage.getItem("$adnTK") === null) {
+        const token: string = adminProp.token;
 
-    dispatch({ type: "LOGGED IN", payload: { ...adminProp } });
+        window.localStorage.setItem("$adnTK", token);
+
+        dispatch({ type: "LOGGED IN", payload: { ...adminProp } });
+      }
+    }
   }, []);
 
   //logout
   const logout = useCallback(() => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.clear();
+    let result: boolean = false;
+    if (typeof window == "object") {
+      if (window.localStorage.getItem("$adnTK") === null) {
+        result = true;
+      } else {
+        window.localStorage.removeItem("$adnTK");
 
-    dispatch({ type: "LOGGED OUT" });
+        result = true;
+
+        dispatch({ type: "LOGGED OUT" });
+      }
+    }
+    return result;
   }, []);
 
   // reload request
-  const handleReload = useCallback(() => {
-    const token: string | null = localStorage.getItem("admintoken");
+  const handleReload = useCallback((): void => {
+    const token: string | null = localStorage.getItem("$adnTK");
+
+    console.log("token", token);
 
     if (!token || token == undefined) {
       return;
@@ -113,6 +134,12 @@ export const AppManagerContext = ({
             const users: allUsers[] = result?.data?.alluser;
 
             dispatch({ type: "LIST OF USERS", payload: users });
+
+            const posts: adminsPosts[] = result?.data?.adInfo?.post;
+            console.log("post", posts);
+
+            // dispatch({ type: "ADMIN POST", payload: posts });
+            dispatch({ type: "INITIAL DATA", payload: posts });
           }
         })
         .catch((err) => console.log(err));
@@ -138,7 +165,10 @@ type Action =
   | { type: "LOGGED OUT" }
   | { type: "LIST OF USERS"; payload: allUsers[] }
   | { type: "USER INFO EDIT"; payload: allUsers }
-  | { type: "DELETE USER"; payload: any };
+  | { type: "DELETE USER"; payload: any }
+  | { type: "ADMIN POST"; payload: adminsPosts[] }
+  | { type: "INITIAL DATA"; payload: adminsPosts[] }
+  | { type: "LIST OF CATEGORIES"; payload: listofCategories[] };
 
 const reducer = (state: State, action: Action): State => {
   const { type } = action;
@@ -184,6 +214,22 @@ const reducer = (state: State, action: Action): State => {
         allUsers: state.allUsers.filter((user) => user.id !== action.payload),
       };
       break;
+
+      // case "ADMIN POST":
+      //   const post = [...state.adminsPost, { ...action.payload }];
+      //   console.log("posts", post);
+      //   return {
+      //     ...state,
+      //     isLoggedIn: true,
+      //     adminsPost: post,
+      //   };
+      break;
+    case "INITIAL DATA":
+      return {
+        ...state,
+        isLoggedIn: true,
+        adminsPost: action.payload,
+      };
 
     default:
       return {
