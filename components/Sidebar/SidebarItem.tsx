@@ -36,7 +36,7 @@ export const SidebarItem = ({
       {/* <Wrapper> */}
 
       <div
-        className="flex justify-start"
+        className="flex justify-start items-center"
         onMouseEnter={() => {
           setIsOpne(true);
         }}
