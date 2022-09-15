@@ -4,10 +4,7 @@ import useSWR from "swr";
 import { config, fetchWithId } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import CategoryListLayout from "../../components/category/CatListLayout";
-import { CustomButton } from "../../components/CustomButton";
-import { Flex } from "../../components/share/Container";
-import { SidebarOption } from "../../components/Sidebar/SidebarOption";
-import { ThemedText } from "../../components/ThemedText";
+import { ListofItems } from "../../components/LayoutList.tsx/listofItems";
 import { CatPost } from "./cat.interface";
 
 export default function ListofCategory(): JSX.Element {
@@ -32,53 +29,41 @@ export default function ListofCategory(): JSX.Element {
   //add spinner***
   if (error) return <div>failed to load</div>;
 
+  console.log(data);
   return (
-    <Flex>
-      <SidebarOption />
-      <div
-        style={{ maxWidth: "900px", minHeight: "100vh" }}
-        className="w-full flex items-start flex-col mx-auto my-0 "
-      >
-        <Flex
-          className="w-full border border-b-1 border-blue-900  pb-8 mx-auto my-14"
-          style={{ borderBottom: "1px solid lightgray" }}
-        >
-          <ThemedText fontSize="XLarge" className="font-bold">
-            Your lists
-          </ThemedText>
-          <CustomButton
-            className="bg-gradient-to-r from-cyan-500 to-blue-500 px-4"
-            onClick={() => {
-              router.push("./manageCategories");
-            }}
-          >
-            New list
-          </CustomButton>
-        </Flex>
-
-        <div className=" w-full mr-8  " style={{ maxWidth: "730px" }}>
-          {data &&
-            data?.length > 0 &&
-            data?.map((cat: CatPost) => (
-              <CategoryListLayout
-                onClick={() => {
-                  router.push({
-                    pathname: "./categoryItem",
-                    query: {
-                      slug: cat?.name,
-                      wb_id: cat?.id,
-                    },
-                  });
-                }}
-                key={cat?.id}
-                title={cat?.name}
-                image={cat?.image}
-                email={email}
-                catId={cat?.id}
-              />
-            ))}
-        </div>
+    <ListofItems
+      title="Your lists"
+      button="New lists"
+      onClick={() => {
+        router.push("./manageCategories");
+      }}
+      className="bg-gradient-to-r from-cyan-500 to-blue-500 px-4 "
+    >
+      <div className=" w-full px-1  ">
+        {data &&
+          data?.length > 0 &&
+          data?.map((cat: CatPost) => (
+            <CategoryListLayout
+              onClick={() => {
+                router.push({
+                  pathname: "./categoryItem",
+                  query: {
+                    slug: cat?.name,
+                    wb_id: cat?.id,
+                  },
+                });
+              }}
+              length_posts={cat?.posts?.length}
+              key={cat?.id}
+              title={cat?.name}
+              image={cat?.image}
+              catId={cat?.id}
+              description={cat?.description}
+            />
+          ))}
       </div>
-    </Flex>
+    </ListofItems>
+    //   </div>
+    // </Flex>
   );
 }

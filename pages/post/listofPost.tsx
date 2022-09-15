@@ -29,7 +29,7 @@ export default function ListofPost(): JSX.Element {
       }}
       className="bg-gradient-to-r from-purple-500 to-pink-500 px-3"
     >
-      <div className=" w-full mr-8  " style={{ maxWidth: "730px" }}>
+      <div className=" w-full mr-8">
         {data &&
           data?.post?.length > 0 &&
           data?.post?.map((post: OwnPost) => (
