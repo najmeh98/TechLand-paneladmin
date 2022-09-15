@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
+import Alert from "../../components/alert";
 import { config } from "../../components/Api";
 import { HeaderText } from "../../components/HeaderText";
 import { Space } from "../../components/share/Space";
@@ -18,21 +19,16 @@ export default function PostInfo() {
 
   const [localToken, setlocalToken] = useState<string | undefined>(undefined);
   const [morePopup, setMorePopup] = useState<boolean>(false);
-  // const [showInfo, setShowInfo] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [deleteItem, setdeleteItem] = useState<boolean>(false);
+
   const [data, setData] = useState({
     id: "",
     title: "",
     content: "",
     image: "",
   });
-
-  const [editValue, seteditValue] = useState({
-    name: "",
-    description: "",
-    image: "",
-  });
-  const [image, setimage] = useState<string>("");
 
   useEffect(() => {
     const token: string = localStorage.getItem("$adnTK") ?? "";
@@ -59,12 +55,6 @@ export default function PostInfo() {
             image: data?.image,
             id: data?.id,
           });
-
-          seteditValue({
-            name: data?.title,
-            description: data?.content,
-            image: data?.image,
-          });
         }
       })
       .catch((error) => {
@@ -80,7 +70,7 @@ export default function PostInfo() {
 
     try {
       axios
-        .post(`${config.apiUrl}/api/data/deletePost?postId=${psId}`, psId, {
+        .delete(`${config.apiUrl}/api/data/deletePost?postId=${psId}`, {
           headers: {
             authorization: localToken || "",
           },
@@ -119,7 +109,8 @@ export default function PostInfo() {
     {
       label: " Delete post info",
       className: "text-red-500 hover:text-red-500",
-      onClick: onSubmitDelete,
+      // onClick: onSubmitDelete,
+      onClick: () => setdeleteItem(true),
     },
     {
       label: "Back to List",
@@ -172,28 +163,17 @@ export default function PostInfo() {
         <HeaderText>{data?.title}</HeaderText>
 
         <ThemedText className=" text-2xl">{data?.content}</ThemedText>
-        {/* 
-        {showInfo && (
-          <CreateList
-            title="Edit post"
-            valueName={editValue.name}
-            valueDesc={editValue.description}
-            onChamgeDesc={(event) =>
-              seteditValue({ ...editValue, name: event.currentTarget.value })
-            }
-            onChangeName={(event) => {
-              seteditValue({
-                ...editValue,
-                description: event.currentTarget.value,
-              });
-            }}
-            onClick_Cancel={() => setShowInfo(!showInfo)}
-            onClick_Create={onSubmitEdit}
-            image={editValue?.image}
-            setImage={setimage}
-            newImage={image}
+
+        {/* show pop Up for delete post */}
+        {deleteItem && (
+          <Alert
+            onClick_Cancel={() => setdeleteItem(false)}
+            onClick_delete={onSubmitDelete}
+            text="Delete story            "
+            desc="Are you sure you want to delete this story?            "
+            Buttondelete="Delete"
           />
-        )} */}
+        )}
       </div>
     </div>
   );
