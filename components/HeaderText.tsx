@@ -9,6 +9,7 @@ interface H1Prop {
   style?: any;
   fontSize?: keyof Theme["fontSize"];
   children: ReactNode;
+  className?: string;
 }
 
 export const HeaderText = ({
@@ -16,12 +17,13 @@ export const HeaderText = ({
   fontSize,
   style,
   children,
+  className,
 }: H1Prop): JSX.Element => {
   const t = useTheme();
   const router = useRouter();
 
   return (
-    <H1 style={style} onClick={onClick}>
+    <H1 style={style} className={className} onClick={onClick}>
       {children}
     </H1>
   );
