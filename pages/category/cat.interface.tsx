@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface CategoryProp {
   name: string;
   description?: string | undefined;
@@ -8,6 +10,9 @@ export interface CatPost {
   name: string;
   description: string;
   image: string;
+  created: string;
+  update: string;
+  posts: [];
 }
 
 export interface infoPostProp extends Omit<CategoryProp, "name"> {
@@ -21,10 +26,18 @@ export interface ItempropTs {
 }
 
 export interface MoreItemProp {
-  onClick_more: () => void;
-  onClick_Info: () => void;
-  text_Delete: string;
-  text_Edit: string;
-  onClick_Delete: () => void;
   morePopup: boolean;
+  children: ReactNode;
+  onClick_more: () => void;
+}
+
+export interface EditCatProp extends CategoryProp {
+  image: string;
+}
+
+export interface editPostProp {
+  id: string;
+  title: string;
+  content: string;
+  image: string;
 }
