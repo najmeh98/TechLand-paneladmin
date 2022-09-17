@@ -23,7 +23,7 @@ export const UserLayout: React.FC<UserProp> = ({
   return (
     <LayoutStyle>
       <SidebarOption />
-      <MainWrapper className="ml-64">
+      <MainWrapper>
         <Conianer
           style={{
             maxWidth: width,
@@ -35,6 +35,7 @@ export const UserLayout: React.FC<UserProp> = ({
             style={{
               ...style,
             }}
+            className="p-6"
           >
             {children}
           </Wrapper>
@@ -49,7 +50,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid rgb(230, 235, 235);
-  border-radius: 16px;
+  /* border-radius: 16px; */
   box-shadow: rgb(16 30 115 / 6%) 0px 6px 26px 0px;
   /* box-shadow: 0 0 40px 15px rgba(0, 0, 0, 0.2); */
 
