@@ -162,15 +162,21 @@ export default function PostInfo() {
 
         <HeaderText>{data?.title}</HeaderText>
 
-        <ThemedText className=" text-2xl">{data?.content}</ThemedText>
+        <ThemedText
+          className=" font-[source-serif-pro] text-2xl text-stone-800 "
+          color="contentColor"
+          fontSize="semiLarge"
+        >
+          {data?.content}
+        </ThemedText>
 
         {/* show pop Up for delete post */}
         {deleteItem && (
           <Alert
             onClick_Cancel={() => setdeleteItem(false)}
             onClick_delete={onSubmitDelete}
-            text="Delete story            "
-            desc="Are you sure you want to delete this story?            "
+            text="Delete story"
+            desc="Are you sure you want to delete this story?"
             Buttondelete="Delete"
           />
         )}
@@ -178,3 +184,5 @@ export default function PostInfo() {
     </div>
   );
 }
+
+// source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif
