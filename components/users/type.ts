@@ -9,7 +9,7 @@ export interface UserProp {
 }
 
 //user component type
-export interface USerInfo {
+export interface UserInfo {
   name: string;
   family: string;
   email: string;

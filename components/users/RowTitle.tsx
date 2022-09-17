@@ -23,7 +23,7 @@ export const RowTitle = (): JSX.Element => {
   );
 };
 
-const RowComponent = ({ title }: { title: string }) => {
+const RowComponent = ({ title }: { title: string }): JSX.Element => {
   const t = useTheme();
   return (
     <Title style={{ fontSize: t.fontSize.normal, color: t.color.titleColor }}>

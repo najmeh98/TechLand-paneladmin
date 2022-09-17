@@ -106,7 +106,6 @@ export const changePassword = (
 };
 
 // fetch data with useSWR
-
 export const fetchWithId = (url: string, localToken: string) =>
   axios(`${url}`, {
     headers: {
