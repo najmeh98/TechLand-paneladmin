@@ -4,16 +4,18 @@ import styled from "styled-components";
 import { Column } from "./share/Container";
 import { CardStyle } from "./utils/CardStyle";
 
-interface OwnProp {
+export interface OwnProp {
   setImage: (postInfo: string) => void;
   image: any;
   newImage?: any;
+  height?: number;
 }
 
 export const ComponentUploader = ({
   setImage,
   image,
   newImage,
+  height,
 }: OwnProp): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -44,41 +46,54 @@ export const ComponentUploader = ({
   });
 
   return (
-    <DropZone {...getRootProps()}>
+    <DropZone
+      {...getRootProps()}
+      className="rounded-lg shadow-md "
+      style={{ height: height }}
+    >
       <input {...getInputProps()} />
-      {newImage.preview ? (
-        <img src={newImage.preview} alt="image" width={100} height={200} />
-      ) : <img
-          src={image.preview || image}
+
+      {image?.preview ? (
+        <img
+          src={image.preview}
           alt="image"
           width={100}
           height={200}
-        /> ? (
+          className="rounded-lg"
+        />
+      ) : newImage ? (
+        <img
+          src={newImage}
+          alt="image"
+          width={100}
+          height={200}
+          className="rounded-lg"
+        />
+      ) : (
         <Column style={{ width: "100%" }}>
           <img
             src="/uploadImg.svg"
-            alt="upload img"
+            alt="uploadImg"
+            className="rounded-lg"
             style={{ maxWidth: "200px", height: "200px" }}
           />
           <p className="mt-0 text-gray-300"> Drag & Drop your image here </p>
         </Column>
-      ) : (
-        ""
       )}
     </DropZone>
   );
 };
 
 const DropZone = styled.div`
-  border: 2px dashed #97bef4;
+  border: 1px dashed #97bef4;
   /* rgb(57, 172, 212) */
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
   img {
-    /* padding: 10px 0px; */
     width: 100%;
-    /* height: 50%; */
+    min-height: 100%;
   }
 `;
