@@ -43,6 +43,7 @@ export interface Theme {
     errortext: string;
     grayColor: string;
     desColor: string;
+    contentColor: string;
   };
   borderRadius: {
     small: number;
