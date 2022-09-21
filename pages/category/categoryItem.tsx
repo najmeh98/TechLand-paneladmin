@@ -285,6 +285,7 @@ export default function CategoryItem(): JSX.Element {
           />
         )}
 
+        {/* show delete pop up */}
         {deleteItem && (
           <Alert
             onClick_Cancel={() => setdeleteItem(true)}
