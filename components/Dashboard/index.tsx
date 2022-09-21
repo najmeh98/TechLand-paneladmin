@@ -126,16 +126,6 @@ const CardStyle = styled.div`
   /* height: 300px; */
 `;
 
-// const MainWrapper = styled.div`
-//   width: 100vw;
-//   height: 100vh;
-//   margin: auto;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
 const Main = styled.div`
   width: 100%;
   height: 100vh;

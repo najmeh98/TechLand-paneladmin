@@ -58,7 +58,7 @@ export default function ListofCategory(): JSX.Element {
               title={cat?.name}
               image={cat?.image}
               catId={cat?.id}
-              description={cat?.description}
+              // description={cat?.description}
             />
           ))}
       </div>
