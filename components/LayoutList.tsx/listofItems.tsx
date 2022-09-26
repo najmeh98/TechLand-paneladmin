@@ -24,7 +24,7 @@ export const ListofItems: React.FC<OwnProp> = ({
       <SidebarOption />
       <div
         style={{ minHeight: "100vh" }}
-        className="w-full flex items-start flex-col mx-auto my-0 max-w-3xl md:max-w-2xl"
+        className="w-full flex items-start flex-col mx-auto my-0 max-w-[44rem] md:max-w-2xl"
       >
         <Flex
           className="w-full border border-b-1 border-blue-900  pb-8   my-14"

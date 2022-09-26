@@ -198,7 +198,7 @@ export default function CategoryItem(): JSX.Element {
 
       <div
         style={{
-          maxWidth: "900px",
+          maxWidth: "800px",
           minHeight: "100vh",
           // position: "relative",
         }}
