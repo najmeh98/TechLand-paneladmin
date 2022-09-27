@@ -3,12 +3,11 @@ import router from "next/router";
 import { useEffect, useState } from "react";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import styled from "styled-components";
-import { config, Deleteuser } from "../Api";
+import { config } from "../Api";
 import { useAppContext } from "../AppManag.tsx/AppContext";
-import { Flex, FlexRow } from "../share/Container";
+import { Flex } from "../share/Container";
 import { Space } from "../share/Space";
-import { ThemedText } from "../ThemedText";
-import { USerInfo } from "./type";
+import { UserInfo } from "./type";
 
 export const UserComponent = ({
   name,
@@ -18,13 +17,14 @@ export const UserComponent = ({
   number,
   createdAt,
   userId,
-}: USerInfo): JSX.Element => {
+  key,
+}: UserInfo): JSX.Element => {
   const [token, settoken] = useState<string | undefined>(undefined);
 
-  const { dispatch } = useAppContext();
+  const { dispatch, logout } = useAppContext();
 
   useEffect(() => {
-    const admintoken: any = localStorage.getItem("token");
+    const admintoken: any = localStorage.getItem("$adnTK");
     settoken(admintoken);
   }, []);
 
@@ -46,6 +46,8 @@ export const UserComponent = ({
           if ((result?.status as number) == 200) {
             console.log(result?.data);
             dispatch({ type: "DELETE USER", payload: id });
+
+            logout();
           }
         })
         .catch((err) => console.log(err));
@@ -62,7 +64,7 @@ export const UserComponent = ({
   };
 
   return (
-    <Flexul>
+    <Flexul key={key}>
       <Text>{name}</Text>
       <Text>{family}</Text>
       <Text>{email}</Text>
