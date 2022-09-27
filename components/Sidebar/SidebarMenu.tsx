@@ -1,31 +1,24 @@
-import { SidebarItem } from "./SidebarItem";
-import { itemProp } from "./SidebarOption";
+import { ReactNode, useState } from "react";
+import { Flex } from "../share/Container";
+import { ThemedText } from "../ThemedText";
+type OwnProp = {
+  label: ReactNode;
+  // هر پراپی ک بعنوان زchildren یاشه تایپش از نوع ReactNode
+  className: string;
+  onClick: () => void;
+  icon?: any;
+};
 
-interface MenuProp {
-  setisOpen: () => {};
-  isOpen: boolean;
-  item: itemProp;
-}
-
-export const SidebarMenu: React.FC<MenuProp> = ({
-  setisOpen,
-  isOpen,
-  item,
-}) => {
+export const SidebarMenu = ({
+  label,
+  className,
+  icon,
+  onClick,
+}: OwnProp): JSX.Element => {
   return (
-    <>
-      {item &&
-        item?.subRoutes &&
-        item?.subRoutes?.map((subRoute: any, index: any) => (
-          <SidebarItem
-            {...subRoute}
-            key={index}
-            isOpen={isOpen}
-            style={{
-              display: isOpen ? "block" : "none",
-            }}
-          />
-        ))}
-    </>
+    <div className="flex items-center justify-start" onClick={onClick}>
+      <>{icon}</>
+      <div className={className}> {label}</div>
+    </div>
   );
 };
