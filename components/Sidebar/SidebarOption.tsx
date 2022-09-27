@@ -22,6 +22,7 @@ import {
 import { SidebarMenu } from "./SidebarMenu";
 import { Flex, FormItem } from "../share/Container";
 import { useState } from "react";
+import SidebarLayout from "./SidebarLayout";
 export type itemProp = {
   title: string | undefined;
   icon?: JSX.Element;
@@ -94,7 +95,7 @@ export const SidebarOption = (): JSX.Element => {
           className="w-14 h-14 rounded-full"
         />
       ) : (
-        <img src="/avator.png" alt="img" className="w-12 h-12 rounded-full" />
+        <img src="./avator.png" alt="img" className="w-12 h-12 rounded-full" />
       )}
     </>
   );
@@ -148,56 +149,47 @@ export const SidebarOption = (): JSX.Element => {
         {profile}
 
         {show && (
-          <div className="relative  !z-10  flex flex-col items-center  w-full justify-center shadow-2xl">
-            <div className="absolute -top-20 rounded-sm !z-30 bg-white w-7 h-7 rotate-45  scale-x-100 scale-y-100 translate-x-1 translate-y-1 skew-x-1 skew-y-1   left-7" />
+          <SidebarLayout>
+            <SidebarMenu
+              className="text-black p-4"
+              label={
+                <FormItem>
+                  <h3 className="m-0 pb-2">{fullName}</h3>
+                  <p className="m-0 text-slate-400 font-light">{`@${adminInfo?.name}`}</p>
+                </FormItem>
+              }
+              icon={<div className=" rounded-full block  mr-3">{profile}</div>}
+              onClick={() => router.push("/admin/adminProfile")}
+            />
 
-            <div
-              className="fixed py-4 px-4 bottom-20 left-2 w-full bg-white  rounded-lg border border-solid border-slate-200"
-              style={{ maxWidth: "300px" }}
-            >
-              <SidebarMenu
-                className="text-black p-4"
-                label={
-                  <FormItem>
-                    <h3 className="m-0 pb-2">{fullName}</h3>
-                    <p className="m-0 text-slate-400 font-light">{`@${adminInfo?.name}`}</p>
-                  </FormItem>
-                }
-                icon={
-                  <div className=" rounded-full block  mr-3">{profile}</div>
-                }
-                onClick={() => router.push("/admin/adminProfile")}
-              />
+            <hr className=" ml-0 mr-3  border-gray-300 border-t-0 border-solid" />
 
-              <hr className=" ml-0 mr-3  border-gray-300 border-t-0 border-solid" />
+            <SidebarMenu
+              className="text-black p-3"
+              label="Account Setting"
+              icon={<Account />}
+              onClick={() => router.push("/admin/adminProfile")}
+            />
 
-              <SidebarMenu
-                className="text-black p-3"
-                label="Account Setting"
-                icon={<Account />}
-                onClick={() => router.push("/admin/adminProfile")}
-              />
+            <SidebarMenu
+              className="text-black p-3"
+              label="Password"
+              // icon={}
+              onClick={() => router.push("/admin/changePassword")}
+            />
 
-              <SidebarMenu
-                className="text-black p-3"
-                label="Password"
-                // icon={}
-                onClick={() => router.push("/admin/changePassword")}
-              />
+            <hr className=" ml-0 mr-3  border-gray-300 border-t-0 border-solid" />
 
-              <hr className=" ml-0 mr-3  border-gray-300 border-t-0 border-solid" />
-
-              <SidebarMenu
-                className="text-black p-3"
-                label="Log out"
-                onClick={() => {
-                  logout();
-                  router.push("/auth/loginByEmail");
-                }}
-                icon={<Signout />}
-              />
-            </div>
-          </div>
+            <SidebarMenu
+              className="text-black p-3"
+              label="Log out"
+              onClick={() => {
+                logout();
+                router.push("/auth/loginByEmail");
+              }}
+              icon={<Signout />}
+            />
+          </SidebarLayout>
         )}
       </div>
     </Wrapper>
