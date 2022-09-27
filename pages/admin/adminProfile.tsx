@@ -58,7 +58,7 @@ export default function AdminProfile(): JSX.Element {
   ]);
 
   console.log("fieldadmin", image);
-  console.log("adminInfo", adminInfo);
+  console.log("adminInfo", admin);
 
   const id: number | undefined = adminInfo?.id;
 
@@ -68,7 +68,7 @@ export default function AdminProfile(): JSX.Element {
 
     const formData: any = new FormData();
     formData.append("image", image);
-    formData.append("admin", admin);
+    formData.append("admin", JSON.stringify(admin));
 
     try {
       const res = await axios.post(
@@ -97,7 +97,7 @@ export default function AdminProfile(): JSX.Element {
   }, [admin, adminInfo?.token, dispatch, error, id, image, router]);
 
   return (
-    <UserLayout title="About You" width="90%">
+    <UserLayout title="About You" width="95%">
       <FormItem style={{ padding: " 50px" }}>
         <FlexRow style={{ alignItems: "center", marginBottom: "15px" }}>
           {/* profile of admin */}
@@ -226,6 +226,7 @@ export default function AdminProfile(): JSX.Element {
             <CustomInput
               type="textarea"
               column={10}
+              className=" text-base "
               value={admin?.bio}
               onChange={(event) =>
                 setadmin({ ...admin, bio: event.currentTarget.value })
