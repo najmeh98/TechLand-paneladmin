@@ -80,20 +80,9 @@ export const CustomInput: React.FC<Props> = ({
         height: height,
         direction: "ltr",
         ...style,
+        position: "relative",
       }}
     >
-      {label && (
-        <>
-          <label
-            style={{
-              color: t.color.labelColor,
-              paddingBottom: t.padding.normal,
-            }}
-          >
-            {label}
-          </label>
-        </>
-      )}
       {type === "password" && (
         <Input
           className={className}
@@ -119,29 +108,32 @@ export const CustomInput: React.FC<Props> = ({
       )}
 
       {type === "textarea" && (
-        <textarea
+        <Textarea
           maxLength={255}
           className={className}
           value={value}
           onChange={onChange}
           rows={row ? row : 6}
           cols={column}
-          style={{
-            borderColor: t.color.borderColor,
-            border: "1px solid rgb(204, 204, 204)",
-            resize: "none",
-            padding: t.padding.normal,
-            borderRadius: t.borderRadius.normal,
-          }}
-        ></textarea>
+        />
       )}
 
       {type === "password" && (
-        <div style={{ position: "relative" }}>
+        <Eye style={{ position: "relative" }}>
           <ShowPass onClick={() => setShow(!show)} password>
             {!show && <FiEye />} {show && <FiEyeOff />}
           </ShowPass>
-        </div>
+        </Eye>
+      )}
+
+      {label && (
+        <Label
+          className={` absolute left-5  pointer-events-none pt-2  transition-all text-slate-400 ${
+            value ? " -top-[17px] text-[#1a73e8]  p-1 bg-white" : ""
+          } `}
+        >
+          {label}
+        </Label>
       )}
     </FormItem>
   );
@@ -158,9 +150,55 @@ export const Input = styled.input`
   margin-bottom: 5px;
   resize: none;
   font-size: medium;
-  /* font-family: inherit; */
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
   &::placeholder {
     font-size: 13px;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1.5px solid #1a73e8;
+  }
+`;
+
+const Textarea = styled.textarea`
+  outline: none;
+  border: 1px solid rgb(204, 204, 204);
+  resize: none;
+  padding: 8px;
+  border-radius: 10px;
+
+  &:focus {
+    outline: none;
+    border: 1.5px solid #1a73e8;
+  }
+`;
+
+const Label = styled.label`
+  /* position: absolute; */
+  /* left: 15px; */
+  /* top: -3px; */
+  /* pointer-events: none; */
+  /* transform: translateY(0.5rem); */
+  /* transition: 150ms cubic-bezier(0.4, 0, 0.2, 1); */
+
+  ${Input}:focus ~ & {
+    transform: translateY(-56%) scale(0.8);
+    padding: 0px 0.2em 0.2em 0.2em;
+    background-color: #ffff;
+    color: #1a73e8;
+    font-size: 20px;
+    top: 0px;
+  }
+
+  ${Textarea}:focus ~ & {
+    transform: translateY(-56%) scale(0.8);
+    padding: 0px 0.2em 0.2em 0.2em;
+    background-color: #ffff;
+    color: #1a73e8;
+    font-size: 20px;
+    top: 0px;
   }
 `;
 
@@ -170,16 +208,28 @@ const ShowPass = styled.div<ImgProps>`
   position: absolute;
   right: 0px;
   top: -45px;
-  /* direction: rtl; */
   cursor: pointer;
   ${(p) =>
     p.password &&
     css`
       border-left: 1px solid rgb(204, 204, 204);
       cursor: pointer;
+      ${Input}:focus ~ & {
+        border-left: 2px solid cornflowerblue;
+      }
     `}
+
   svg {
     display: block;
     margin: 10px auto;
+  }
+  &:focus {
+    border-left: 2px solid cornflowerblue;
+  }
+`;
+
+const Eye = styled.div`
+  ${Input}:focus ~ & {
+    border-right: 2px solid cornflowerblue;
   }
 `;
