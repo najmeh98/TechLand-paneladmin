@@ -71,7 +71,7 @@ export default function AdminCreate(): JSX.Element {
 
   return (
     <UserLayout title="Create new Admin" width="85%">
-      <FormItem style={{ padding: "30px" }}>
+      <FormItem style={{ padding: "30px" }} className="space-y-7">
         <FlexRow>
           <CustomInput
             type="text"
@@ -93,7 +93,7 @@ export default function AdminCreate(): JSX.Element {
             }
           />
         </FlexRow>
-        <Space vertical={15} />
+        {/* <Space vertical={15} /> */}
 
         <FlexRow>
           <CustomInput
@@ -116,7 +116,6 @@ export default function AdminCreate(): JSX.Element {
             }
           />
         </FlexRow>
-        <Space vertical={15} />
 
         <FlexRow>
           <CustomInput
@@ -139,7 +138,6 @@ export default function AdminCreate(): JSX.Element {
             }
           />
         </FlexRow>
-        <Space vertical={15} />
 
         <FlexRow>
           <CustomInput
@@ -165,7 +163,6 @@ export default function AdminCreate(): JSX.Element {
             }
           />
         </FlexRow>
-        <Space vertical={25} />
 
         <ButtonRow>
           <CustomButton

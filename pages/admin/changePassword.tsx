@@ -76,70 +76,70 @@ export default function ChangePassword(): JSX.Element {
   }, [adminPassword, error, id, router, token]);
 
   return (
-    <UserLayout title="Password" width="70%" style={{ padding: "20px 30px" }}>
-      <ThemedText style={{ padding: "20px 0px", color: t.color.borderColor }}>
-        Please enter your current password to change your password
-      </ThemedText>
+    <UserLayout title="Password" width="70%" style={{ padding: "30px 50px" }}>
+      <div className="space-y-7">
+        <ThemedText style={{ color: t.color.borderColor }} className="pt-4">
+          Please enter your current password to change your password
+        </ThemedText>
 
-      <CustomInput
-        type="password"
-        label="Current password"
-        // width="90%"
-        value={adminPassword.currentpassword}
-        onChange={(event) =>
-          setadminPassword({
-            ...adminPassword,
-            currentpassword: event.currentTarget.value,
-          })
-        }
-        style={{ marginRight: "40px" }}
-      />
-      <Space vertical={20} />
+        <CustomInput
+          type="password"
+          label="Current password"
+          // width="90%"
+          value={adminPassword.currentpassword}
+          onChange={(event) =>
+            setadminPassword({
+              ...adminPassword,
+              currentpassword: event.currentTarget.value,
+            })
+          }
+          style={{ marginRight: "40px" }}
+        />
 
-      <CustomInput
-        type="password"
-        label="New password"
-        // width="90%"
-        value={adminPassword.newpassword}
-        onChange={(event) =>
-          setadminPassword({
-            ...adminPassword,
-            newpassword: event.currentTarget.value,
-          })
-        }
-        style={{ marginRight: "40px" }}
-      />
-      <Space vertical={20} />
+        <CustomInput
+          type="password"
+          label="New password"
+          // width="90%"
+          value={adminPassword.newpassword}
+          onChange={(event) =>
+            setadminPassword({
+              ...adminPassword,
+              newpassword: event.currentTarget.value,
+            })
+          }
+          style={{ marginRight: "40px" }}
+        />
 
-      <CustomInput
-        type="password"
-        label="Confirm new password "
-        // width="90%"
-        value={adminPassword.renewpassword}
-        onChange={(event) =>
-          setadminPassword({
-            ...adminPassword,
-            renewpassword: event.currentTarget.value,
-          })
-        }
-        style={{ marginRight: "40px" }}
-      />
-      <Space vertical={20} />
+        <CustomInput
+          type="password"
+          label="Confirm new password "
+          // width="90%"
+          value={adminPassword.renewpassword}
+          onChange={(event) =>
+            setadminPassword({
+              ...adminPassword,
+              renewpassword: event.currentTarget.value,
+            })
+          }
+          style={{ marginRight: "40px" }}
+        />
 
-      <ButtonRow style={{ marginRight: "40px" }}>
-        <CustomButton onClick={() => router.push("/")} padding="0px 15px">
-          Cancel
-        </CustomButton>
-        <CustomButton
-          onClick={updatePassword}
-          padding="0px 15px"
-          style={{ paddingLeft: "10px" }}
+        <ButtonRow style={{ marginRight: "40px" }}>
+          <CustomButton onClick={() => router.push("/")} padding="0px 15px">
+            Cancel
+          </CustomButton>
 
-          //   disable={loading}
-        >
-          Update password
-        </CustomButton>
-      </ButtonRow>
+          <CustomButton
+            onClick={updatePassword}
+            padding="0px 15px"
+            style={{ paddingLeft: "10px" }}
+
+            //   disable={loading}
+          >
+            Update password
+          </CustomButton>
+        </ButtonRow>
+      </div>
     </UserLayout>
   );
 }
