@@ -44,13 +44,10 @@ export const RegisterHeader = ({ step }: Prop): JSX.Element => {
 };
 
 const Container = styled.div`
-  /* margin: auto; */
   width: 100%;
   display: flex;
-  /* width: 70%; */
   justify-content: space-between;
   align-items: center;
-  /* flex-direction: row-reverse; */
   min-height: 90px;
   border-bottom: 1px solid #e7e7e7;
 `;
