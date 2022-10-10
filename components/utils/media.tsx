@@ -7,7 +7,7 @@ export const tablet = (body: any): FlattenSimpleInterpolation => css`
 `;
 
 export const mobile = (body: any) => css`
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     ${body}
   }
 `;

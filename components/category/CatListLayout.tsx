@@ -23,8 +23,7 @@ export default function CategoryListLayout({
 }: ICatListProp): JSX.Element {
   return (
     <div
-      className="w-full mb-10 cursor-pointer  border-solid border-gray-300  rounded flex items-start justify-between bg-slate-50 hover:shadow-[0_8px_30px_#7c7b7b1e]"
-      // style={{ maxWidth: "740px" }}
+      className="w-full cursor-pointer  border-solid border-gray-300  rounded flex items-start justify-between bg-slate-50 hover:shadow-[0_8px_30px_#7c7b7b1e]"
       onClick={onClick}
     >
       <div className="flex flex-col p-6 items-start  justify-start h-full ">
