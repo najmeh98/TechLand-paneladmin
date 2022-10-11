@@ -1,6 +1,4 @@
-import { ReactNode, useState } from "react";
-import { Flex } from "../share/Container";
-import { ThemedText } from "../ThemedText";
+import { ReactNode } from "react";
 type OwnProp = {
   label: ReactNode;
   // هر پراپی ک بعنوان زchildren یاشه تایپش از نوع ReactNode

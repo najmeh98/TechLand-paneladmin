@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useTheme } from "../Context/ThemeContext";
-import { useRouter } from "next/router";
 import { itemProp } from "./SidebarOption";
 
 type Props = {

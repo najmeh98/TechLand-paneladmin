@@ -1,12 +1,9 @@
-import Link from "next/link";
 import React from "react";
-import { Wrapper } from "../share/Container";
 import { ThemedText } from "../ThemedText";
 
 interface ICatListProp {
   title: string;
   image: string;
-  // email?: string | undefined;
   catId: string;
   length_posts?: number;
   length_categories?: string;

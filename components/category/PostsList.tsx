@@ -1,6 +1,4 @@
 import React from "react";
-import { Flex } from "../share/Container";
-import { SidebarOption } from "../Sidebar/SidebarOption";
 import { ThemedText } from "../ThemedText";
 
 interface OwnProp {

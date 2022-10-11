@@ -1,13 +1,7 @@
-import React, {
-  ChangeEvent,
-  DetailedHTMLProps,
-  TextareaHTMLAttributes,
-  useState,
-} from "react";
+import React, { ChangeEvent, useState } from "react";
 import styled, { css, CSSProperties } from "styled-components";
 import { useTheme } from "./Context/ThemeContext";
 import { FormItem } from "./share/Container";
-import { Space } from "./share/Space";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 interface TextInput {

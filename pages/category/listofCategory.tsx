@@ -39,7 +39,7 @@ export default function ListofCategory(): JSX.Element {
       }}
       className="bg-gradient-to-r from-cyan-500 to-blue-500 px-4 "
     >
-      <div className=" w-full px-1  ">
+      <div className=" w-full px-1  space-y-11 ">
         {data &&
           data?.length > 0 &&
           data?.map((cat: CatPost) => (

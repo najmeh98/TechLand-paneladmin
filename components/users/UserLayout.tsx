@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTheme } from "../Context/ThemeContext";
 import { HeaderText } from "../HeaderText";
-import { Flex, FlexRow, MainWrapper } from "../share/Container";
+import { MainWrapper } from "../share/Container";
 import { SidebarOption } from "../Sidebar/SidebarOption";
 import { UserProp } from "./type";
 

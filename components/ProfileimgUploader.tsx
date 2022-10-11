@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import styled from "styled-components";
 import { OwnProp } from "./ComponetnUploader";
 
 // interface profileImg extends Omit<OwnProp, "newImage"> {}

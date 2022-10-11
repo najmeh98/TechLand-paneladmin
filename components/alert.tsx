@@ -2,8 +2,6 @@ import React from "react";
 import { ButtonRow } from "../pages/users/userInfo";
 import { CustomButton } from "./CustomButton";
 import { HeaderText } from "./HeaderText";
-import { Close } from "./icons/Icon";
-import { Wrapper } from "./LayoutList.tsx/CreateList";
 import { LayoutPopup } from "./LayoutList.tsx/LayoutPopup";
 import { Space } from "./share/Space";
 import { ThemedText } from "./ThemedText";

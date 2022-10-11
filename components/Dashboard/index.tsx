@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { SidebarOption } from "../Sidebar/SidebarOption";
 import { FiUsers } from "react-icons/fi";
-import { useTheme } from "../Context/ThemeContext";
 import { DashboardMain } from "./DashboardMain";
 import { useAppContext } from "../AppManag.tsx/AppContext";
 import axios, { AxiosError } from "axios";
@@ -11,7 +10,6 @@ import { VscPreview } from "react-icons/vsc";
 import { useRouter } from "next/router";
 
 export default function Dashboard(): JSX.Element {
-  const t = useTheme();
   const { adminInfo } = useAppContext();
   const [count, setCount] = useState<object | any>({});
   const [loading, setLoading] = useState<boolean>(false);

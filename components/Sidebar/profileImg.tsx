@@ -1,5 +1,4 @@
 import { useAppContext } from "../AppManag.tsx/AppContext";
-import { ThemedText } from "../ThemedText";
 
 export const ProfileImg = (): JSX.Element => {
   const { adminInfo } = useAppContext();

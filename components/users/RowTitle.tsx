@@ -1,7 +1,5 @@
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useTheme } from "../Context/ThemeContext";
-import { ThemedText } from "../ThemedText";
 
 const InfoRow: { id: number; name: string }[] = [
   { id: 0, name: "name" },

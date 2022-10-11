@@ -20,9 +20,11 @@ import {
   Writepost,
 } from "../icons/Icon";
 import { SidebarMenu } from "./SidebarMenu";
-import { Flex, FormItem } from "../share/Container";
+// import { SlLock } from "react-icons/sl";
+import { FormItem } from "../share/Container";
 import { useState } from "react";
 import SidebarLayout from "./SidebarLayout";
+
 export type itemProp = {
   title: string | undefined;
   icon?: JSX.Element;
@@ -174,7 +176,7 @@ export const SidebarOption = (): JSX.Element => {
             <SidebarMenu
               className="text-black p-3"
               label="Password"
-              // icon={}
+              // icon={<SlLock />}
               onClick={() => router.push("/admin/changePassword")}
             />
 
