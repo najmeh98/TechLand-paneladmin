@@ -8,11 +8,11 @@ import { Space } from "../../components/share/Space";
 import { CustomButton } from "../../components/CustomButton";
 import { ThemedText } from "../../components/ThemedText";
 import { Span } from "./register";
-import { Flex } from "../../components/share/Container";
 import { AxiosError } from "axios";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { Theme } from "../../components/types/theme";
 import { loginProp } from "./authType";
+import { useNotofication } from "../../components/NotificationMange.tsx/NotificationManager";
 
 export default function LoginByEmail(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,6 +22,8 @@ export default function LoginByEmail(): JSX.Element {
   });
 
   const { dispatch, login: CheckLoggedIn } = useAppContext();
+
+  const { createNotification } = useNotofication();
 
   const t: Theme = useTheme();
   const router = useRouter();
@@ -37,6 +39,11 @@ export default function LoginByEmail(): JSX.Element {
 
       setLoading(false);
       if ((result?.status as number) == 200) {
+        createNotification({
+          title: "Welcome back",
+          description: "",
+          duration: 4000,
+        });
         console.log(result);
 
         CheckLoggedIn({ ...result?.data });
@@ -63,49 +70,50 @@ export default function LoginByEmail(): JSX.Element {
         }
       }
     }
-  }, [CheckLoggedIn, dispatch, loginInfo.email, loginInfo.password, router]);
+  }, [
+    CheckLoggedIn,
+    createNotification,
+    dispatch,
+    loginInfo.email,
+    loginInfo.password,
+    router,
+  ]);
 
   return (
-    <Layout>
+    <Layout
+      title="Hello Friends !"
+      text="Enter your personal details to open an account with us"
+      button="sign up"
+    >
       <div
         style={{
           width: "100%",
-          // maxWidth: "70%",
-          // padding: "40px",
           margin: "6px",
-          direction: "ltr",
         }}
+        className="flex  flex-col items-start"
       >
-        <ThemedText
-          style={{
-            fontWeight: t.fontWeight.bold,
-            fontSize: t.fontSize.medium,
-            marginBottom: t.margin.Large,
-          }}
-        >
-          Login
-        </ThemedText>
+        <h1 className="flex items-center justify-center w-full whitespace-nowrap maxsm:text-2xl">
+          Sign in to Website
+        </h1>
 
-        <Space vertical={30} />
-
-        <ThemedText>Login to your account</ThemedText>
-
-        <Space vertical={25} />
+        <Space vertical={55} />
 
         <CustomInput
-          label="Email :"
-          placeholder="email"
+          label="Email "
+          width="100%"
+          // placeholder="email"
           type="text"
           value={loginInfo.email}
           onChange={(event) =>
             setLoginInfo({ ...loginInfo, email: event.currentTarget.value })
           }
         />
-        <Space vertical={15} />
+        <Space vertical={30} />
 
         <CustomInput
-          label="Password :"
-          placeholder="password"
+          label="Password "
+          width="100%"
+          // placeholder="password"
           type="password"
           value={loginInfo.password}
           onChange={(event) =>
@@ -113,25 +121,27 @@ export default function LoginByEmail(): JSX.Element {
           }
         />
 
-        <Flex style={{ paddingTop: "10px" }}>
+        {/* <Flex style={{ paddingTop: "10px" }}>
           <div>
             <input type={"checkbox"} />
             <span>Remember me</span>
           </div>
           <span>Reset Password?</span>
-        </Flex>
+        </Flex> */}
 
-        <Space vertical={12} />
+        <Space vertical={30} />
 
         <CustomButton
           width="100%"
           onClick={onSubmitEmail}
-          // style={{ color: "#163655" }}
+          style={{ boxShadow: "8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9" }}
         >
           Sign in
         </CustomButton>
 
-        <ThemedText style={{ padding: "20px 0px" }}>
+        <Space vertical={30} />
+
+        <ThemedText>
           Don&apos;t have account yet?{" "}
           <Span onClick={() => router.push("/auth/register")}>Join Us</Span>
         </ThemedText>
