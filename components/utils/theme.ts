@@ -57,5 +57,5 @@ export const lightTheme: Theme = {
   },
   boxShadowbox: "0 1px 11px hsl(0deg 0% 66% / 27%)",
   buttoncolor: "",
-  direction: "rtl",
+  direction: "ltr",
 };

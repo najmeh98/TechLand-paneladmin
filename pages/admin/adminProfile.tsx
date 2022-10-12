@@ -127,9 +127,9 @@ export default function AdminProfile(): JSX.Element {
 
           <Wrapper>
             <CustomButton
-              color="fontColor"
-              bgcolor="bgColor"
-              style={{ border: "1px solid lightgray", borderRadius: "5px" }}
+              // color="fontColor"
+              // bgcolor="bgColor"
+              // style={{ border: "1px solid lightgray", borderRadius: "5px" }}
               onClick={() => {
                 router.push("/");
               }}

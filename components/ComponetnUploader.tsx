@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { Column } from "./share/Container";
-import { CardStyle } from "./utils/CardStyle";
 
 export interface OwnProp {
   setImage: (postInfo: string) => void;

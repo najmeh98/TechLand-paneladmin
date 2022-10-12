@@ -10,6 +10,7 @@ export interface OwnadminProp {
   token: string;
   bio?: string;
   job?: string;
+  image?: string;
 }
 
 export interface allUsers {
@@ -28,6 +29,14 @@ export interface adminsPosts {
   id?: string;
   title: string;
   content: string;
-  file: any;
+  image: string;
   published?: boolean;
+  created?: string;
+  update?: string;
+}
+
+export interface listofCategories {
+  name: string;
+  description?: string | undefined;
+  image: string;
 }

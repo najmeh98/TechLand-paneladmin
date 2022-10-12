@@ -200,6 +200,6 @@ export const SidebarOption = (): JSX.Element => {
 
 const Wrapper = styled.div`
   box-shadow: 0 1px 11px hsl(0deg 0% 66% / 27%);
-  animation: 1s ease 0s 1 normal none running fadeIn;
-  transition: all 0.5s;
+  /* animation: 1s ease 0s 1 normal none running fadeIn; */
+  /* transition: all 0.5s; */
 `;
