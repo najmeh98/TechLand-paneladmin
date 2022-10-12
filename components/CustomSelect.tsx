@@ -42,7 +42,7 @@ export const CustomSelect = ({
       >
         {({ open }) => (
           <>
-            <Listbox.Label className="block text-base font-normal text-black">
+            <Listbox.Label className="block text-base font-normal pl-1 text-slate-400">
               Categrory
             </Listbox.Label>
             <Container className="relative mt-1 ">
@@ -146,36 +146,6 @@ export const CustomSelect = ({
       )}
     </>
   );
-
-  {
-    /* <Container className="w-full cursor-pointer">  */
-  }
-
-  //   {/* <SelectStyle className="items-center	justify-between w-1/2">
-  //     <span>Category</span>
-  //     <IoIosArrowDown
-  //       style={{ right: "20px", top: "10px" }}
-  //       onClick={() => setShowInput(!showInput)}
-  //     />
-  //   </SelectStyle> */
-
-  //  {showInput && (
-  //     <Category className="border-1 border-solid border-gray-300 p-2 mt-2.5 bg-white	absolute rounded-2xl  w-1/2	">
-  //       {categoryItem.map((item, index) => (
-  //         <option
-  //           key={item.name}
-  //           className="p-2 hover:bg-slate-100 hover:shadow-md hover:cursor-pointer"
-  //         >
-  //           {item.name}
-  //         </option>
-  //       ))}
-  //       <AddItem className="pt-1	pl-1 cursor-pointer">
-  //         <FiPlusCircle fontSize="18px" />
-  //       </AddItem>
-  //     </Category>
-  //   )}
-  // </Container> */}
-  // );
 };
 
 const Container = styled.div`
