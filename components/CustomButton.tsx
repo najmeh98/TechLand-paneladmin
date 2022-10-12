@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useTheme } from "./Context/ThemeContext";
-import { Wrapper } from "./share/Container";
 import { Theme } from "./types/theme";
+import { motion } from "framer-motion";
 
 type OwnProps = {
   onClick: () => void;
@@ -33,11 +33,14 @@ export const CustomButton = ({
 }: OwnProps): JSX.Element => {
   let t = useTheme();
   return (
-    <Row
+    <motion.div
+      initial=""
+      className="flex items-center"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
       style={{
         marginTop: t.margin.medium,
         marginBottom: t.margin.medium,
-        // margin: t.margin.medium,
         width: width,
         maxWidth: maxWidth,
         ...style,
@@ -47,6 +50,7 @@ export const CustomButton = ({
         onClick={onClick}
         className={className}
         // disabled={disable}
+
         style={{
           width: "100%",
           height: "40px",
@@ -59,14 +63,10 @@ export const CustomButton = ({
       >
         {children}
       </Button>
-    </Row>
+    </motion.div>
   );
 };
 
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-`;
 const Button = styled.button`
   border: none;
   cursor: pointer;
