@@ -5,13 +5,13 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-module.exports = {
-  experimental: {
-    externalDir:
-      true |
-      {
-        enabled: true,
-        silent: true,
-      },
-  },
-};
+// module.exports = {
+//   experimental: {
+//     externalDir:
+//       true |
+//       {
+//         enabled: true,
+//         silent: true,
+//       },
+//   },
+// };
