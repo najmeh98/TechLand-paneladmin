@@ -18,4 +18,7 @@ export interface OwnPost {
   image: string;
   created: string;
   update: string;
+  category: {
+    name: string;
+  };
 }

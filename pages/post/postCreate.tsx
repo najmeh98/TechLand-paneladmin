@@ -1,17 +1,20 @@
+import { Toastr, ToastrProps, ToastrRef } from "@paljs/ui";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { config } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { ComponentUploader } from "../../components/ComponetnUploader";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
 import { CustomSelect } from "../../components/CustomSelect";
+import { useNotofication } from "../../components/NotificationMange.tsx/NotificationManager";
 import { Space } from "../../components/share/Space";
+import Toast from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
 import { ButtonRow } from "../users/userInfo";
 import { CatItem, OwnProp } from "./postCreate.interface";
-
+import { CKEditor } from "ckeditor4-react";
 export default function PostCreate(): JSX.Element {
   const router = useRouter();
 
@@ -29,6 +32,25 @@ export default function PostCreate(): JSX.Element {
   const [selectedItem, setSelectedItem] = useState<CatItem>();
 
   const { dispatch } = useAppContext();
+  const { createNotification } = useNotofication();
+  const [ShowMassege, setShowMassege] = useState(false);
+
+  // const { showToastr, toastrRef } = Toast();
+
+  const [data] = useState<ToastrProps>({
+    position: "topEnd",
+    duration: 3500,
+    hasIcon: true,
+    destroyByClick: true,
+    preventDuplicates: false,
+  });
+
+  const toastrRef = useRef<ToastrRef>(null);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const showToastr = (mode: string, message: string, title: string): void => {
+    toastrRef.current?.add(message, title, { ...data, status: mode });
+  };
 
   useEffect(() => {
     const token: string = localStorage.getItem("$adnTK") ?? "";
@@ -78,10 +100,18 @@ export default function PostCreate(): JSX.Element {
           setLoading(false);
           if ((result?.status as number) == 200) {
             console.log(result);
+
+            showToastr(
+              "Success",
+              "Success",
+              "The post was successfully registered"
+            );
+
             dispatch({
               type: "ADMIN POST",
               payload: { ...result?.data },
             });
+
             setPostInfo({
               title: "",
               content: "",
@@ -114,66 +144,75 @@ export default function PostCreate(): JSX.Element {
     postInfo.content,
     postInfo.title,
     selectedItem?.id,
+    showToastr,
   ]);
 
   return (
-    <UserLayout
-      title="Create new Post"
-      width="78%"
-      style={{
-        padding: "40px",
-        justifyContent: "center",
-      }}
-    >
-      {/* upload Image */}
-      <ComponentUploader setImage={setImage} image={image} />
-
-      <Space vertical={30} />
-
-      <CustomInput
-        type="text"
-        label="Title"
-        value={postInfo.title}
-        onChange={(event) =>
-          setPostInfo({ ...postInfo, title: event.currentTarget.value })
-        }
-      />
-
-      <Space vertical={25} />
-
-      <CustomInput
-        type="textarea"
-        label="Content"
-        value={postInfo.content}
-        onChange={(event) =>
-          setPostInfo({ ...postInfo, content: event.currentTarget.value })
-        }
-      />
-
-      <Space vertical={25} />
-
-      <CustomSelect
-        categoryItem={categoryItem}
-        setCategoryItem={setCategoryItem}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
-
-      <Space vertical={50} />
-
-      <ButtonRow>
-        <CustomButton
-          style={{ marginRight: "20px" }}
-          padding=" 0px 15px"
-          onClick={() => router.push("/")}
-        >
-          Cancel
-        </CustomButton>
-        <CustomButton padding=" 0px 15px" onClick={onSubmitPost}>
-          Save
-        </CustomButton>
-      </ButtonRow>
-    </UserLayout>
+    <>
+      <UserLayout
+        title="Create new Post"
+        width="78%"
+        style={{
+          padding: "40px",
+          justifyContent: "center",
+        }}
+      >
+        {/* <Toastr ref={toastrRef} /> */}
+        {/* upload Image */}
+        <ComponentUploader setImage={setImage} image={image} />
+        <Space vertical={30} />
+        <CustomInput
+          type="text"
+          label="Title"
+          value={postInfo.title}
+          onChange={(event) =>
+            setPostInfo({ ...postInfo, title: event.currentTarget.value })
+          }
+        />
+        <Space vertical={25} />
+        {/* <CustomInput
+          type="textarea"
+          label="Content"
+          value={postInfo.content}
+          onChange={(event) =>
+            setPostInfo({ ...postInfo, content: event.currentTarget.value })
+          }
+        /> */}
+        <CKEditor
+          config={{ language: "en" }}
+          // Data={postInfo.content}
+          data={postInfo.content}
+          onChange={(event) =>
+            setPostInfo({ ...postInfo, content: event.editor.getData() })
+          }
+          style={{
+            borderRadius: "7px",
+            border: "1px solid rgb(204,204,204)",
+            fontSize: "16px",
+          }}
+        />
+        <Space vertical={25} />
+        <CustomSelect
+          categoryItem={categoryItem}
+          setCategoryItem={setCategoryItem}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
+        <Space vertical={50} />
+        <ButtonRow>
+          <CustomButton
+            style={{ marginRight: "20px" }}
+            padding=" 0px 15px"
+            onClick={() => router.push("/")}
+          >
+            Cancel
+          </CustomButton>
+          <CustomButton padding=" 0px 15px" onClick={onSubmitPost}>
+            Save
+          </CustomButton>
+        </ButtonRow>
+      </UserLayout>
+    </>
   );
 }
 
