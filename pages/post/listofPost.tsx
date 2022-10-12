@@ -25,11 +25,11 @@ export default function ListofPost(): JSX.Element {
       title="Your stories "
       button="New story"
       onClick={() => {
-        router.push("/post/postCreate");
+        router.push("./postCreate");
       }}
       className="bg-gradient-to-r from-purple-500 to-pink-500 px-3"
     >
-      <div className=" w-full mr-8 ">
+      <div className=" w-full mr-8  space-y-11">
         {data &&
           data?.post?.length > 0 &&
           data?.post?.map((post: OwnPost) => (
