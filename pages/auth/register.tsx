@@ -7,6 +7,8 @@ import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { useTheme } from "../../components/Context/ThemeContext";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
+import { HeaderText } from "../../components/HeaderText";
+import Input from "../../components/Input";
 import { Layout } from "../../components/register/Layout";
 import { FlexRow } from "../../components/share/Container";
 import { Space } from "../../components/share/Space";
@@ -42,14 +44,6 @@ export default function Register(): JSX.Element {
     hasIcon: true,
     destoryByClick: true,
   });
-
-  // const showToastr = (
-  //   mode: string,
-  //   title: string,
-  //   description: string
-  // ): void => {
-  //   toastrRef.current?.add(description, title, { ...data, status: mode });
-  // };
 
   const onSubmitVerification = useCallback(async (): Promise<void> => {
     if (admin.password !== admin.repassword) {
@@ -89,27 +83,27 @@ export default function Register(): JSX.Element {
 
   return (
     <>
-      <Layout>
+      <Layout
+        title="welcome back !"
+        text="To keep connected with us plaese login with your personal details"
+        button="sign in"
+      >
         <div
           style={{
             width: "100%",
             direction: "ltr",
           }}
         >
-          <ThemedText
-            style={{
-              fontWeight: t.fontWeight.bold,
-              fontSize: t.fontSize.medium,
-              marginBottom: t.margin.Large,
-            }}
-          >
-            Register
-          </ThemedText>
+          <HeaderText className="flex items-center justify-center w-full whitespace-nowrap maxsm:text-2xl">
+            create account
+          </HeaderText>
 
-          <FlexRow style={{ marginBottom: "10px" }}>
+          <Space vertical={30} />
+
+          <FlexRow style={{ marginBottom: "30px" }}>
             <CustomInput
-              label="name"
-              placeholder="Name"
+              label=" First Name"
+              // placeholder="Name"
               type="text"
               value={admin.name}
               onChange={(event) =>
@@ -119,8 +113,8 @@ export default function Register(): JSX.Element {
             />
 
             <CustomInput
-              label="last Name"
-              placeholder="Last name"
+              label="Last Name"
+              // placeholder="Last name"
               type="text"
               value={admin.family}
               style={{ paddingLeft: "10px" }}
@@ -131,10 +125,10 @@ export default function Register(): JSX.Element {
             />
           </FlexRow>
 
-          <FlexRow style={{ marginBottom: "10px" }}>
+          <FlexRow style={{ marginBottom: "30px" }}>
             <CustomInput
-              label="password :"
-              placeholder="password"
+              label="Password "
+              // placeholder="password"
               type="password"
               value={admin.password}
               onChange={(event) =>
@@ -144,8 +138,8 @@ export default function Register(): JSX.Element {
             />
 
             <CustomInput
-              label="repassword :"
-              placeholder="repassword"
+              label="Repassword "
+              // placeholder="repassword"
               style={{ paddingLeft: "10px" }}
               type="password"
               value={admin.repassword}
@@ -156,10 +150,10 @@ export default function Register(): JSX.Element {
             />
           </FlexRow>
 
-          <FlexRow style={{ marginBottom: "10px" }}>
+          <FlexRow style={{ marginBottom: "30px" }}>
             <CustomInput
-              label="username"
-              placeholder="Username"
+              label="Username"
+              // placeholder="Username"
               type="text"
               value={admin.username}
               onChange={(event) =>
@@ -169,8 +163,8 @@ export default function Register(): JSX.Element {
             />
 
             <CustomInput
-              label="phoneNumber"
-              placeholder="phoneNumber"
+              label="PhoneNumber"
+              // placeholder="phoneNumber"
               style={{ paddingLeft: "10px" }}
               type="text"
               value={admin.phoneNumber}
@@ -187,8 +181,8 @@ export default function Register(): JSX.Element {
           <Space vertical={3} />
 
           <CustomInput
-            label="address"
-            placeholder="address"
+            label="Address"
+            // placeholder="address"
             type="text"
             value={admin.address}
             onChange={(event) =>
@@ -197,11 +191,11 @@ export default function Register(): JSX.Element {
             // width="100%"
           />
 
-          <Space vertical={10} />
+          <Space vertical={30} />
 
           <CustomInput
-            label="email"
-            placeholder="email"
+            label="Email"
+            // placeholder="email"
             type="text"
             value={admin.email}
             onChange={(event) => {
@@ -210,21 +204,24 @@ export default function Register(): JSX.Element {
             // width="100%"
           />
 
-          <Space vertical={15} />
+          <Space vertical={30} />
 
           <CustomButton onClick={onSubmitVerification}>
             Create Account
           </CustomButton>
+
+          <Space vertical={30} />
+
           <ThemedText
             style={{
               display: "flex",
               alignItems: "center",
               textAlign: "center",
               justifyContent: "flex-start",
-              padding: "10px 0px",
+              // padding: "10px 0px",
             }}
           >
-            Already have an account ?{" "}
+            Already have an account ?
             <Span onClick={() => router.push("/auth/loginByEmail")}>
               Log in
             </Span>
@@ -233,14 +230,10 @@ export default function Register(): JSX.Element {
           {/* <Toast ref={toastrRef} /> */}
         </div>
       </Layout>
+      <Input />
     </>
   );
 }
-
-const Label = styled.label`
-  /* width: 100%; */
-  padding-left: 5px;
-`;
 
 const RowStyle = styled.div`
   width: 49%;

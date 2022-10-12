@@ -111,7 +111,7 @@ export default function ManageCategories(): JSX.Element {
       <CustomInput
         type="text"
         placeholder="Give it a name"
-        label="name"
+        // label="Give it a name"
         width="100%"
         value={catValue.name}
         onChange={(event) =>
@@ -124,6 +124,7 @@ export default function ManageCategories(): JSX.Element {
         <CustomInput
           type="text"
           placeholder="Description"
+          // label="Description"
           width="100%"
           value={catValue.description}
           onChange={(event) =>
