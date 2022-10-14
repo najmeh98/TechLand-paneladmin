@@ -13,6 +13,9 @@ import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { Theme } from "../../components/types/theme";
 import { loginProp } from "./authType";
 import { useNotofication } from "../../components/NotificationMange.tsx/NotificationManager";
+import "react-toastify/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
+import { Toaster } from "../../components/Toast";
 
 export default function LoginByEmail(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,11 +26,9 @@ export default function LoginByEmail(): JSX.Element {
 
   const { dispatch, login: CheckLoggedIn } = useAppContext();
 
-  const { createNotification } = useNotofication();
-
-  const t: Theme = useTheme();
   const router = useRouter();
-  const password: string = loginInfo.password;
+
+  const { showToastr } = Toaster();
 
   const onSubmitEmail = useCallback(async (): Promise<void> => {
     if (!loginInfo.email || !loginInfo.password) {
@@ -39,18 +40,17 @@ export default function LoginByEmail(): JSX.Element {
 
       setLoading(false);
       if ((result?.status as number) == 200) {
-        createNotification({
-          title: "Welcome back",
-          description: "",
-          duration: 4000,
-        });
         console.log(result);
 
         CheckLoggedIn({ ...result?.data });
         //set logg in dispatch
-        dispatch({ type: "LOGGED IN", payload: { ...result?.data } });
+        // dispatch({ type: "LOGGED IN", payload: { ...result?.data } });
 
-        router.push("/");
+        showToastr("Success", "You have successfully logged in");
+
+        setTimeout(() => {
+          router.push("/");
+        }, 5000);
       }
     } catch (error) {
       console.log(error);
@@ -60,92 +60,93 @@ export default function LoginByEmail(): JSX.Element {
         switch (err.response?.status as number) {
           case 401:
             // Authentication
+            showToastr("Error", "User not found");
             break;
+
           case 404:
-            //
+            showToastr("Error", "Enter the data correctly");
             break;
+
           case 400:
-            //
+            showToastr("Error", "The request encountered an error");
             break;
         }
       }
     }
-  }, [
-    CheckLoggedIn,
-    createNotification,
-    dispatch,
-    loginInfo.email,
-    loginInfo.password,
-    router,
-  ]);
+  }, [CheckLoggedIn, loginInfo.email, loginInfo.password, router, showToastr]);
+
+  console.log("Number of renders:", onSubmitEmail);
 
   return (
-    <Layout
-      title="Hello Friends !"
-      text="Enter your personal details to open an account with us"
-      button="sign up"
-    >
-      <div
-        style={{
-          width: "100%",
-          margin: "6px",
-        }}
-        className="flex  flex-col items-start"
+    <>
+      <Layout
+        title="Hello Friends !"
+        text="Enter your personal details to open an account with us"
+        button="sign up"
       >
-        <h1 className="flex items-center justify-center w-full whitespace-nowrap maxsm:text-2xl">
-          Sign in to Website
-        </h1>
-
-        <Space vertical={55} />
-
-        <CustomInput
-          label="Email "
-          width="100%"
-          // placeholder="email"
-          type="text"
-          value={loginInfo.email}
-          onChange={(event) =>
-            setLoginInfo({ ...loginInfo, email: event.currentTarget.value })
-          }
-        />
-        <Space vertical={30} />
-
-        <CustomInput
-          label="Password "
-          width="100%"
-          // placeholder="password"
-          type="password"
-          value={loginInfo.password}
-          onChange={(event) =>
-            setLoginInfo({ ...loginInfo, password: event.currentTarget.value })
-          }
-        />
-
-        {/* <Flex style={{ paddingTop: "10px" }}>
-          <div>
-            <input type={"checkbox"} />
-            <span>Remember me</span>
-          </div>
-          <span>Reset Password?</span>
-        </Flex> */}
-
-        <Space vertical={30} />
-
-        <CustomButton
-          width="100%"
-          onClick={onSubmitEmail}
-          style={{ boxShadow: "8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9" }}
+        <div
+          style={{
+            width: "100%",
+            margin: "6px",
+          }}
+          className="flex  flex-col items-start"
         >
-          Sign in
-        </CustomButton>
+          <h1 className="flex items-center justify-center w-full whitespace-nowrap maxsm:text-2xl">
+            Sign in to Website
+          </h1>
 
-        <Space vertical={30} />
+          <ToastContainer />
 
-        <ThemedText>
-          Don&apos;t have account yet?{" "}
-          <Span onClick={() => router.push("/auth/register")}>Join Us</Span>
-        </ThemedText>
-      </div>
-    </Layout>
+          <Space vertical={55} />
+
+          <CustomInput
+            label="Email "
+            width="100%"
+            // placeholder="email"
+            type="text"
+            value={loginInfo.email}
+            onChange={(event) =>
+              setLoginInfo({ ...loginInfo, email: event.currentTarget.value })
+            }
+          />
+          <Space vertical={30} />
+
+          <CustomInput
+            label="Password "
+            width="100%"
+            // placeholder="password"
+            type="password"
+            value={loginInfo.password}
+            onChange={(event) =>
+              setLoginInfo({
+                ...loginInfo,
+                password: event.currentTarget.value,
+              })
+            }
+          />
+
+          <Space vertical={30} />
+
+          <CustomButton
+            width="100%"
+            onClick={onSubmitEmail}
+            style={{
+              boxShadow: "8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9",
+            }}
+          >
+            Sign in
+          </CustomButton>
+
+          <Space vertical={30} />
+
+          <ThemedText>
+            Don&apos;t have account yet?{" "}
+            <Span onClick={() => router.push("/auth/register")}>Join Us</Span>
+          </ThemedText>
+        </div>
+      </Layout>
+
+      <div className="flex items-center justify-center"></div>
+    </>
   );
 }
