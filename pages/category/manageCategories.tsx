@@ -8,6 +8,7 @@ import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
 import { Space } from "../../components/share/Space";
 import { ThemedText } from "../../components/ThemedText";
+import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
 import { ButtonRow } from "../users/userInfo";
 import { CategoryProp, CatPost } from "./cat.interface";
@@ -25,6 +26,8 @@ export default function ManageCategories(): JSX.Element {
   const [categoriesPost, setCategoriesPost] = useState<CatPost>();
 
   const router = useRouter();
+
+  const { showToastr } = Toaster();
 
   const [image, setimage] = useState<string>("");
 
@@ -60,13 +63,13 @@ export default function ManageCategories(): JSX.Element {
 
             setCategoriesPost(response?.data);
 
+            showToastr("Success", "Category created successfully ");
+
             setCatValue({
               name: "",
               description: "",
             });
             setimage("");
-
-            //dispatch({type:'POST CATEGORY' , payload: })
           }
         })
         .catch((error) => {
@@ -74,24 +77,23 @@ export default function ManageCategories(): JSX.Element {
           const err = error as AxiosError;
           if (err.response?.status) {
             switch (err?.response?.status as number) {
-              case 401:
-                //retrun
-                break;
               case 403:
-                //
+                showToastr("Error", "The information is not entered correctly");
+
                 break;
               case 400:
-                //
+                showToastr("Error", "The post was not created correctly");
+
                 break;
               case 500:
-              //
+                showToastr("Error", "Server Error");
             }
           }
         });
     } catch (error) {
       console.log(error);
     }
-  }, [catValue.description, catValue.name, image, token]);
+  }, [catValue.description, catValue.name, image, showToastr, token]);
 
   return (
     <UserLayout

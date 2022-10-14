@@ -10,11 +10,13 @@ import { CustomInput } from "../../components/CustomInput";
 import { CustomSelect } from "../../components/CustomSelect";
 import { useNotofication } from "../../components/NotificationMange.tsx/NotificationManager";
 import { Space } from "../../components/share/Space";
-import Toast from "../../components/Toast";
+import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
 import { ButtonRow } from "../users/userInfo";
 import { CatItem, OwnProp } from "./postCreate.interface";
 import { CKEditor } from "ckeditor4-react";
+import "react-toastify/ReactToastify.min.css";
+import { toast, ToastContainer } from "react-toastify";
 export default function PostCreate(): JSX.Element {
   const router = useRouter();
 
@@ -48,9 +50,11 @@ export default function PostCreate(): JSX.Element {
   const toastrRef = useRef<ToastrRef>(null);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const showToastr = (mode: string, message: string, title: string): void => {
-    toastrRef.current?.add(message, title, { ...data, status: mode });
-  };
+  // const showToastr = (mode: string, message: string, title: string): void => {
+  //   toastrRef.current?.add(message, title, { ...data, status: mode });
+  // };
+
+  const { showToastr } = Toaster();
 
   useEffect(() => {
     const token: string = localStorage.getItem("$adnTK") ?? "";
@@ -66,7 +70,9 @@ export default function PostCreate(): JSX.Element {
       })
       .then((result) => {
         console.log(result);
-        setCategoryItem(result?.data);
+        if ((result?.status as number) == 200) {
+          setCategoryItem(result?.data);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -101,16 +107,12 @@ export default function PostCreate(): JSX.Element {
           if ((result?.status as number) == 200) {
             console.log(result);
 
-            showToastr(
-              "Success",
-              "Success",
-              "The post was successfully registered"
-            );
-
             dispatch({
               type: "ADMIN POST",
               payload: { ...result?.data },
             });
+
+            showToastr("Success", "You have successfully logged in");
 
             setPostInfo({
               title: "",
@@ -129,9 +131,11 @@ export default function PostCreate(): JSX.Element {
           setLoading(false);
           const err = error as AxiosError;
           if ((err.response?.status as number) == 400) {
-            // "Error in creating a new admin"
+            // "Error in creating a new post"
+            showToastr("Error", "Post creation error");
           } else {
             // 500 error
+            showToastr("Error", "Server Error");
           }
         });
     } catch (error) {
@@ -149,6 +153,8 @@ export default function PostCreate(): JSX.Element {
 
   return (
     <>
+      <ToastContainer />
+
       <UserLayout
         title="Create new Post"
         width="78%"
@@ -170,14 +176,7 @@ export default function PostCreate(): JSX.Element {
           }
         />
         <Space vertical={25} />
-        {/* <CustomInput
-          type="textarea"
-          label="Content"
-          value={postInfo.content}
-          onChange={(event) =>
-            setPostInfo({ ...postInfo, content: event.currentTarget.value })
-          }
-        /> */}
+
         <CKEditor
           config={{ language: "en" }}
           // Data={postInfo.content}
