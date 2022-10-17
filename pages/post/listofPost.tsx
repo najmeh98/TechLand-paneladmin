@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { config, fetchWithId } from "../../components/Api";
 import CategoryListLayout from "../../components/category/CatListLayout";
 import { ListofItems } from "../../components/LayoutList.tsx/listofItems";
+import { SpinnerComponent } from "../../components/utils/Spinner";
 import { OwnPost } from "./postCreate.interface";
 
 export default function ListofPost(): JSX.Element {
@@ -30,7 +31,10 @@ export default function ListofPost(): JSX.Element {
       className="bg-gradient-to-r from-purple-500 to-pink-500 px-3"
     >
       <div className=" w-full mr-8  space-y-11">
-        {data &&
+        {data == undefined ? (
+          <SpinnerComponent />
+        ) : (
+          data &&
           data?.post?.length > 0 &&
           data?.post?.map((post: OwnPost) => (
             <CategoryListLayout
@@ -50,7 +54,8 @@ export default function ListofPost(): JSX.Element {
               // email={email}
               catId={post?.id}
             />
-          ))}
+          ))
+        )}
       </div>
     </ListofItems>
   );

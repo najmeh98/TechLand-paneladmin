@@ -5,6 +5,7 @@ import { config, fetchWithId } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import CategoryListLayout from "../../components/category/CatListLayout";
 import { ListofItems } from "../../components/LayoutList.tsx/listofItems";
+import { SpinnerComponent } from "../../components/utils/Spinner";
 import { CatPost } from "./cat.interface";
 
 export default function ListofCategory(): JSX.Element {
@@ -14,7 +15,7 @@ export default function ListofCategory(): JSX.Element {
 
   const { adminInfo } = useAppContext();
 
-  const email: string = adminInfo?.email;
+  // const email: string = adminInfo?.email;
 
   useEffect(() => {
     const token: string = localStorage.getItem("$adnTK") ?? "";
@@ -40,7 +41,9 @@ export default function ListofCategory(): JSX.Element {
       className="bg-gradient-to-r from-cyan-500 to-blue-500 px-4 "
     >
       <div className=" w-full px-1  space-y-11 ">
-        {data &&
+        {data === undefined ? (
+          <SpinnerComponent />
+        ) : (
           data?.length > 0 &&
           data?.map((cat: CatPost) => (
             <CategoryListLayout
@@ -60,7 +63,8 @@ export default function ListofCategory(): JSX.Element {
               catId={cat?.id}
               // description={cat?.description}
             />
-          ))}
+          ))
+        )}
       </div>
     </ListofItems>
     //   </div>
