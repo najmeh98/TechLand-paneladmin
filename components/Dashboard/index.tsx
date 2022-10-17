@@ -58,8 +58,8 @@ export default function Dashboard(): JSX.Element {
         <Container>
           <DashboardMain
             icon={<FiUsers fontSize={30} />}
-            title="Total Users"
-            count={count?.userCount}
+            title="Total Admins"
+            count={count?.adminCount}
             text="Add new admin"
             onClick={() => router.push("admin/adminCreate")}
           />
