@@ -35,6 +35,7 @@ export default function ManageCategories(): JSX.Element {
   const token: string = adminInfo.token;
 
   console.log(categoriesPost);
+
   const onSubmitCategory = useCallback((): void => {
     // setError('All fields are required')
     if (!catValue.name) {
@@ -63,13 +64,17 @@ export default function ManageCategories(): JSX.Element {
 
             setCategoriesPost(response?.data);
 
-            showToastr("Success", "Category created successfully ");
-
             setCatValue({
               name: "",
               description: "",
             });
             setimage("");
+
+            showToastr("Success", "Category created successfully ");
+            console.log(
+              "nt",
+              showToastr("Success", "Category created successfully ")
+            );
           }
         })
         .catch((error) => {
@@ -94,6 +99,8 @@ export default function ManageCategories(): JSX.Element {
       console.log(error);
     }
   }, [catValue.description, catValue.name, image, showToastr, token]);
+
+  console.log("toaster", showToastr);
 
   return (
     <UserLayout
