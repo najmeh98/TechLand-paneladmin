@@ -36,7 +36,7 @@ export const CustomButton = ({
     <motion.div
       initial=""
       className="flex items-center"
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.9 }}
       style={{
         marginTop: t.margin.medium,
