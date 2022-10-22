@@ -8,6 +8,7 @@ export interface OwnProp {
   image: any;
   newImage?: any;
   height?: number;
+  className?: string;
 }
 
 export const ComponentUploader = ({
@@ -20,10 +21,6 @@ export const ComponentUploader = ({
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      // const url = URL.createObjectURL(acceptedFiles[0]);
-      // console.log("url", url);
-      // setPreImage(url);
-
       console.log("files", acceptedFiles);
 
       setImage(
