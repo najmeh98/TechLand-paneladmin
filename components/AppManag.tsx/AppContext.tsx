@@ -37,6 +37,7 @@ const initialState: State = {
     bio: "",
     job: "",
     image: "",
+    banner: "",
   },
   allUsers: [],
   adminsPost: [],

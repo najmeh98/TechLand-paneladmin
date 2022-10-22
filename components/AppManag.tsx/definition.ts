@@ -11,6 +11,7 @@ export interface OwnadminProp {
   bio?: string;
   job?: string;
   image?: string;
+  banner?: string;
 }
 
 export interface allUsers {
