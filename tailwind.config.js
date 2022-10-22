@@ -42,6 +42,10 @@ module.exports = {
           "serif",
         ],
       },
+      colors: {
+        "bg-img": "rgba(242 , 240 , 245 , 0.4)",
+        "bg-img-hover": "rgba(242 , 240 , 245 , 0.1)",
+      },
       width: {},
     },
   },
