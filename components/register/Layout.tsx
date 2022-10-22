@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import { mobile } from "../utils/media";
+import { mobile, tablet } from "../utils/media";
 
 type OwnProp = {
   children: React.ReactNode;
@@ -25,7 +25,7 @@ export const Layout = ({
   return (
     <Wrapper>
       <Container className="container mx-auto">
-        <LeftSide className=" flex items-center justify-center" sideToSide>
+        <LeftSide className=" flex items-center justify-center " sideToSide>
           <div
             className="    absolute w-96 h-96 overflow-hidden  rounded-full -left-[34%] -bottom-[38%] transition-transform  "
             style={{
@@ -60,7 +60,10 @@ export const Layout = ({
           </div>
         </LeftSide>
 
-        <RightSide className=" py-10 pr-[65px] pl-[65px]" sideToSide>
+        <RightSide
+          className=" py-10 pr-[45px] pl-[45px] sm:px-[30px] md:px-[70px] lg:px-[45px]"
+          sideToSide
+        >
           {children}
         </RightSide>
       </Container>
@@ -129,24 +132,7 @@ const LeftSide = styled.div<sideProps>`
   left: 0;
   z-index: 200;
 
-  /* ${(p) =>
-    p.sideToSide &&
-    css`
-      position: relative;
-      left: calc(100% - 450px);
-    `} */
-
-  ${mobile(css`
+  ${tablet(css`
     display: none;
   `)}
 `;
-
-// boxShadow:
-//   "inset 8px 8px 12px #d1d9e6, inset -8px -8px 12px #f9f9f9",
-// boxShadow: " 4px 4px 10px #d1d9e6 ",
-// boxShadow:
-//   "inset 5px 5px 10px #a9a9aa77,inset -5px -5px 10px #ffffff7e",
-
-// boxShadow:
-//   " 5px 5px 10px #f1f1f9e0 inset,  -5px -5px 10px #d2cecec5 inset",
-// backgroundColor: "#ecf0f3",
