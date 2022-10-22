@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { CatPost } from "../../pages/category/cat.interface";
 import { config } from "../Api";
+import { Toaster } from "../Toast";
 import { CreateList } from "./CreateList";
 import { CatProp, INewListProp } from "./createlist.interface";
 
@@ -20,6 +21,8 @@ export default function Createnewlist({
   const [category, setCategory] = useState<CatPost>();
 
   const [image, setimage] = useState<string>("");
+
+  const { showToastr } = Toaster();
 
   const icon = (
     <div
@@ -62,24 +65,29 @@ export default function Createnewlist({
             });
 
             setimage("");
+            showToastr("Success", "Category created successfully ");
             //dispatch({type:'POST CATEGORY' , payload: })
           }
         })
         .catch((error) => {
           const err = error as AxiosError;
+
           if ((err.response?.status as number) == 403) {
-            // retrun
+            showToastr("Error", "The information is not entered correctly");
           } else if (err?.response?.status == 400) {
-            // return
+            showToastr("Error", "The post was not created correctly");
           } else {
             // error 500
+
             console.log(err);
+
+            showToastr("Error", "Server Error");
           }
         });
     } catch (error) {
       console.log(error);
     }
-  }, [catValue.description, catValue.name, image, loaclToken]);
+  }, [catValue.description, catValue.name, image, loaclToken, showToastr]);
 
   return (
     <CreateList
