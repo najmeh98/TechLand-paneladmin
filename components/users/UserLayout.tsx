@@ -23,7 +23,7 @@ export const UserLayout: React.FC<UserProp> = ({
   return (
     <LayoutStyle>
       <SidebarOption />
-      <MainWrapper>
+      <MainWrapper className="container">
         <Conianer
           style={{
             maxWidth: width,

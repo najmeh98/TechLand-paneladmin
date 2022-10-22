@@ -20,7 +20,6 @@ import {
   Writepost,
 } from "../icons/Icon";
 import { SidebarMenu } from "./SidebarMenu";
-// import { SlLock } from "react-icons/sl";
 import { FormItem } from "../share/Container";
 import { useState } from "react";
 import SidebarLayout from "./SidebarLayout";
@@ -94,10 +93,10 @@ export const SidebarOption = (): JSX.Element => {
         <img
           src={adminInfo?.image}
           alt="profilImg"
-          className="w-14 h-14 rounded-full"
+          className="w-14 h-14 rounded-full border-2 border-solid border-[#f0f2f0] shadow-gray-300"
         />
       ) : (
-        <img src="./avator.png" alt="img" className="w-12 h-12 rounded-full" />
+        <img src="/avator.png" alt="img" className="w-14 h-14 rounded-full" />
       )}
     </>
   );

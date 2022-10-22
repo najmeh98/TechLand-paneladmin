@@ -11,7 +11,7 @@ export const SpinnerComponent = (): JSX.Element => {
 
 const Spinner = (): JSX.Element => {
   return (
-    <div className="w-full text-center cursor-pointer h-44 max-w-[44rem]  md:max-w-2xl border-solid border-gray-300  rounded  justify-between bg-slate-50 hover:shadow-[0_8px_30px_#7c7b7b1e]">
+    <div className="w-full mt-7 text-center cursor-pointer h-44 max-w-[44rem]  md:max-w-2xl border-solid border-gray-300  rounded  justify-between bg-slate-50 hover:shadow-[0_8px_30px_#7c7b7b1e]">
       <SpinnerIcon />
     </div>
   );
