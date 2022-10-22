@@ -14,8 +14,9 @@ import { Theme } from "../../components/types/theme";
 import { loginProp } from "./authType";
 import { useNotofication } from "../../components/NotificationMange.tsx/NotificationManager";
 import "react-toastify/ReactToastify.min.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { Toaster } from "../../components/Toast";
+import { ErrorText } from "../../components/share/ErrorText";
 
 export default function LoginByEmail(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,6 +24,7 @@ export default function LoginByEmail(): JSX.Element {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string>("");
 
   const { dispatch, login: CheckLoggedIn } = useAppContext();
 
@@ -32,6 +34,7 @@ export default function LoginByEmail(): JSX.Element {
 
   const onSubmitEmail = useCallback(async (): Promise<void> => {
     if (!loginInfo.email || !loginInfo.password) {
+      setError("Enter all information");
       return;
     }
     try {
@@ -79,6 +82,8 @@ export default function LoginByEmail(): JSX.Element {
 
   return (
     <>
+      <ToastContainer />
+
       <Layout
         title="Hello Friends !"
         text="Enter your personal details to open an account with us"
@@ -94,8 +99,6 @@ export default function LoginByEmail(): JSX.Element {
           <h1 className="flex items-center justify-center w-full whitespace-nowrap maxsm:text-2xl">
             Sign in to Website
           </h1>
-
-          <ToastContainer />
 
           <Space vertical={55} />
 
@@ -125,7 +128,10 @@ export default function LoginByEmail(): JSX.Element {
             }
           />
 
-          <Space vertical={30} />
+          <Space vertical={20} />
+          {error && <ErrorText>{error}</ErrorText>}
+
+          <Space vertical={10} />
 
           <CustomButton
             width="100%"
@@ -137,12 +143,12 @@ export default function LoginByEmail(): JSX.Element {
             Sign in
           </CustomButton>
 
-          <Space vertical={30} />
+          <Space vertical={10} />
 
-          <ThemedText>
+          <p className="cursor-pointer">
             Don&apos;t have account yet?{" "}
             <Span onClick={() => router.push("/auth/register")}>Join Us</Span>
-          </ThemedText>
+          </p>
         </div>
       </Layout>
 

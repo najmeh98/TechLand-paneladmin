@@ -4,17 +4,20 @@ import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import { Verification } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
-import { useTheme } from "../../components/Context/ThemeContext";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
 import { HeaderText } from "../../components/HeaderText";
 import Input from "../../components/Input";
 import { Layout } from "../../components/register/Layout";
 import { FlexRow } from "../../components/share/Container";
+import { ErrorText } from "../../components/share/ErrorText";
 import { Space } from "../../components/share/Space";
-import { ThemedText } from "../../components/ThemedText";
+import { Toaster } from "../../components/Toast";
 import { ToasterRef, ToasterProps } from "../../components/types/toastr";
+import { dataValidation } from "../../components/utils/dataValidation";
 import { OwnProp } from "./authType";
+import "react-toastify/ReactToastify.min.css";
+import { ToastContainer } from "react-toastify";
 
 export default function Register(): JSX.Element {
   let [admin, setadmin] = useState<OwnProp>({
@@ -32,23 +35,31 @@ export default function Register(): JSX.Element {
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
-  const t = useTheme();
 
   const { dispatch, login: CheckLoggedIn } = useAppContext();
 
-  const toastrRef = useRef<ToasterRef>(null);
+  const { showToastr } = Toaster();
 
-  const [data] = useState<ToasterProps>({
-    position: "",
-    duration: 3500,
-    hasIcon: true,
-    destoryByClick: true,
-  });
+  // const toastrRef = useRef<ToasterRef>(null);
+
+  // const [data] = useState<ToasterProps>({
+  //   position: "",
+  //   duration: 3500,
+  //   hasIcon: true,
+  //   destoryByClick: true,
+  // });
 
   const onSubmitVerification = useCallback(async (): Promise<void> => {
+    const data = dataValidation(admin);
+
+    if (data == false) {
+      setError("Enter all Information");
+    }
+
     if (admin.password !== admin.repassword) {
       // return showToastr("Danger", "error", "error is here");
       setError("password and duplicate password are not the same!");
+      return;
     } else {
       try {
         setLoading(true);
@@ -59,10 +70,11 @@ export default function Register(): JSX.Element {
         if ((result?.status as number) == 200) {
           CheckLoggedIn({ ...result?.data });
 
-          //update the auth context
-          // dispatch({ type: "LOGGED IN", payload: { ...result?.data.admin } });
+          showToastr("Success", "You have successfully register");
 
-          router.push("/");
+          setTimeout(() => {
+            router.push("/");
+          }, 5000);
         }
       } catch (error) {
         setLoading(false);
@@ -71,6 +83,7 @@ export default function Register(): JSX.Element {
         if (err.response) {
           switch (err.response?.status as number) {
             case 400:
+              showToastr("Error", "The request encountered an error");
               break;
 
             default:
@@ -79,10 +92,12 @@ export default function Register(): JSX.Element {
         }
       }
     }
-  }, [CheckLoggedIn, admin, router]);
+  }, [CheckLoggedIn, admin, router, showToastr]);
 
   return (
     <>
+      <ToastContainer />
+
       <Layout
         title="welcome back !"
         text="To keep connected with us plaese login with your personal details"
@@ -204,28 +219,21 @@ export default function Register(): JSX.Element {
             // width="100%"
           />
 
-          <Space vertical={30} />
+          <Space vertical={20} />
+
+          {error && <ErrorText>{error}</ErrorText>}
 
           <CustomButton onClick={onSubmitVerification}>
             Create Account
           </CustomButton>
+          <Space vertical={10} />
 
-          <Space vertical={30} />
-
-          <ThemedText
-            style={{
-              display: "flex",
-              alignItems: "center",
-              textAlign: "center",
-              justifyContent: "flex-start",
-              // padding: "10px 0px",
-            }}
-          >
+          <p className="flex items-center justify-start text-center cursor-pointer">
             Already have an account ?
             <Span onClick={() => router.push("/auth/loginByEmail")}>
               Log in
             </Span>
-          </ThemedText>
+          </p>
 
           {/* <Toast ref={toastrRef} /> */}
         </div>
