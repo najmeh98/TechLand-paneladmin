@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Alert from "../../components/alert";
 import { config } from "../../components/Api";
 import { HeaderText } from "../../components/HeaderText";
+import { ContentText } from "../../components/share/ContentText";
 import { Space } from "../../components/share/Space";
 import { ProfileImg } from "../../components/Sidebar/profileImg";
 import { SidebarOption } from "../../components/Sidebar/SidebarOption";
@@ -162,13 +163,9 @@ export default function PostInfo() {
 
         <HeaderText>{data?.title}</HeaderText>
 
-        <ThemedText
-          className=" font-[source-serif-pro] text-2xl text-stone-800 "
-          color="contentColor"
-          fontSize="semiLarge"
-        >
+        <ContentText className=" font-[source-serif-pro] text-2xl text-stone-800 ">
           {data?.content}
-        </ThemedText>
+        </ContentText>
 
         {/* show pop Up for delete post */}
         {deleteItem && (
