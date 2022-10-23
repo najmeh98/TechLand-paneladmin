@@ -8,7 +8,6 @@ import { ComponentUploader } from "../../components/ComponetnUploader";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
 import { CustomSelect } from "../../components/CustomSelect";
-import { useNotofication } from "../../components/NotificationMange.tsx/NotificationManager";
 import { Space } from "../../components/share/Space";
 import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
@@ -16,7 +15,8 @@ import { ButtonRow } from "../users/userInfo";
 import { CatItem, OwnProp } from "./postCreate.interface";
 import { CKEditor } from "ckeditor4-react";
 import "react-toastify/ReactToastify.min.css";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+
 export default function PostCreate(): JSX.Element {
   const router = useRouter();
 
@@ -29,23 +29,24 @@ export default function PostCreate(): JSX.Element {
     content: "",
   });
 
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
   const [localToken, setLocalToken] = useState<string>("");
   const [categoryItem, setCategoryItem] = useState<CatItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<CatItem>();
 
   const { dispatch } = useAppContext();
-  const { createNotification } = useNotofication();
-  const [ShowMassege, setShowMassege] = useState(false);
 
   // const { showToastr, toastrRef } = Toast();
 
-  const [data] = useState<ToastrProps>({
-    position: "topEnd",
-    duration: 3500,
-    hasIcon: true,
-    destroyByClick: true,
-    preventDuplicates: false,
-  });
+  // const [data] = useState<ToastrProps>({
+  //   position: "topEnd",
+  //   duration: 3500,
+  //   hasIcon: true,
+  //   destroyByClick: true,
+  //   preventDuplicates: false,
+  // });
 
   const toastrRef = useRef<ToastrRef>(null);
 
@@ -80,8 +81,9 @@ export default function PostCreate(): JSX.Element {
   }, [localToken]);
 
   const onSubmitPost = useCallback((): void => {
-    if (!postInfo.title || !postInfo.content) {
-      // setError('All fields are required')
+    if (!title || !content) {
+      setError("All fields are required");
+      showToastr("Error", "All fields are required ");
       return;
     }
     try {
@@ -90,8 +92,8 @@ export default function PostCreate(): JSX.Element {
       const dataPost = new FormData();
       const catId: string = selectedItem?.id ?? "";
 
-      dataPost.append("title", postInfo.title);
-      dataPost.append("content", postInfo.content);
+      dataPost.append("title", title);
+      dataPost.append("content", content);
       dataPost.append("image", image); // convert file to image
       dataPost.append("catId", catId);
 
@@ -112,19 +114,19 @@ export default function PostCreate(): JSX.Element {
               payload: { ...result?.data },
             });
 
-            showToastr("Success", "You have successfully logged in");
+            setTitle("");
+            setContent("");
 
-            setPostInfo({
-              title: "",
-              content: "",
-            });
             setImage("");
+
             setSelectedItem({
               id: "",
               image: "",
               name: "",
               description: "",
             });
+
+            showToastr("Success", "The post was created successfully");
           }
         })
         .catch((error) => {
@@ -140,16 +142,19 @@ export default function PostCreate(): JSX.Element {
         });
     } catch (error) {
       console.log(error);
+      showToastr("Error", "Server Error");
     }
   }, [
+    content,
     dispatch,
     image,
     localToken,
-    postInfo.content,
-    postInfo.title,
     selectedItem?.id,
     showToastr,
+    title,
   ]);
+
+  console.log("content", content);
 
   return (
     <>
@@ -166,31 +171,36 @@ export default function PostCreate(): JSX.Element {
         {/* <Toastr ref={toastrRef} /> */}
         {/* upload Image */}
         <ComponentUploader setImage={setImage} image={image} />
+
         <Space vertical={30} />
+
         <CustomInput
           type="text"
           label="Title"
-          value={postInfo.title}
-          onChange={(event) =>
-            setPostInfo({ ...postInfo, title: event.currentTarget.value })
-          }
+          value={title}
+          onChange={(event) => setTitle(event.currentTarget.value)}
+          // onChange={(event) =>
+          //   setPostInfo({ ...postInfo, title: event.currentTarget.value })
+          // }
         />
+
         <Space vertical={25} />
 
         <CKEditor
           config={{ language: "en" }}
-          // Data={postInfo.content}
-          data={postInfo.content}
-          onChange={(event) =>
-            setPostInfo({ ...postInfo, content: event.editor.getData() })
-          }
+          initData={content}
+          type="classic"
+          onChange={(event) => setContent(event.editor.getData())}
           style={{
             borderRadius: "7px",
             border: "1px solid rgb(204,204,204)",
             fontSize: "16px",
+            overflowY: "scroll",
           }}
         />
+
         <Space vertical={25} />
+
         <CustomSelect
           categoryItem={categoryItem}
           setCategoryItem={setCategoryItem}
