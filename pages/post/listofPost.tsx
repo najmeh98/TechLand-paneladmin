@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { config, fetchWithId } from "../../components/Api";
+import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import CategoryListLayout from "../../components/category/CatListLayout";
 import { ListofItems } from "../../components/LayoutList.tsx/listofItems";
 import { SpinnerComponent } from "../../components/utils/Spinner";
@@ -16,11 +17,15 @@ export default function ListofPost(): JSX.Element {
     setLoaclToken(token);
   }, []);
 
+  const { adminInfo } = useAppContext();
+
+  const id: any = adminInfo?.id;
+
   const { data, error } = useSWR(
-    [`${config.apiUrl}/api/data/getAllposts`, loaclToken],
+    [`${config.apiUrl}/api/data/getAllposts?adminId=${id}`, loaclToken],
     fetchWithId
   );
-  console.log("dt", data);
+  console.log("dt", typeof data?.post?.length);
   return (
     <ListofItems
       title="Your stories "
@@ -33,9 +38,7 @@ export default function ListofPost(): JSX.Element {
       <div className=" w-full mr-8  space-y-11">
         {data == undefined ? (
           <SpinnerComponent />
-        ) : (
-          data &&
-          data?.post?.length > 0 &&
+        ) : data && data?.post?.length > 0 ? (
           data?.post?.map((post: OwnPost) => (
             <CategoryListLayout
               onClick={() => {
@@ -52,9 +55,11 @@ export default function ListofPost(): JSX.Element {
               title={post?.title}
               image={post?.image}
               // email={email}
-              catId={post?.id}
+              // catId={post?.id}
             />
           ))
+        ) : (
+          data?.post == 0 && data?.post?.length == 0 && <p>There is no posts</p>
         )}
       </div>
     </ListofItems>
