@@ -9,6 +9,8 @@ import { Space } from "../../components/share/Space";
 import { ProfileImg } from "../../components/Sidebar/profileImg";
 import { SidebarOption } from "../../components/Sidebar/SidebarOption";
 import { editPostProp } from "../category/cat.interface";
+import "react-toastify/ReactToastify.min.css";
+import { ToastContainer } from "react-toastify";
 
 export default function EditPostInfo(): JSX.Element {
   const { query } = useRouter();
@@ -166,6 +168,7 @@ export default function EditPostInfo(): JSX.Element {
           column={85}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 }

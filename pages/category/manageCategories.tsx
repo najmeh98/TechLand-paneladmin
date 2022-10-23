@@ -11,6 +11,8 @@ import { ThemedText } from "../../components/ThemedText";
 import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
 import { ButtonRow } from "../users/userInfo";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 import { CategoryProp, CatPost } from "./cat.interface";
 
 export default function ManageCategories(): JSX.Element {
@@ -33,8 +35,6 @@ export default function ManageCategories(): JSX.Element {
 
   const { adminInfo } = useAppContext();
   const token: string = adminInfo.token;
-
-  console.log(categoriesPost);
 
   const onSubmitCategory = useCallback((): void => {
     // setError('All fields are required')
@@ -71,10 +71,6 @@ export default function ManageCategories(): JSX.Element {
             setimage("");
 
             showToastr("Success", "Category created successfully ");
-            console.log(
-              "nt",
-              showToastr("Success", "Category created successfully ")
-            );
           }
         })
         .catch((error) => {
@@ -103,68 +99,75 @@ export default function ManageCategories(): JSX.Element {
   console.log("toaster", showToastr);
 
   return (
-    <UserLayout
-      title="create new list"
-      width="75%"
-      style={{
-        padding: "40px",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {/* uploader image  */}
-      <ComponentUploader setImage={setimage} image={image} />
+    <>
+      <ToastContainer />
 
-      <Space vertical={40} />
+      <UserLayout
+        title="create new list"
+        width="75%"
+        style={{
+          padding: "40px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {/* uploader image  */}
+        <ComponentUploader setImage={setimage} image={image} />
 
-      <CustomInput
-        type="text"
-        placeholder="Give it a name"
-        // label="Give it a name"
-        width="100%"
-        value={catValue.name}
-        onChange={(event) =>
-          setCatValue({ ...catValue, name: event.currentTarget.value })
-        }
-      />
+        <Space vertical={40} />
 
-      <Space vertical={30} />
-      {description ? (
         <CustomInput
           type="text"
-          placeholder="Description"
-          // label="Description"
+          placeholder="Give it a name"
+          // label="Give it a name"
           width="100%"
-          value={catValue.description}
+          value={catValue.name}
           onChange={(event) =>
-            setCatValue({ ...catValue, description: event.currentTarget.value })
+            setCatValue({ ...catValue, name: event.currentTarget.value })
           }
         />
-      ) : (
-        <ThemedText
-          style={{ color: "rgb(57, 172, 212)", width: "100%" }}
-          onClick={() => setDescription(true)}
-          // className=" text-cyan-500 shadow-cyan-500/50 "
-        >
-          Add a description
-        </ThemedText>
-      )}
 
-      <Space vertical={40} />
+        <Space vertical={30} />
+        {description ? (
+          <CustomInput
+            type="text"
+            placeholder="Description"
+            // label="Description"
+            width="100%"
+            value={catValue.description}
+            onChange={(event) =>
+              setCatValue({
+                ...catValue,
+                description: event.currentTarget.value,
+              })
+            }
+          />
+        ) : (
+          <ThemedText
+            style={{ color: "rgb(57, 172, 212)", width: "100%" }}
+            onClick={() => setDescription(true)}
+            // className=" text-cyan-500 shadow-cyan-500/50 "
+          >
+            Add a description
+          </ThemedText>
+        )}
 
-      <ButtonRow style={{ width: "100%" }}>
-        <CustomButton
-          style={{ marginRight: "20px" }}
-          padding=" 0px 15px"
-          onClick={() => router.back()}
-        >
-          Cancel
-        </CustomButton>
+        <Space vertical={40} />
 
-        <CustomButton padding="0px 15px" onClick={onSubmitCategory}>
-          Save
-        </CustomButton>
-      </ButtonRow>
-    </UserLayout>
+        <ButtonRow style={{ width: "100%" }}>
+          <CustomButton
+            style={{ marginRight: "20px" }}
+            padding=" 0px 15px"
+            onClick={() => router.back()}
+          >
+            Cancel
+          </CustomButton>
+
+          <CustomButton padding="0px 15px" onClick={onSubmitCategory}>
+            Save
+          </CustomButton>
+        </ButtonRow>
+      </UserLayout>
+    </>
   );
 }
