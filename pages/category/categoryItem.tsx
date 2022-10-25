@@ -8,7 +8,7 @@ import { SidebarOption } from "../../components/Sidebar/SidebarOption";
 import { ThemedText } from "../../components/ThemedText";
 import { BsThreeDots } from "react-icons/bs";
 import { Note } from "../../components/share/Note";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { CreateList } from "../../components/LayoutList.tsx/CreateList";
 import {
   EditCatProp,
@@ -18,12 +18,14 @@ import {
 } from "./cat.interface";
 import { adminsPosts } from "../../components/AppManag.tsx/definition";
 import Alert from "../../components/alert";
+import { Toaster } from "../../components/Toast";
 
 export default function CategoryItem(): JSX.Element {
   const { query } = useRouter();
   const router = useRouter();
 
-  console.log("query", query);
+  const { showToastr } = Toaster();
+
   const wbId = query?.wb_id;
 
   const [localToken, setLocalToken] = useState<string | undefined>(undefined);
@@ -86,9 +88,6 @@ export default function CategoryItem(): JSX.Element {
       .catch((error) => console.log(error));
   }, [localToken, wbId]);
 
-  console.log("info", info);
-  console.log("posts", posts);
-
   // send edit category
   const onSubmitEdit = useCallback((): void => {
     const data: FormData = new FormData();
@@ -125,13 +124,28 @@ export default function CategoryItem(): JSX.Element {
             });
 
             setShowInfo(!showInfo);
+
+            showToastr("Success", "The request was made successfully");
           }
         })
         .catch((error) => {
           console.log(error);
+          const err = error as AxiosError;
+
+          switch (err?.response?.status) {
+            case 400:
+              showToastr("Error", "The request encountered an error");
+              break;
+
+            case 404:
+              showToastr("Error", "The category does not exicted!");
+              break;
+          }
         });
     } catch (error) {
       console.log(error);
+
+      showToastr("Error", "Server Error !");
     }
   }, [
     editValue.description,
@@ -139,12 +153,9 @@ export default function CategoryItem(): JSX.Element {
     image,
     localToken,
     showInfo,
+    showToastr,
     wbId,
   ]);
-
-  console.log("edit", editValue);
-  console.log("im", image);
-  console.log("wbId", wbId);
 
   const onSubmitDelete = useCallback((): void => {
     setLoading(true);
@@ -161,18 +172,29 @@ export default function CategoryItem(): JSX.Element {
           }
         )
         .then((response) => {
-          console.log(response);
-          if ((response?.status as number) == 200) {
-            router.back();
-          }
           setLoading(false);
+
+          if ((response?.status as number) == 200) {
+            showToastr("Success", "The deletion was successful. ");
+
+            setTimeout(() => {
+              router.back();
+            }, 5000);
+          }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          const err = error as AxiosError;
+
+          if (err?.response?.status == 400) {
+            showToastr("Error", "The request encountered an error");
+          }
+        });
     } catch (error) {
       console.log(error);
       setLoading(false);
+      showToastr("Error", "Server Error");
     }
-  }, [localToken, router, wbId]);
+  }, [localToken, router, showToastr, wbId]);
 
   const moreItems = [
     {
@@ -241,7 +263,7 @@ export default function CategoryItem(): JSX.Element {
         </FormItem>
 
         {/* show post of categories  */}
-        {posts &&
+        {posts ? (
           posts.length > 0 &&
           posts.map((post: any) => (
             <PostsList
@@ -260,7 +282,10 @@ export default function CategoryItem(): JSX.Element {
               image={post?.image}
               createdAt={post?.createdAt}
             />
-          ))}
+          ))
+        ) : (
+          <p>You don&lsquo;t have any POST yet...!</p>
+        )}
 
         {/* create new category list */}
         {showInfo && (

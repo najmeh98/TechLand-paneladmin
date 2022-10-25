@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { config } from "../../components/Api";
@@ -11,12 +11,14 @@ import { SidebarOption } from "../../components/Sidebar/SidebarOption";
 import { editPostProp } from "../category/cat.interface";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+import { Toaster } from "../../components/Toast";
 
 export default function EditPostInfo(): JSX.Element {
   const { query } = useRouter();
 
   const router = useRouter();
-  console.log(query);
+
+  const { showToastr } = Toaster();
 
   const postId: any = query?.pId;
 
@@ -94,16 +96,42 @@ export default function EditPostInfo(): JSX.Element {
               image: data?.image,
               id: data?.id,
             });
+
+            showToastr("Success", "The request was made successfully");
+
+            setTimeout(() => {
+              router.back();
+            }, 5000);
           }
         })
         .catch((error) => {
           console.log(error);
+          const err = error as AxiosError;
+
+          switch (err?.response?.status) {
+            case 400:
+              showToastr("Error", "The request encountered an error");
+              break;
+
+            case 404:
+              showToastr("Error", "The post  does not exicted!");
+              break;
+          }
         });
     } catch (error) {
       setLoading(false);
       console.log(error);
+      showToastr("Error", "Server Error !");
     }
-  }, [editValue?.content, editValue?.title, image, localToken, psId]);
+  }, [
+    editValue?.content,
+    editValue?.title,
+    image,
+    localToken,
+    psId,
+    router,
+    showToastr,
+  ]);
 
   return (
     <div className="flex items-start  mx-auto ">

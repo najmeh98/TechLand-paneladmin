@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { Verification } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
@@ -54,6 +54,7 @@ export default function Register(): JSX.Element {
 
     if (data == false) {
       setError("Enter all Information");
+      return;
     }
 
     if (admin.password !== admin.repassword) {
@@ -85,8 +86,16 @@ export default function Register(): JSX.Element {
             case 400:
               showToastr("Error", "The request encountered an error");
               break;
+            case 403:
+              showToastr("Error", "Admin already exists..!");
+              break;
 
-            default:
+            case 404:
+              showToastr("Error", "Enter the data correctly");
+              break;
+
+            case 500:
+              showToastr("Error", "Server Error");
               break;
           }
         }
@@ -102,6 +111,7 @@ export default function Register(): JSX.Element {
         title="welcome back !"
         text="To keep connected with us plaese login with your personal details"
         button="sign in"
+        path={() => router.push("./loginByEmail")}
       >
         <div
           style={{
@@ -228,7 +238,7 @@ export default function Register(): JSX.Element {
           </CustomButton>
           <Space vertical={10} />
 
-          <p className="flex items-center justify-start text-center cursor-pointer">
+          <p className="cursor-pointer hidden maxlg:block">
             Already have an account ?
             <Span onClick={() => router.push("/auth/loginByEmail")}>
               Log in
@@ -242,10 +252,6 @@ export default function Register(): JSX.Element {
     </>
   );
 }
-
-const RowStyle = styled.div`
-  width: 49%;
-`;
 
 export const Span = styled.span`
   padding-left: 5px;

@@ -1,18 +1,14 @@
 import React, { useCallback, useState } from "react";
-import { useTheme } from "../../components/Context/ThemeContext";
 import { useRouter } from "next/router";
 import { Login } from "../../components/Api";
 import { CustomInput } from "../../components/CustomInput";
 import { Layout } from "../../components/register/Layout";
 import { Space } from "../../components/share/Space";
 import { CustomButton } from "../../components/CustomButton";
-import { ThemedText } from "../../components/ThemedText";
 import { Span } from "./register";
 import { AxiosError } from "axios";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
-import { Theme } from "../../components/types/theme";
 import { loginProp } from "./authType";
-import { useNotofication } from "../../components/NotificationMange.tsx/NotificationManager";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "../../components/Toast";
@@ -43,8 +39,6 @@ export default function LoginByEmail(): JSX.Element {
 
       setLoading(false);
       if ((result?.status as number) == 200) {
-        console.log(result);
-
         CheckLoggedIn({ ...result?.data });
         //set logg in dispatch
         // dispatch({ type: "LOGGED IN", payload: { ...result?.data } });
@@ -73,12 +67,14 @@ export default function LoginByEmail(): JSX.Element {
           case 400:
             showToastr("Error", "The request encountered an error");
             break;
+
+          case 500:
+            showToastr("Error", "Server Error");
+            break;
         }
       }
     }
   }, [CheckLoggedIn, loginInfo.email, loginInfo.password, router, showToastr]);
-
-  console.log("Number of renders:", onSubmitEmail);
 
   return (
     <>
@@ -88,6 +84,7 @@ export default function LoginByEmail(): JSX.Element {
         title="Hello Friends !"
         text="Enter your personal details to open an account with us"
         button="sign up"
+        path={() => router.push("./register")}
       >
         <div
           style={{
@@ -143,9 +140,9 @@ export default function LoginByEmail(): JSX.Element {
             Sign in
           </CustomButton>
 
-          <Space vertical={10} />
+          <Space vertical={20} />
 
-          <p className="cursor-pointer">
+          <p className="cursor-pointer hidden maxlg:block">
             Don&apos;t have account yet?{" "}
             <Span onClick={() => router.push("/auth/register")}>Join Us</Span>
           </p>

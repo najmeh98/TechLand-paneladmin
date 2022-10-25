@@ -14,6 +14,7 @@ import { dataValidation } from "../../components/utils/dataValidation";
 import { ButtonRow } from "../users/userInfo";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+import { ErrorText } from "../../components/share/ErrorText";
 
 interface OwnProp {
   currentpassword: string;
@@ -26,8 +27,6 @@ export default function ChangePassword(): JSX.Element {
   const router = useRouter();
   const { adminInfo } = useAppContext();
   const token: string = adminInfo?.token;
-
-  console.log(adminInfo);
 
   const id: number = adminInfo?.id ?? 0;
 
@@ -43,7 +42,6 @@ export default function ChangePassword(): JSX.Element {
 
   const updatePassword = useCallback(async (): Promise<void> => {
     const checkdata: boolean = dataValidation(adminPassword);
-    console.log("dt", checkdata);
 
     if (checkdata == false) {
       setError("Enter all information");
@@ -92,7 +90,7 @@ export default function ChangePassword(): JSX.Element {
             case 400:
               showToastr("Error", "The password was not updated correctly..!");
               break;
-            case 401:
+            case 404:
               showToastr("Error", "The password is wrong!");
 
             case 402:
@@ -157,7 +155,7 @@ export default function ChangePassword(): JSX.Element {
             style={{ marginRight: "40px" }}
           />
 
-          {/* {error && <ErrorText>{error}</ErrorText>} */}
+          {error && <ErrorText>{error}</ErrorText>}
 
           <ButtonRow style={{ marginRight: "40px" }}>
             <CustomButton onClick={() => router.push("/")} padding="0px 15px">

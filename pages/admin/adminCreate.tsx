@@ -26,10 +26,13 @@ export default function AdminCreate(): JSX.Element {
     repassword: "",
     address: "",
   });
+
   const [loading, setloading] = useState<boolean>(false);
+
   const [error, setError] = useState<string | undefined>(undefined);
 
   const { adminInfo } = useAppContext();
+
   const token: string = adminInfo?.token;
 
   const router: NextRouter = useRouter();
@@ -60,7 +63,7 @@ export default function AdminCreate(): JSX.Element {
           setloading(false);
 
           // done
-          showToastr("Success", "You have successfully logged in");
+          showToastr("Success", "The request was made successfully");
 
           setTimeout(() => {
             router.push("/");
@@ -70,12 +73,18 @@ export default function AdminCreate(): JSX.Element {
         const err = error as AxiosError;
         if (err.response) {
           switch (err.response?.status as number) {
-            case 400:
+            case 403:
               // "Error in creating a new post"
               showToastr("Error", "Admin already exists");
               break;
-            case 401:
-              showToastr("Error", "");
+
+            case 400:
+              showToastr("Error", "The request encountered an error");
+              break;
+
+            case 404:
+              showToastr("Error", "Enter the data correctly");
+              break;
 
             default:
               showToastr("Error", "Server Error");
