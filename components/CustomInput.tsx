@@ -95,7 +95,6 @@ export const CustomInput: React.FC<Props> = ({
           value={value}
           onChange={onChange}
           type={type}
-          maxLength={255}
           placeholder={placeholder}
           style={{ padding: t.padding.normal, height: t.height.small }}
         />
@@ -103,7 +102,6 @@ export const CustomInput: React.FC<Props> = ({
 
       {type === "textarea" && (
         <Textarea
-          maxLength={255}
           className={className}
           value={value}
           onChange={onChange}
