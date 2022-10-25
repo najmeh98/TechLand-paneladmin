@@ -7,7 +7,6 @@ import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
 import { HeaderText } from "../../components/HeaderText";
-import Input from "../../components/Input";
 import { Layout } from "../../components/register/Layout";
 import { FlexRow } from "../../components/share/Container";
 import { ErrorText } from "../../components/share/ErrorText";
@@ -248,7 +247,6 @@ export default function Register(): JSX.Element {
           {/* <Toast ref={toastrRef} /> */}
         </div>
       </Layout>
-      <Input />
     </>
   );
 }
