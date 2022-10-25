@@ -24,7 +24,7 @@ import { toast } from "react-toastify";
 //   return { showToastr, toastrRef };
 // }
 
-interface dataProp {
+export interface dataProp {
   position: string;
   autoClose: number;
   hideProgressBar: boolean;
