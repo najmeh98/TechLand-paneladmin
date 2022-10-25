@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
 import { mobile, tablet } from "../utils/media";
+import { motion } from "framer-motion";
 
 type OwnProp = {
   children: React.ReactNode;
@@ -48,12 +49,14 @@ export const Layout = ({
               {text}
             </p>
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.07 }}
+              whileTap={{ scale: 1 }}
               onClick={path}
               className="uppercase cursor-pointer px-7 py-2 rounded-full text-lg m-10 text-white bg-gradient-to-r from-cyan-500 to-blue-500 outline-none border-none "
             >
               {button}
-            </button>
+            </motion.button>
           </div>
         </LeftSide>
 
