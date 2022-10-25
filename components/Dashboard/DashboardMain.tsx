@@ -15,7 +15,7 @@ export const DashboardMain: React.FC<OwnProp> = ({
   onClick,
 }) => {
   const t = useTheme();
-  console.log(count);
+
   return (
     <CardStyle>
       <FlexRow

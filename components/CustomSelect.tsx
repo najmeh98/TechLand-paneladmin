@@ -21,15 +21,11 @@ export const CustomSelect = ({
   setSelectedItem,
   selectedItem,
 }: CustomProp): JSX.Element => {
-  // const [selectItem, setSelectItem] = useState<CatItem>();
-
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
-  console.log("select", selectedItem);
-  console.log("cat", categoryItem);
 
   return (
     <>

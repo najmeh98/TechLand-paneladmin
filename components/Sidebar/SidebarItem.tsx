@@ -32,8 +32,6 @@ export const SidebarItem = ({
       className="flex items-start justify-center w-full cursor-pointer mb-10"
       onClick={onClick}
     >
-      {/* <Wrapper> */}
-
       <div
         className="flex justify-start items-center"
         onMouseEnter={() => {
@@ -72,44 +70,7 @@ export const SidebarItem = ({
           </div>
         )}
       </div>
-
-      {/* <p style={{ color: t.color.bgColor, ...style }}>{title}</p> */}
-      {/* </Wrapper> */}
-
-      {/* <span onClick={() => setshowSubRoute(!showSubRoute)} style={style}>
-          {subRoutes && <ArrowDown fill="#fff" />}
-        </span> */}
     </div>
-
-    /* <Column style={{ width: "100%" }}>
-        {showSubRoute &&
-          subRoutes?.map((SubRoute: any, index: any) => (
-            <Wrapper
-              key={index}
-              onClick={() => {
-                router.push(SubRoute?.path);
-              }}
-              style={{
-                display: isOpen ? "flex" : "none",
-                width: "100%",
-                justifyContent: "flex-start",
-                paddingLeft: "10px",
-                color: t.color.bgColor,
-                cursor: "pointer",
-              }}
-            >
-              <Span>{SubRoute.icon}</Span>
-              <Title
-                style={{
-                  color: t.color.bgColor,
-                  paddingLeft: t.padding.medium,
-                }}
-              >
-                {SubRoute.title}
-              </Title>
-            </Wrapper>
-          ))}
-      </Column> */
   );
 };
 

@@ -30,10 +30,6 @@ export const BannerimgUploader = ({
     [setbannerImage]
   );
 
-  console.log("newban", newbannerImage);
-  console.log("ban", bannerimage);
-  console.log("setban", setbannerImage);
-
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,

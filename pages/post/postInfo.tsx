@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import Alert from "../../components/alert";
@@ -9,11 +9,11 @@ import { Space } from "../../components/share/Space";
 import { ProfileImg } from "../../components/Sidebar/profileImg";
 import { SidebarOption } from "../../components/Sidebar/SidebarOption";
 import { ThemedText } from "../../components/ThemedText";
+import { Toaster } from "../../components/Toast";
 import { Item, MoreItem } from "../category/categoryItem";
 
 export default function PostInfo() {
   const { query } = useRouter();
-  console.log("q", query);
 
   const postId: any = query?.wb;
   const router = useRouter();
@@ -66,6 +66,8 @@ export default function PostInfo() {
 
   const psId: string = data?.id;
 
+  const { showToastr } = Toaster();
+
   const onSubmitDelete = useCallback((): void => {
     setLoading(true);
 
@@ -80,18 +82,30 @@ export default function PostInfo() {
           setLoading(false);
           if ((response.status as number) == 200) {
             console.log(response);
-            router.back();
+
+            showToastr("Success", "The deletion was successful. ");
+
+            setTimeout(() => {
+              router.back();
+            }, 5000);
           }
         })
         .catch((error) => {
           setLoading(false);
           console.log(error);
+
+          const err = error as AxiosError;
+
+          if (err?.response?.status == 400) {
+            showToastr("Error", "The request encountered an error");
+          }
         });
     } catch (error) {
       console.log(error);
       setLoading(false);
+      showToastr("Error", "Server Error");
     }
-  }, [localToken, psId, router]);
+  }, [localToken, psId, router, showToastr]);
 
   const moreItem = [
     {

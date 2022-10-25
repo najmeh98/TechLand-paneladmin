@@ -32,9 +32,6 @@ export const ComponentUploader = ({
     },
     [setImage]
   );
-  console.log("image", image);
-  console.log("newImage", newImage);
-  console.log("preimg", image.preview);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,

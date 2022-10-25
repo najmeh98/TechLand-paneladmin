@@ -70,7 +70,6 @@ export default function PostCreate(): JSX.Element {
         },
       })
       .then((result) => {
-        console.log(result);
         if ((result?.status as number) == 200) {
           setCategoryItem(result?.data);
         }
@@ -104,7 +103,6 @@ export default function PostCreate(): JSX.Element {
           },
         })
         .then((result) => {
-          console.log(result);
           setLoading(false);
           if ((result?.status as number) == 200) {
             console.log(result);
@@ -153,8 +151,6 @@ export default function PostCreate(): JSX.Element {
     showToastr,
     title,
   ]);
-
-  console.log("content", content);
 
   return (
     <>

@@ -74,16 +74,11 @@ export const SidebarOption = (): JSX.Element => {
   let router = useRouter();
   let t = useTheme();
 
-  console.log(useAppContext());
-
   const { logout, adminInfo } = useAppContext();
 
   const toggle = (): void => {
     setShow(!show);
   };
-
-  console.log("info", adminInfo);
-  console.log("img", adminInfo?.image);
 
   const fullName: string = `${adminInfo?.name} ${adminInfo?.family}`;
 

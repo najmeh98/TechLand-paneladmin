@@ -71,8 +71,6 @@ export const AppManagerContext = ({
     initialState
   );
 
-  console.log(state);
-
   //login
   const login = useCallback((adminProp: OwnadminProp): void => {
     if (typeof window == "object") {
@@ -107,8 +105,6 @@ export const AppManagerContext = ({
   const handleReload = useCallback((): void => {
     const token: string | null = localStorage.getItem("$adnTK");
 
-    console.log("token", token);
-
     if (!token || token == undefined) {
       return;
     }
@@ -124,7 +120,6 @@ export const AppManagerContext = ({
           }
         )
         .then((result) => {
-          console.log(result);
           if ((result?.status as number) == 200) {
             //admin info
             const adInfo: any = result?.data?.adInfo;
@@ -137,7 +132,6 @@ export const AppManagerContext = ({
             dispatch({ type: "LIST OF USERS", payload: users });
 
             const posts: adminsPosts[] = result?.data?.adInfo?.post;
-            console.log("post", posts);
 
             // dispatch({ type: "ADMIN POST", payload: posts });
             dispatch({ type: "INITIAL DATA", payload: posts });
@@ -148,7 +142,6 @@ export const AppManagerContext = ({
       console.log(error);
     }
   }, []);
-  console.log(state);
 
   useEffect(() => {
     handleReload();

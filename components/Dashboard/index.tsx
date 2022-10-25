@@ -30,8 +30,6 @@ export default function Dashboard(): JSX.Element {
         }
       )
       .then((res) => {
-        console.log(res);
-        console.log("count", res.data);
         setLoading(false);
 
         if ((res?.status as number) == 200) {
@@ -55,7 +53,7 @@ export default function Dashboard(): JSX.Element {
       <SidebarOption />
 
       <ContaineRow>
-        <Container>
+        <Container className="container">
           <DashboardMain
             icon={<FiUsers fontSize={30} />}
             title="Total Admins"
@@ -83,24 +81,11 @@ export default function Dashboard(): JSX.Element {
   );
 }
 
-const MainWrapper = styled.div`
-  margin: auto;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  overflow-y: auto;
-  overflow-x: hidden;
-`;
-
 const ContaineRow = styled.div`
   max-width: 1300px;
   margin: 50px auto;
   padding: 10px;
   width: 100%;
-  /* border: 1px solid rgb(230, 235, 235); */
 `;
 
 const Container = styled.div`

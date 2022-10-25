@@ -25,7 +25,7 @@ export default function ListofPost(): JSX.Element {
     [`${config.apiUrl}/api/data/getAllposts?adminId=${id}`, loaclToken],
     fetchWithId
   );
-  console.log("dt", typeof data?.post?.length);
+
   return (
     <ListofItems
       title="Your stories "

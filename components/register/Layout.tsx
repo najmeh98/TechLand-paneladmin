@@ -7,6 +7,7 @@ type OwnProp = {
   title: string;
   text: string;
   button: string;
+  path: any;
   // step: number;
 };
 
@@ -19,9 +20,8 @@ export const Layout = ({
   title,
   text,
   button,
+  path,
 }: OwnProp): JSX.Element => {
-  const [sideToSide, setsideToSide] = useState(false);
-
   return (
     <Wrapper>
       <Container className="container mx-auto">
@@ -49,10 +49,7 @@ export const Layout = ({
             </p>
 
             <button
-              onClick={() => {
-                setsideToSide(!sideToSide);
-                console.log(sideToSide);
-              }}
+              onClick={path}
               className="uppercase cursor-pointer px-7 py-2 rounded-full text-lg m-10 text-white bg-gradient-to-r from-cyan-500 to-blue-500 outline-none border-none "
             >
               {button}
