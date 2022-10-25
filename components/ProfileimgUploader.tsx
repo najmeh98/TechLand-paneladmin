@@ -2,18 +2,13 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { OwnProp } from "./ComponetnUploader";
 
-// interface profileImg extends Omit<OwnProp, "newImage"> {}
-
 export default function ProfileimgUploader({
   setImage,
   image,
   newImage,
 }: OwnProp) {
-  console.log("img", newImage);
   const onDrop = useCallback(
     (acceptedFiles: any) => {
-      console.log("files", acceptedFiles);
-
       setImage(
         Object.assign(acceptedFiles[0], {
           preview: URL.createObjectURL(acceptedFiles[0]),
@@ -36,43 +31,35 @@ export default function ProfileimgUploader({
     >
       <input {...getInputProps()} />
 
-      {image.preview && image.preview?.length > 0 ? (
-        <img
-          src={image.preview}
-          alt="img"
-          width={100}
-          height={100}
-          className="rounded-full shadow-md border border-solid border-slate-300"
-        />
+      {image?.preview && image.preview?.length > 0 ? (
+        <ImageCompt src={image?.preview} />
+      ) : newImage !== undefined && newImage?.length > 0 ? (
+        <ImageCompt src={newImage} />
       ) : (
-        <img
-          src={newImage}
-          alt="image"
-          width={100}
-          height={100}
-          className="rounded-full shadow-md border border-solid border-slate-300"
-        />
-      )}
-
-      {/* {
-        <img
-          src={image.preview || newImage}
-          alt="image"
-          width={100}
-          height={100}
-          className="rounded-full shadow-md border border-solid border-slate-300"
-        />
-      } */}
-
-      {image === null && newImage === null && (
-        <img
-          src="/avator.png"
-          alt="img"
-          width={100}
-          height={100}
-          className="rounded-full shadow-md border border-solid border-slate-300"
-        />
+        <ImageCompt src="/avator.png" />
       )}
     </div>
   );
 }
+
+export const ImageCompt = ({
+  src,
+  className,
+}: {
+  src: string;
+  className?: string;
+}): JSX.Element => {
+  return (
+    <img
+      src={src}
+      alt="..."
+      width={`${className ? "w-full" : "130px"}`}
+      height={`${className ? "300px" : "130px"}`}
+      className={`${
+        className
+          ? className
+          : "rounded-full shadow-md border-2 border-solid border-slate-300"
+      }`}
+    />
+  );
+};
