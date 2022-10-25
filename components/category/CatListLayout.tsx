@@ -4,7 +4,6 @@ import { ThemedText } from "../ThemedText";
 interface ICatListProp {
   title: string;
   image: string;
-  catId: string;
   length_posts?: number;
   length_categories?: string;
   onClick: () => void;
@@ -14,7 +13,6 @@ export default function CategoryListLayout({
   title,
   image,
   length_categories,
-  catId,
   onClick,
   length_posts,
 }: ICatListProp): JSX.Element {
