@@ -1,6 +1,6 @@
 import { Toastr, ToastrRef, ToastrProps } from "@paljs/ui/Toastr";
 import React, { useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { Theme, toast, ToastPosition } from "react-toastify";
 
 // export default function Toast(): {
 //   showToastr: (mode: string, message: string, title: string) => void;
@@ -25,14 +25,14 @@ import { toast } from "react-toastify";
 // }
 
 export interface dataProp {
-  position: string;
+  position: ToastPosition | undefined;
   autoClose: number;
   hideProgressBar: boolean;
   closeOnClick: boolean;
   pauseOnHover: boolean;
   draggable: boolean;
   progress: undefined;
-  theme: string;
+  theme: Theme | undefined;
 }
 
 export const Toaster = () => {
