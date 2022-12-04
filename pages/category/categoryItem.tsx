@@ -218,6 +218,10 @@ export default function CategoryItem(): JSX.Element {
   ];
 
   return (
+    <>
+      
+            <ToastContainer />
+
     <Flex>
       <SidebarOption />
 
@@ -325,6 +329,7 @@ export default function CategoryItem(): JSX.Element {
         )}
       </div>
     </Flex>
+      </>
   );
 }
 
