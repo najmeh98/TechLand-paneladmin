@@ -10,12 +10,11 @@ import { CatPost } from "./cat.interface";
 
 export default function ListofCategory(): JSX.Element {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
   const [loaclToken, setLoaclToken] = useState<string>("");
 
   const { adminInfo } = useAppContext();
 
-  // const email: string = adminInfo?.email;
+  const id: any = adminInfo?.id;
 
   useEffect(() => {
     const token: string = localStorage.getItem("$adnTK") ?? "";
@@ -28,9 +27,20 @@ export default function ListofCategory(): JSX.Element {
   );
 
   //add spinner***
-  if (error) return <div>failed to load</div>;
+  if (error)
+    return (
+      <ListofItems
+        title="Your lists"
+        button="New lists"
+        onClick={() => {
+          router.push("./manageCategories");
+        }}
+        className="bg-gradient-to-r from-cyan-500 to-blue-500 px-4 "
+      >
+        <SpinnerComponent />
+      </ListofItems>
+    );
 
-  console.log(data);
   return (
     <ListofItems
       title="Your lists"
@@ -60,14 +70,10 @@ export default function ListofCategory(): JSX.Element {
               key={cat?.id}
               title={cat?.name}
               image={cat?.image}
-              catId={cat?.id}
-              // description={cat?.description}
             />
           ))
         )}
       </div>
     </ListofItems>
-    //   </div>
-    // </Flex>
   );
 }
