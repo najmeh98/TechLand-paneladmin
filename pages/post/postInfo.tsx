@@ -138,8 +138,7 @@ export default function PostInfo() {
 
   return (
     <>
-            <ToastContainer />
-
+     <ToastContainer />
       
     <div className="flex items-start  mx-auto ">
       <SidebarOption />
@@ -199,7 +198,7 @@ export default function PostInfo() {
         )}
       </div>
     </div>
-      </>
+   </>
   );
 }
 
