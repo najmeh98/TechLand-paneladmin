@@ -6,6 +6,7 @@ export interface CategoryProp {
 }
 
 export interface CatPost {
+  // category: {
   id: string;
   name: string;
   description: string;
@@ -13,6 +14,7 @@ export interface CatPost {
   created: string;
   update: string;
   posts: [];
+  // };
 }
 
 export interface infoPostProp extends Omit<CategoryProp, "name"> {

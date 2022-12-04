@@ -54,8 +54,6 @@ export default function ListofPost(): JSX.Element {
               key={post?.id}
               title={post?.title}
               image={post?.image}
-              // email={email}
-              // catId={post?.id}
             />
           ))
         ) : (
