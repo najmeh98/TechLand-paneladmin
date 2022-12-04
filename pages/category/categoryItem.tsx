@@ -19,6 +19,9 @@ import {
 import { adminsPosts } from "../../components/AppManag.tsx/definition";
 import Alert from "../../components/alert";
 import { Toaster } from "../../components/Toast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
+
 
 export default function CategoryItem(): JSX.Element {
   const { query } = useRouter();
