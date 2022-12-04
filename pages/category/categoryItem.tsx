@@ -19,6 +19,8 @@ import {
 import { adminsPosts } from "../../components/AppManag.tsx/definition";
 import Alert from "../../components/alert";
 import { Toaster } from "../../components/Toast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 
 export default function CategoryItem(): JSX.Element {
   const { query } = useRouter();
@@ -215,113 +217,117 @@ export default function CategoryItem(): JSX.Element {
   ];
 
   return (
-    <Flex>
-      <SidebarOption />
+    <>
+      <ToastContainer />
 
-      <div
-        style={{
-          maxWidth: "800px",
-          minHeight: "100vh",
-          // position: "relative",
-        }}
-        className="w-full flex items-start flex-col mx-auto my-0  "
-      >
-        <FormItem
-          className="w-full  pb-8 mx-auto my-9"
+      <Flex>
+        <SidebarOption />
+
+        <div
           style={{
-            borderBottom: "1px solid lightgray",
-            position: "relative",
+            maxWidth: "800px",
+            minHeight: "100vh",
+            // position: "relative",
           }}
+          className="w-full flex items-start flex-col mx-auto my-0  "
         >
-          <Flex>
-            <HeaderText>{info?.title}</HeaderText>
+          <FormItem
+            className="w-full  pb-8 mx-auto my-9"
+            style={{
+              borderBottom: "1px solid lightgray",
+              position: "relative",
+            }}
+          >
+            <Flex>
+              <HeaderText>{info?.title}</HeaderText>
 
-            {/* show more Item */}
-            <MoreItem
-              onClick_more={() => setMorePopup(!morePopup)}
-              morePopup={morePopup}
-            >
-              {moreItems &&
-                moreItems.length > 0 &&
-                moreItems?.map((item) => {
-                  console.log("item", item);
-                  return (
-                    <Item
-                      onClick={item?.onClick}
-                      text={item?.label}
-                      className={item?.className}
-                      key={item?.label}
-                    />
-                  );
-                })}
-            </MoreItem>
-          </Flex>
+              {/* show more Item */}
+              <MoreItem
+                onClick_more={() => setMorePopup(!morePopup)}
+                morePopup={morePopup}
+              >
+                {moreItems &&
+                  moreItems.length > 0 &&
+                  moreItems?.map((item) => {
+                    console.log("item", item);
+                    return (
+                      <Item
+                        onClick={item?.onClick}
+                        text={item?.label}
+                        className={item?.className}
+                        key={item?.label}
+                      />
+                    );
+                  })}
+              </MoreItem>
+            </Flex>
 
-          <ThemedText fontSize="semiLarge" color="desColor">
-            {info?.description}
-          </ThemedText>
-        </FormItem>
+            <ThemedText fontSize="semiLarge" color="desColor">
+              {info?.description}
+            </ThemedText>
+          </FormItem>
 
-        {/* show post of categories  */}
-        {posts ? (
-          posts.length > 0 &&
-          posts.map((post: any) => (
-            <PostsList
-              onClick={() => {
-                router.push({
-                  pathname: "../post/postInfo",
-                  query: {
-                    query: [post?.title],
-                    wb: post?.id,
-                  },
-                });
-              }}
-              key={post?.id}
-              title={post?.title}
-              content={post?.content}
-              image={post?.image}
-              createdAt={post?.createdAt}
+          {/* show post of categories  */}
+          {posts ? (
+            posts.length > 0 &&
+            posts.map((post: any) => (
+              <PostsList
+                onClick={() => {
+                  router.push({
+                    pathname: "../post/postInfo",
+                    query: {
+                      query: [post?.title],
+                      wb: post?.id,
+                    },
+                  });
+                }}
+                key={post?.id}
+                title={post?.title}
+                content={post?.content}
+                image={post?.image}
+                createdAt={post?.createdAt}
+              />
+            ))
+          ) : (
+            <p>You don&lsquo;t have any POST yet...!</p>
+          )}
+
+          {/* create new category list */}
+          {showInfo && (
+            <CreateList
+              title="Edit list"
+              valueName={editValue.name}
+              valueDesc={editValue.description}
+              onChangeName={(event) =>
+                setEitValue({ ...editValue, name: event.currentTarget.value })
+              }
+              onChamgeDesc={(event) =>
+                setEitValue({
+                  ...editValue,
+                  description: event.currentTarget.value,
+                })
+              }
+              onClick_Cancel={() => setShowInfo(!showInfo)}
+              onClick_Create={onSubmitEdit}
+              image={image}
+              setImage={setimage}
+              newImage={editValue?.image}
             />
-          ))
-        ) : (
-          <p>You don&lsquo;t have any POST yet...!</p>
-        )}
+          )}
 
-        {/* create new category list */}
-        {showInfo && (
-          <CreateList
-            title="Edit list"
-            valueName={editValue.name}
-            valueDesc={editValue.description}
-            onChangeName={(event) =>
-              setEitValue({ ...editValue, name: event.currentTarget.value })
-            }
-            onChamgeDesc={(event) =>
-              setEitValue({
-                ...editValue,
-                description: event.currentTarget.value,
-              })
-            }
-            onClick_Cancel={() => setShowInfo(!showInfo)}
-            onClick_Create={onSubmitEdit}
-            image={image}
-            setImage={setimage}
-            newImage={editValue?.image}
-          />
-        )}
-
-        {/* show delete pop up */}
-        {deleteItem && (
-          <Alert
-            onClick_Cancel={() => setdeleteItem(true)}
-            onClick_delete={onSubmitDelete}
-            text="Delete List"
-            desc="Deleting this list will not delete the stories in it."
-            Buttondelete="Delete"
-          />
-        )}
-      </div>
-    </Flex>
+          {/* show delete pop up */}
+          {deleteItem && (
+            <Alert
+              onClick_Cancel={() => setdeleteItem(true)}
+              onClick_delete={onSubmitDelete}
+              text="Delete List"
+              desc="Deleting this list will not delete the stories in it."
+              Buttondelete="Delete"
+            />
+          )}
+        </div>
+      </Flex>
+    </>
   );
 }
 

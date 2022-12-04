@@ -11,6 +11,8 @@ import { SidebarOption } from "../../components/Sidebar/SidebarOption";
 import { ThemedText } from "../../components/ThemedText";
 import { Toaster } from "../../components/Toast";
 import { Item, MoreItem } from "../category/categoryItem";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 
 export default function PostInfo() {
   const { query } = useRouter();
@@ -135,64 +137,68 @@ export default function PostInfo() {
   ];
 
   return (
-    <div className="flex items-start  mx-auto ">
-      <SidebarOption />
-      <div
-        style={{ maxWidth: "900px" }}
-        className="w-full mx-auto my-9 flex flex-col items-start justify-center px-24"
-      >
-        <div className="relative flex py-5 items-center justify-between w-full">
-          {/* show profile image */}
-          <ProfileImg />
+    <>
+      <ToastContainer />
 
-          {/* show more Item */}
-          <MoreItem
-            onClick_more={() => setMorePopup(!morePopup)}
-            morePopup={morePopup}
-          >
-            {moreItem &&
-              moreItem.length > 0 &&
-              moreItem?.map((item) => (
-                <Item
-                  onClick={item?.onClick}
-                  text={item?.label}
-                  key={item?.label}
-                  className={item?.className}
-                />
-              ))}
-          </MoreItem>
-        </div>
+      <div className="flex items-start  mx-auto ">
+        <SidebarOption />
+        <div
+          style={{ maxWidth: "900px" }}
+          className="w-full mx-auto my-9 flex flex-col items-start justify-center px-24"
+        >
+          <div className="relative flex py-5 items-center justify-between w-full">
+            {/* show profile image */}
+            <ProfileImg />
 
-        <Space vertical={35} />
+            {/* show more Item */}
+            <MoreItem
+              onClick_more={() => setMorePopup(!morePopup)}
+              morePopup={morePopup}
+            >
+              {moreItem &&
+                moreItem.length > 0 &&
+                moreItem?.map((item) => (
+                  <Item
+                    onClick={item?.onClick}
+                    text={item?.label}
+                    key={item?.label}
+                    className={item?.className}
+                  />
+                ))}
+            </MoreItem>
+          </div>
 
-        <img
-          src={data?.image}
-          alt="img"
-          width={300}
-          height={350}
-          className="w-full rounded-lg"
-        />
+          <Space vertical={35} />
 
-        <Space vertical={20} />
-
-        <HeaderText>{data?.title}</HeaderText>
-
-        <ContentText className=" font-[source-serif-pro] text-2xl text-stone-800 ">
-          {data?.content}
-        </ContentText>
-
-        {/* show pop Up for delete post */}
-        {deleteItem && (
-          <Alert
-            onClick_Cancel={() => setdeleteItem(false)}
-            onClick_delete={onSubmitDelete}
-            text="Delete story"
-            desc="Are you sure you want to delete this story?"
-            Buttondelete="Delete"
+          <img
+            src={data?.image}
+            alt="img"
+            width={300}
+            height={350}
+            className="w-full rounded-lg"
           />
-        )}
+
+          <Space vertical={20} />
+
+          <HeaderText>{data?.title}</HeaderText>
+
+          <ContentText className=" font-[source-serif-pro] text-2xl text-stone-800 ">
+            {data?.content}
+          </ContentText>
+
+          {/* show pop Up for delete post */}
+          {deleteItem && (
+            <Alert
+              onClick_Cancel={() => setdeleteItem(false)}
+              onClick_delete={onSubmitDelete}
+              text="Delete story"
+              desc="Are you sure you want to delete this story?"
+              Buttondelete="Delete"
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
