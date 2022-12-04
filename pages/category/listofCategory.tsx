@@ -65,7 +65,5 @@ export default function ListofCategory(): JSX.Element {
         )}
       </div>
     </ListofItems>
-    //   </div>
-    // </Flex>
   );
 }
