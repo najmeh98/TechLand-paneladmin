@@ -11,6 +11,8 @@ import { SidebarOption } from "../../components/Sidebar/SidebarOption";
 import { ThemedText } from "../../components/ThemedText";
 import { Toaster } from "../../components/Toast";
 import { Item, MoreItem } from "../category/categoryItem";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 
 export default function PostInfo() {
   const { query } = useRouter();
@@ -135,6 +137,10 @@ export default function PostInfo() {
   ];
 
   return (
+    <>
+            <ToastContainer />
+
+      
     <div className="flex items-start  mx-auto ">
       <SidebarOption />
       <div
@@ -193,6 +199,7 @@ export default function PostInfo() {
         )}
       </div>
     </div>
+      </>
   );
 }
 
