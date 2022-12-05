@@ -1,28 +1,5 @@
-import { Toastr, ToastrRef, ToastrProps } from "@paljs/ui/Toastr";
 import React, { useRef, useState } from "react";
 import { Theme, toast, ToastPosition } from "react-toastify";
-
-// export default function Toast(): {
-//   showToastr: (mode: string, message: string, title: string) => void;
-//   toastrRef: React.RefObject<ToastrRef>;
-// } {
-//   const [data] = useState<ToastrProps>({
-//     position: "topEnd",
-//     duration: 3500,
-//     hasIcon: true,
-//     destroyByClick: true,
-//     preventDuplicates: false,
-//   });
-
-//   const toastrRef = useRef<ToastrRef>(null);
-
-//   const showToastr = (mode: string, message: string, title: string): void => {
-//     console.log("done");
-//     toastrRef.current?.add(message, title, { ...data, status: mode });
-//   };
-
-//   return { showToastr, toastrRef };
-// }
 
 export interface dataProp {
   position: ToastPosition | undefined;
