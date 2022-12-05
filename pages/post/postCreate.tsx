@@ -1,4 +1,3 @@
-import { Toastr, ToastrProps, ToastrRef } from "@paljs/ui";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -37,23 +36,6 @@ export default function PostCreate(): JSX.Element {
   const [selectedItem, setSelectedItem] = useState<CatItem>();
 
   const { dispatch } = useAppContext();
-
-  // const { showToastr, toastrRef } = Toast();
-
-  // const [data] = useState<ToastrProps>({
-  //   position: "topEnd",
-  //   duration: 3500,
-  //   hasIcon: true,
-  //   destroyByClick: true,
-  //   preventDuplicates: false,
-  // });
-
-  const toastrRef = useRef<ToastrRef>(null);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // const showToastr = (mode: string, message: string, title: string): void => {
-  //   toastrRef.current?.add(message, title, { ...data, status: mode });
-  // };
 
   const { showToastr } = Toaster();
 
