@@ -46,13 +46,13 @@ export default function PostsList({
             src="/noimage.jpeg"
             width={200}
             height={150}
-            alt={content}
+            alt={title}
             className="rounded-md shadow-xl bg-cover"
           />
         ) : (
           <img
             src={image}
-            alt={content}
+            alt={title}
             width={160}
             height={160}
             className="rounded-md shadow-xl bg-cover"
