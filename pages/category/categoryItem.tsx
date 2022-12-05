@@ -21,10 +21,6 @@ import Alert from "../../components/alert";
 import { Toaster } from "../../components/Toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
-<<<<<<< HEAD
-=======
-
->>>>>>> d56a3b06109a92c19ee5b4332e4789360e8a7b90
 
 export default function CategoryItem(): JSX.Element {
   const { query } = useRouter();
@@ -222,15 +218,7 @@ export default function CategoryItem(): JSX.Element {
 
   return (
     <>
-<<<<<<< HEAD
       <ToastContainer />
-=======
-      
-            <ToastContainer />
-
-    <Flex>
-      <SidebarOption />
->>>>>>> d56a3b06109a92c19ee5b4332e4789360e8a7b90
 
       <Flex>
         <SidebarOption />
@@ -327,11 +315,10 @@ export default function CategoryItem(): JSX.Element {
             />
           )}
 
-<<<<<<< HEAD
           {/* show delete pop up */}
           {deleteItem && (
             <Alert
-              onClick_Cancel={() => setdeleteItem(true)}
+              onClick_Cancel={() => setdeleteItem(false)}
               onClick_delete={onSubmitDelete}
               text="Delete List"
               desc="Deleting this list will not delete the stories in it."
@@ -340,45 +327,40 @@ export default function CategoryItem(): JSX.Element {
           )}
         </div>
       </Flex>
-    </>
-=======
-        {/* create new category list */}
-        {showInfo && (
-          <CreateList
-            title="Edit list"
-            valueName={editValue.name}
-            valueDesc={editValue.description}
-            onChangeName={(event) =>
-              setEitValue({ ...editValue, name: event.currentTarget.value })
-            }
-            onChamgeDesc={(event) =>
-              setEitValue({
-                ...editValue,
-                description: event.currentTarget.value,
-              })
-            }
-            onClick_Cancel={() => setShowInfo(!showInfo)}
-            onClick_Create={onSubmitEdit}
-            image={image}
-            setImage={setimage}
-            newImage={editValue?.image}
-          />
-        )}
+      {/* create new category list */}
+      {/* {showInfo && (
+        <CreateList
+          title="Edit list"
+          valueName={editValue.name}
+          valueDesc={editValue.description}
+          onChangeName={(event) =>
+            setEitValue({ ...editValue, name: event.currentTarget.value })
+          }
+          onChamgeDesc={(event) =>
+            setEitValue({
+              ...editValue,
+              description: event.currentTarget.value,
+            })
+          }
+          onClick_Cancel={() => setShowInfo(!showInfo)}
+          onClick_Create={onSubmitEdit}
+          image={image}
+          setImage={setimage}
+          newImage={editValue?.image}
+        />
+      )} */}
 
-        {/* show delete pop up */}
-        {deleteItem && (
-          <Alert
-            onClick_Cancel={() => setdeleteItem(true)}
-            onClick_delete={onSubmitDelete}
-            text="Delete List"
-            desc="Deleting this list will not delete the stories in it."
-            Buttondelete="Delete"
-          />
-        )}
-      </div>
-    </Flex>
-      </>
->>>>>>> d56a3b06109a92c19ee5b4332e4789360e8a7b90
+      {/* show delete pop up */}
+      {/* {deleteItem && (
+        <Alert
+          onClick_Cancel={() => setdeleteItem(true)}
+          onClick_delete={onSubmitDelete}
+          text="Delete List"
+          desc="Deleting this list will not delete the stories in it."
+          Buttondelete="Delete"
+        />
+      )} */}
+    </>
   );
 }
 
