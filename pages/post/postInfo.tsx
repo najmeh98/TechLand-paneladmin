@@ -138,7 +138,21 @@ export default function PostInfo() {
 
   return (
     <>
+<<<<<<< HEAD
       <ToastContainer />
+=======
+     <ToastContainer />
+      
+    <div className="flex items-start  mx-auto ">
+      <SidebarOption />
+      <div
+        style={{ maxWidth: "900px" }}
+        className="w-full mx-auto my-9 flex flex-col items-start justify-center px-24"
+      >
+        <div className="relative flex py-5 items-center justify-between w-full">
+          {/* show profile image */}
+          <ProfileImg />
+>>>>>>> d56a3b06109a92c19ee5b4332e4789360e8a7b90
 
       <div className="flex items-start  mx-auto ">
         <SidebarOption />
@@ -198,7 +212,12 @@ export default function PostInfo() {
           )}
         </div>
       </div>
+<<<<<<< HEAD
     </>
+=======
+    </div>
+   </>
+>>>>>>> d56a3b06109a92c19ee5b4332e4789360e8a7b90
   );
 }
 
