@@ -39,3 +39,8 @@ export const MainWrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
 `;
+export const ButtonRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
