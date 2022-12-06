@@ -4,10 +4,9 @@ import { CustomInput } from "../CustomInput";
 import { HeaderText } from "../HeaderText";
 import { Space } from "../share/Space";
 import { ComponentUploader } from "../ComponetnUploader";
-import { OwnProp } from "./createlist.interface";
+import { OwnProp } from "../types/createlist.interface";
 import { useState } from "react";
 import { ThemedText } from "../ThemedText";
-import { ButtonRow } from "../share/Container";
 
 export const CreateList = ({
   title,
@@ -23,10 +22,6 @@ export const CreateList = ({
   newImage,
 }: OwnProp): JSX.Element => {
   const [description, setDescription] = useState<boolean>(false);
-
-  console.log("image", image);
-  console.log("valueName", valueName);
-  console.log("title", title);
 
   return (
     <Wrapper className="mx-auto	 z-10 right-0 left-0 top-0 bottom-0   w-screen  shadow-slate-400	h-screen flex items-center	justify-center	fixed overflow-x-hidden overflow-y-auto">
@@ -110,4 +105,9 @@ const Container = styled.div`
   width: 100%;
   max-width: 800px;
   /* min-height: 500px; */
+`;
+const ButtonRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `;
