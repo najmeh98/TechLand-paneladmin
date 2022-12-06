@@ -10,11 +10,11 @@ import { CustomSelect } from "../../components/CustomSelect";
 import { Space } from "../../components/share/Space";
 import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
-import { ButtonRow } from "../users/userInfo";
 import { CatItem, OwnProp } from "../../components/types/postCreate.interface";
 import { CKEditor } from "ckeditor4-react";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+import { ButtonRow } from "../../components/share/Container";
 
 export default function PostCreate(): JSX.Element {
   const router = useRouter();

@@ -5,13 +5,12 @@ import { adminCreate } from "../../components/Api";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
-import { FormItem, FlexRow } from "../../components/share/Container";
+import { FormItem, FlexRow, ButtonRow } from "../../components/share/Container";
 import { ErrorText } from "../../components/share/ErrorText";
 import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
 import { dataValidation } from "../../components/utils/dataValidation";
 import { OwnProp } from "../../components/types/authType";
-import { ButtonRow } from "../users/userInfo";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 

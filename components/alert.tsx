@@ -1,8 +1,8 @@
 import React from "react";
-import { ButtonRow } from "../pages/users/userInfo";
 import { CustomButton } from "./CustomButton";
 import { HeaderText } from "./HeaderText";
 import { LayoutPopup } from "./LayoutList.tsx/LayoutPopup";
+import { ButtonRow } from "./share/Container";
 import { Space } from "./share/Space";
 import { ThemedText } from "./ThemedText";
 

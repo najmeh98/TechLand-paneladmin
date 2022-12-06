@@ -11,10 +11,10 @@ import { Toaster } from "../../components/Toast";
 import { Theme } from "../../components/types/theme";
 import { UserLayout } from "../../components/users/UserLayout";
 import { dataValidation } from "../../components/utils/dataValidation";
-import { ButtonRow } from "../users/userInfo";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 import { ErrorText } from "../../components/share/ErrorText";
+import { ButtonRow } from "../../components/share/Container";
 
 interface OwnProp {
   currentpassword: string;

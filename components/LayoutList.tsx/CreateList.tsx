@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ButtonRow } from "../../pages/users/userInfo";
 import { CustomButton } from "../CustomButton";
 import { CustomInput } from "../CustomInput";
 import { HeaderText } from "../HeaderText";
@@ -8,6 +7,7 @@ import { ComponentUploader } from "../ComponetnUploader";
 import { OwnProp } from "./createlist.interface";
 import { useState } from "react";
 import { ThemedText } from "../ThemedText";
+import { ButtonRow } from "../share/Container";
 
 export const CreateList = ({
   title,

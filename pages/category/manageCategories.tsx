@@ -10,10 +10,10 @@ import { Space } from "../../components/share/Space";
 import { ThemedText } from "../../components/ThemedText";
 import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
-import { ButtonRow } from "../users/userInfo";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
 import { CategoryProp, CatPost } from "../../components/types/cat.interface";
+import { ButtonRow } from "../../components/share/Container";
 
 export default function ManageCategories(): JSX.Element {
   const [description, setDescription] = useState<boolean>(false);
