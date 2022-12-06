@@ -5,7 +5,7 @@ import { CatPost } from "../types/cat.interface";
 import { config } from "../Api";
 import { Toaster } from "../Toast";
 import { CreateList } from "./CreateList";
-import { CatProp, INewListProp } from "./createlist.interface";
+import { CatProp, INewListProp } from "../types/createlist.interface";
 
 export default function Createnewlist({
   setShowPopup,

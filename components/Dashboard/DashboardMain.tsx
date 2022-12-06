@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FlexRow, FormItem } from "../share/Container";
 import { ThemedText } from "../ThemedText";
 import { FiPlus } from "react-icons/fi";
-import { OwnProp } from "./dashType";
+import { OwnProp } from "../types/dashType";
 import { useTheme } from "../Context/ThemeContext";
 
 export const DashboardMain: React.FC<OwnProp> = ({
