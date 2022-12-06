@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import { CatPost } from "../../pages/category/cat.interface";
+import { CatPost } from "../types/cat.interface";
 import { config } from "../Api";
 import { Toaster } from "../Toast";
 import { CreateList } from "./CreateList";

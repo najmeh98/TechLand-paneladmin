@@ -15,7 +15,7 @@ import {
   infoPostProp,
   ItempropTs,
   MoreItemProp,
-} from "./cat.interface";
+} from "../../components/types/cat.interface";
 import { adminsPosts } from "../../components/AppManag.tsx/definition";
 import Alert from "../../components/alert";
 import { Toaster } from "../../components/Toast";

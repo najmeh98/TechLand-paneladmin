@@ -6,7 +6,7 @@ import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import CategoryListLayout from "../../components/category/CatListLayout";
 import { ListofItems } from "../../components/LayoutList.tsx/listofItems";
 import { SpinnerComponent } from "../../components/utils/Spinner";
-import { CatPost } from "./cat.interface";
+import { CatPost } from "../../components/types/cat.interface";
 
 export default function ListofCategory(): JSX.Element {
   const router = useRouter();

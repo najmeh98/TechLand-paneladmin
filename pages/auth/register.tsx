@@ -14,7 +14,7 @@ import { Space } from "../../components/share/Space";
 import { Toaster } from "../../components/Toast";
 import { ToasterRef, ToasterProps } from "../../components/types/toastr";
 import { dataValidation } from "../../components/utils/dataValidation";
-import { OwnProp } from "./authType";
+import { OwnProp } from "../../components/types/authType";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 

@@ -8,7 +8,7 @@ import { CustomInput } from "../../components/CustomInput";
 import { Space } from "../../components/share/Space";
 import { ProfileImg } from "../../components/Sidebar/profileImg";
 import { SidebarOption } from "../../components/Sidebar/SidebarOption";
-import { editPostProp } from "../category/cat.interface";
+import { editPostProp } from "../../components/types/cat.interface";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "../../components/Toast";

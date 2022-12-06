@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { FiPlusCircle } from "react-icons/fi";
-import { CatItem } from "../pages/post/postCreate.interface";
+import { CatItem } from "./types/postCreate.interface";
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BsCheck2 } from "react-icons/bs";

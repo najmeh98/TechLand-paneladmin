@@ -11,7 +11,7 @@ import { Flex, FlexRow, FormItem } from "../../components/share/Container";
 import { Space } from "../../components/share/Space";
 import { ThemedText } from "../../components/ThemedText";
 import { UserLayout } from "../../components/users/UserLayout";
-import { InfoProp } from "./type";
+import { InfoProp } from "../../components/types/type";
 
 export default function UserInfo(): JSX.Element {
   const t = useTheme();

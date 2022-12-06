@@ -8,7 +8,7 @@ import { CustomButton } from "../../components/CustomButton";
 import { Span } from "./register";
 import { AxiosError } from "axios";
 import { useAppContext } from "../../components/AppManag.tsx/AppContext";
-import { loginProp } from "./authType";
+import { loginProp } from "../../components/types/authType";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "../../components/Toast";

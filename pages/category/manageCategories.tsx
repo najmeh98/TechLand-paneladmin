@@ -13,7 +13,7 @@ import { UserLayout } from "../../components/users/UserLayout";
 import { ButtonRow } from "../users/userInfo";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
-import { CategoryProp, CatPost } from "./cat.interface";
+import { CategoryProp, CatPost } from "../../components/types/cat.interface";
 
 export default function ManageCategories(): JSX.Element {
   const [description, setDescription] = useState<boolean>(false);

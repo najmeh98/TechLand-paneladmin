@@ -10,7 +10,7 @@ import { ErrorText } from "../../components/share/ErrorText";
 import { Toaster } from "../../components/Toast";
 import { UserLayout } from "../../components/users/UserLayout";
 import { dataValidation } from "../../components/utils/dataValidation";
-import { OwnProp } from "../auth/authType";
+import { OwnProp } from "../../components/types/authType";
 import { ButtonRow } from "../users/userInfo";
 import "react-toastify/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";

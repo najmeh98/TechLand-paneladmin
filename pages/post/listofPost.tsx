@@ -6,7 +6,7 @@ import { useAppContext } from "../../components/AppManag.tsx/AppContext";
 import CategoryListLayout from "../../components/category/CatListLayout";
 import { ListofItems } from "../../components/LayoutList.tsx/listofItems";
 import { SpinnerComponent } from "../../components/utils/Spinner";
-import { OwnPost } from "./postCreate.interface";
+import { OwnPost } from "../../components/types/postCreate.interface";
 
 export default function ListofPost(): JSX.Element {
   const router = useRouter();

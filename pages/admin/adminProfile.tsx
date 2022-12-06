@@ -13,7 +13,7 @@ import { Space } from "../../components/share/Space";
 import { ThemedText } from "../../components/ThemedText";
 import { Theme } from "../../components/types/theme";
 import { UserLayout } from "../../components/users/UserLayout";
-import { ProfileProp } from "./adprofiletype";
+import { ProfileProp } from "../../components/types/adprofiletype";
 import { BannerimgUploader } from "../../components/BannerimgUploader";
 import { Toaster } from "../../components/Toast";
 import "react-toastify/ReactToastify.min.css";
