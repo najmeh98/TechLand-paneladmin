@@ -10,13 +10,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AppManagerContext>
       <ThemeContext.Provider value={lightTheme}>
         <Head>
-          <title>Welcome to panel Admin</title>
+          <title>TechLand panel Admin 🖋️</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, minimum-scale=1"
           />
           <meta name="description" content="panel Admin" />
-          <link rel="icon" href="/favicon.ico" />
+          {/* <link rel="icon" href="/favicon.ico" /> */}
         </Head>
         <Component {...pageProps} />
       </ThemeContext.Provider>
