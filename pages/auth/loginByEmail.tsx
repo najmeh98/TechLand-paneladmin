@@ -81,8 +81,8 @@ export default function LoginByEmail(): JSX.Element {
       <ToastContainer />
 
       <Layout
-        title="Hello Friends !"
-        text="Enter your personal details to open an account with us"
+        title="welcome back !"
+        text="To keep connected with us plaese login with your personal details"
         button="sign up"
         path={() => router.push("./register")}
       >

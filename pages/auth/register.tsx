@@ -107,8 +107,8 @@ export default function Register(): JSX.Element {
       <ToastContainer />
 
       <Layout
-        title="welcome back !"
-        text="To keep connected with us plaese login with your personal details"
+        title="Hello Friends !"
+        text="Enter your personal details to open an account with us"
         button="sign in"
         path={() => router.push("./loginByEmail")}
       >
